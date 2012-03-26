@@ -46,6 +46,8 @@ for i=1:6:756
     j=j+1;
 end
 
+clear i j i1 i2 i3 i4 i5 i6 out1 out2 out3 out4 out5 out6 v;
+
 
 
 
