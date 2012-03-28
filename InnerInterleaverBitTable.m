@@ -1,5 +1,5 @@
 
-
+% Bit Interleaver array according to DVB-T standard
 v = 6;
 i1 = 1;
 i2 = 0;
@@ -46,7 +46,43 @@ for i=1:6:756
     j=j+1;
 end
 
-clear i j i1 i2 i3 i4 i5 i6 out1 out2 out3 out4 out5 out6 v;
+clear j i1 i2 i3 i4 i5 i6 out1 out2 out3 out4 out5 out6 v;
+
+
+
+% Symbol interleaver array according to DVB-T Standard
+q = 1;
+Mr = zeros(1,2048);
+Nr = zeros(1,10);
+
+for i=0:2047
+    if i == 2,
+      Nr(1) = 1;
+    end
+    Nsum = Nr(1)*2^4 + Nr(2)*2^3 + Nr(3)*2^9 + Nr(4)*2^6 + Nr(5)*2^2 +...
+            Nr(6)*2^8 + Nr(7)*2^1 + Nr(8)*2^5 + Nr(9)*2^7 + Nr(10)*2^0;
+    Mr(q) = rem(i,2)*2^10 + Nsum;
+    if( Mr(q) < 1512 )
+        q = q + 1;
+    end
+    Nr = [Nr(2:10) xor(Nr(1),Nr(4))];
+end
+
+SymbolInterleaverTable = Mr(1:1512)+1;
+
+% Expand table to accommodate 6-bit words
+SymbolInterleaverTable = [SymbolInterleaverTable*6-5; 
+	                 SymbolInterleaverTable*6-4;
+					 SymbolInterleaverTable*6-3;
+					 SymbolInterleaverTable*6-2;
+					 SymbolInterleaverTable*6-1; 
+					 SymbolInterleaverTable*6];
+
+% Flatten matrix into lookup table
+SymbolInterleaverTable = SymbolInterleaverTable(:);
+
+clear i q Mr Nr Nsum;
+
 
 
 
