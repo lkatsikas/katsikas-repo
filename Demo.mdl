@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.234"
+    ComputedModelVersion    "1.236"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -39,9 +39,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "katsikas"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Mar 29 18:37:19 2012"
-  RTWModifiedTimeStamp	  254946961
-  ModelVersionFormat	  "1.%<AutoIncrement:234>"
+  LastModifiedDate	  "Fri Mar 30 14:51:58 2012"
+  RTWModifiedTimeStamp	  255019861
+  ModelVersionFormat	  "1.%<AutoIncrement:236>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -78,6 +78,7 @@ Model {
     $ObjectID		    2
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "Demo"
+    signals_		    []
     overrideMode_	    [0.0]
     Array {
       Type		      "Cell"
@@ -829,7 +830,7 @@ Model {
   }
   System {
     Name		    "Demo"
-    Location		    [77, 287, 1341, 1005]
+    Location		    [198, 262, 1462, 980]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -843,7 +844,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "763"
+    SIDHighWatermark	    "765"
     Block {
       BlockType		      Reference
       Name		      "(204,188) Shortened\nRS Decoder"
@@ -3207,7 +3208,7 @@ MatData {
     "   !0    @    !     0    $          @ !  $    .    6     8    (    #0         %    \"     D    !     0         &  "
     "  )        -T\"    !0    $    \"    #P   !8    9    *@         .    2     8    (    #0         %    \"     8    ! "
     "    0         &    &        -T\"     0    $    #     0    X   !0    !@    @    &          4    (     0    0    !  "
-    "        D    @          #@9$       &B\"0       @&U         *$ .    .     8    (    !          %    \"     $    (  "
+    "        D    @          !@84       &B\"0       @&U         *$ .    .     8    (    !          %    \"     $    (  "
     "   0         0    \"    '5N9&]C:V5D#@   #     &    \"     D\"        !0    @    !     0    $          @ !  $    . "
     "   > $   8    (     @         %    \"     $    !     0         %  0 \"@    $    H    4V-O<&5#9F<  $)L;V-K3F%M90!6:"
     "7-I8FQE    5F5R<VEO;@    X   !(    !@    @    -          4    (    !@    $    !          8    8        W0(    !   "
@@ -3630,9 +3631,9 @@ MatData {
     "    @    ) @        4    (     0    $    !          (  0 !    #@   %@    &    \"     T         !0    @    )     0 "
     "   $         !@   \"0       #= @    4    !     @    \\    6    &0   \"H         #@   $@    &    \"     T         !"
     "0    @    &     0    $         !@   !@       #= @    $    !     P    $    .    4     8    (    !@         %    \" "
-    "    $    $     0         )    (            / _       @=4       .!V0       8'1 #@   #@    &    \"     0         !0 "
-    "   @    !    \"     $         $     @   !U;F1O8VME9 X    P    !@    @    ) @        4    (     0    $    !        "
-    "  (  0 !    #@   ( !   &    \"     (         !0    @    !     0    $         !0 $  H    !    *    %-C;W!E0V9G  !\""
+    "    $    $     0         )    (            \")        @=4       .!V0       8'1 #@   #@    &    \"     0         !0"
+    "    @    !    \"     $         $     @   !U;F1O8VME9 X    P    !@    @    ) @        4    (     0    $    !       "
+    "   (  0 !    #@   ( !   &    \"     (         !0    @    !     0    $         !0 $  H    !    *    %-C;W!E0V9G  !\""
     ";&]C:TYA;64 5FES:6)L90   %9E<G-I;VX    .    2     8    (    #0         %    \"     8    !     0         &    &    "
     "    -T\"     0    $    \"     @    X   !0    !@    @    $          4    (     0   !H    !         !     :    +T%U9"
     "&EO(%-I;FLO4F5C96EV960*4V-O<&4        .    ,     8    (    !          %    \"     $    #     0         0  , ;V9F  "
