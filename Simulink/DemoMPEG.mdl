@@ -1,12 +1,12 @@
 Model {
-  Name			  "Temp"
+  Name			  "DemoMPEG"
   Version		  7.7
   MdlSubVersion		  0
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.254"
+    ComputedModelVersion    "1.248"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -18,7 +18,7 @@ Model {
       Type		      "Cell"
       Dimension		      2
       Cell		      "HDLSubsystem"
-      Cell		      "Temp"
+      Cell		      "DemoMPEG"
       PropName		      "mdlProps"
     }
   }
@@ -39,9 +39,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "katsikas"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sun Apr 29 22:18:28 2012"
-  RTWModifiedTimeStamp	  257638705
-  ModelVersionFormat	  "1.%<AutoIncrement:254>"
+  LastModifiedDate	  "Mon Apr 30 00:44:12 2012"
+  RTWModifiedTimeStamp	  257647442
+  ModelVersionFormat	  "1.%<AutoIncrement:248>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -77,12 +77,13 @@ Model {
     $PropName		    "DataLoggingOverride"
     $ObjectID		    2
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
-    model_		    "Temp"
+    model_		    "MpegDemo"
+    signals_		    []
     overrideMode_	    [0.0]
     Array {
       Type		      "Cell"
       Dimension		      1
-      Cell		      "Temp"
+      Cell		      "MpegDemo"
       PropName		      "logAsSpecifiedByModels_"
     }
     Array {
@@ -648,7 +649,7 @@ Model {
       }
       Name		      "Configuration"
       CurrentDlgPage	      "Solver"
-      ConfigPrmDlgPosition     [ 171, 24, 1108, 955 ] 
+      ConfigPrmDlgPosition     [ 173, 26, 1106, 893 ] 
     }
     PropName		    "ConfigurationSets"
   }
@@ -870,8 +871,8 @@ Model {
     }
   }
   System {
-    Name		    "Temp"
-    Location		    [320, 339, 1590, 1005]
+    Name		    "DemoMPEG"
+    Location		    [379, 382, 1649, 1048]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -885,7 +886,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "1190"
+    SIDHighWatermark	    "1153"
     Block {
       BlockType		      Reference
       Name		      "(204,188) Shortened\nRS Decoder"
@@ -943,7 +944,7 @@ Model {
       System {
 	Name			"Audio Sink"
 	Location		[467, 348, 1679, 741]
-	Open			on
+	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -968,7 +969,7 @@ Model {
 	  Name			  "Buffer"
 	  SID			  "828"
 	  Position		  [300, 80, 350, 130]
-	  N			  "120*160*3"
+	  N			  "120*160"
 	  TreatMby1Signals	  "One channel"
 	}
 	Block {
@@ -976,7 +977,7 @@ Model {
 	  Name			  "Final"
 	  SID			  "765"
 	  Ports			  [1]
-	  Position		  [655, 72, 770, 138]
+	  Position		  [785, 282, 900, 348]
 	  LibraryVersion	  "1.254"
 	  UserDataPersistent	  on
 	  UserData		  "DataTag0"
@@ -989,7 +990,7 @@ Model {
 	  specRange		  off
 	  minInputVal		  "0"
 	  maxInputVal		  "255"
-	  FigPos		  "[842 870 458 411]"
+	  FigPos		  "[730 1122 458 411]"
 	  AxisZoom		  on
 	  trueSizedOnce		  on
 	  OpenAtMdlStart	  on
@@ -999,9 +1000,9 @@ Model {
 	  Name			  "Reshape"
 	  SID			  "830"
 	  Ports			  [1, 1]
-	  Position		  [440, 93, 470, 117]
+	  Position		  [435, 93, 465, 117]
 	  OutputDimensionality	  "Customize"
-	  OutputDimensions	  "[120,160,3]"
+	  OutputDimensions	  "[160,120]"
 	}
 	Block {
 	  BlockType		  SubSystem
@@ -1019,7 +1020,7 @@ Model {
 	  System {
 	    Name		    "Sync1 Inversion\nand Energy\nDispersal Removal"
 	    Location		    [126, 302, 886, 495]
-	    Open		    on
+	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
 	    ScreenColor		    "white"
@@ -1146,7 +1147,7 @@ Model {
 		    outVarSiz		    off
 		    maxOutSizeMode	    "Dialog parameter"
 		    maxOutSize		    "[10 1]"
-		    Ts			    "8 * (8*188/30e6) / (8*188 - 1)"
+		    Ts			    "8 * (8*188/9.6e6) / (8*188 - 1)"
 		    frameBased		    on
 		    sampPerFrame	    "(8*188 - 1)"
 		    reset		    on
@@ -1163,7 +1164,7 @@ Model {
 		    Position		    [30, 320, 60, 350]
 		    VectorParams1D	    off
 		    OutDataTypeStr	    "boolean"
-		    SampleTime		    "8 * (8*188/30e6)"
+		    SampleTime		    "8 * (8*188/9.6e6)"
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -2496,10 +2497,78 @@ Model {
 	    }
 	  }
 	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "To Multimedia File"
+	  SID			  "764"
+	  Ports			  [1]
+	  Position		  [775, 16, 905, 84]
+	  LibraryVersion	  "1.473"
+	  SourceBlock		  "dspsnks4/To Multimedia File"
+	  SourceType		  "To Multimedia File"
+	  outputFilename	  "output.avi"
+	  streamSelection	  "Video only"
+	  videoCompressor	  "None (uncompressed)"
+	  audioCompressor	  "None (uncompressed)"
+	  imagePorts		  "One multidimensional signal"
+	  fileType		  "AVI"
+	  audioDatatype		  "Determine from input data type"
+	  fourcc		  "RGB"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Transpose"
+	  SID			  "873"
+	  Ports			  [1, 1]
+	  Position		  [525, 85, 580, 125]
+	  LibraryVersion	  "1.896"
+	  SourceBlock		  "dspmtrx3/Transpose"
+	  SourceType		  "Transpose"
+	  ShowPortLabels	  "FromPortIcon"
+	  SystemSampleTime	  "-1"
+	  FunctionWithSeparateData off
+	  RTWMemSecFuncInitTerm	  "Inherit from model"
+	  RTWMemSecFuncExecute	  "Inherit from model"
+	  RTWMemSecDataConstants  "Inherit from model"
+	  RTWMemSecDataInternal	  "Inherit from model"
+	  RTWMemSecDataParameters "Inherit from model"
+	  GeneratePreprocessorConditionals off
+	  Hermitian		  off
+	  overflowFlag		  off
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Write Binary File"
+	  SID			  "769"
+	  Ports			  [3]
+	  Position		  [775, 180, 905, 250]
+	  LibraryVersion	  "1.254"
+	  SourceBlock		  "vipsnks/Write Binary File"
+	  SourceType		  "Write Binary File"
+	  FileName		  "output.bin"
+	  VideoFormat		  "Four character codes"
+	  FOURCC		  "I420"
+	  BitStreamFormat	  "Planar"
+	  NumInputs		  "3"
+	  ComponentOrder	  "[1 2 3]"
+	  Interlaced		  off
+	  LineOrdering		  "Top line first"
+	  InheritBits		  on
+	  Component1		  "Y'"
+	  Component2		  "Cb"
+	  Component3		  "Cr"
+	  Component4		  "Alpha"
+	  Bits1			  "8"
+	  Bits2			  "8"
+	  Bits3			  "8"
+	  Bits4			  "0"
+	  SignedInput		  off
+	  FileEndian		  "Little endian"
+	}
 	Line {
 	  SrcBlock		  "Reshape"
 	  SrcPort		  1
-	  DstBlock		  "Final"
+	  DstBlock		  "Transpose"
 	  DstPort		  1
 	}
 	Line {
@@ -2513,6 +2582,28 @@ Model {
 	  SrcPort		  1
 	  DstBlock		  "Sync1 Inversion\nand Energy\nDispersal Removal"
 	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Transpose"
+	  SrcPort		  1
+	  Points		  [80, 0]
+	  Branch {
+	    Points		    [30, 0; 0, 85]
+	    Branch {
+	      Points		      [0, 125]
+	      DstBlock		      "Final"
+	      DstPort		      1
+	    }
+	    Branch {
+	      DstBlock		      "Write Binary File"
+	      DstPort		      1
+	    }
+	  }
+	  Branch {
+	    Points		    [0, -55]
+	    DstBlock		    "To Multimedia File"
+	    DstPort		    1
+	  }
 	}
 	Line {
 	  SrcBlock		  "Sync1 Inversion\nand Energy\nDispersal Removal"
@@ -2537,7 +2628,7 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"Audio Source"
-	Location		[265, 632, 1634, 894]
+	Location		[195, 623, 1564, 885]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -2555,7 +2646,7 @@ Model {
 	  Name			  "Bit rate (Mbit/s)"
 	  SID			  "1126"
 	  Ports			  [1]
-	  Position		  [105, 160, 230, 190]
+	  Position		  [55, 160, 180, 190]
 	  BlockMirror		  on
 	  Format		  "bank"
 	  Decimation		  "1"
@@ -2566,7 +2657,7 @@ Model {
 	  Name			  "Compute\ndata rate"
 	  SID			  "1127"
 	  Ports			  [1, 1]
-	  Position		  [295, 158, 400, 192]
+	  Position		  [245, 158, 350, 192]
 	  BlockMirror		  on
 	  ShowName		  off
 	  MinAlgLoopOccurrences	  off
@@ -2715,8 +2806,8 @@ Model {
 	  BlockType		  SubSystem
 	  Name			  "Prepend MPEG-2\nTransport Stream\nHeader Bytes"
 	  SID			  "1040"
-	  Ports			  [0, 1]
-	  Position		  [105, 61, 220, 119]
+	  Ports			  [1, 1]
+	  Position		  [310, 61, 425, 119]
 	  ShowName		  off
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
@@ -2733,7 +2824,7 @@ Model {
 	  MaskIconUnits		  "autoscale"
 	  System {
 	    Name		    "Prepend MPEG-2\nTransport Stream\nHeader Bytes"
-	    Location		    [819, 632, 1579, 1003]
+	    Location		    [189, 479, 949, 850]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -2747,232 +2838,12 @@ Model {
 	    ShowPageBoundaries	    off
 	    ZoomFactor		    "100"
 	    Block {
-	      BlockType		      SubSystem
-	      Name		      "Audio Source"
-	      SID		      "1168"
-	      Ports		      [0, 1]
-	      Position		      [65, 232, 145, 288]
-	      MinAlgLoopOccurrences   off
-	      PropExecContextOutsideSubsystem off
-	      RTWSystemCode	      "Auto"
-	      FunctionWithSeparateData off
-	      Opaque		      off
-	      RequestExecContextInheritance off
-	      MaskHideContents	      off
-	      System {
-		Name			"Audio Source"
-		Location		[355, 636, 1516, 898]
-		Open			off
-		ModelBrowserVisibility	off
-		ModelBrowserWidth	200
-		ScreenColor		"white"
-		PaperOrientation	"landscape"
-		PaperPositionMode	"auto"
-		PaperType		"A4"
-		PaperUnits		"centimeters"
-		TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
-		TiledPageScale		1
-		ShowPageBoundaries	off
-		ZoomFactor		"100"
-		Block {
-		  BlockType		  Buffer
-		  Name			  "Buffer"
-		  SID			  "1169"
-		  Position		  [675, 125, 725, 175]
-		  N			  "184"
-		  TreatMby1Signals	  "One channel"
-		}
-		Block {
-		  BlockType		  FrameConversion
-		  Name			  "Frame Conversion"
-		  SID			  "1170"
-		  Ports			  [1, 1]
-		  Position		  [875, 130, 930, 170]
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "From Multimedia File"
-		  SID			  "1184"
-		  Ports			  [0, 1]
-		  Position		  [55, 119, 195, 181]
-		  LibraryVersion	  "1.712"
-		  SourceBlock		  "dspsrcs4/From Multimedia File"
-		  SourceType		  "From Multimedia File"
-		  inputFilename		  "vipmen.avi"
-		  loop			  on
-		  numPlays		  "inf"
-		  outputStreams		  "Video only"
-		  videoDataType		  "uint8"
-		  audioDataType		  "int16"
-		  inheritSampleTime	  off
-		  userDefinedSampleTime	  "(8*188/30e6) / (8 * 184)"
-		  noAudioOutput		  off
-		  isIntensityVideo	  off
-		  fourcc		  "RGB"
-		  colorVideoFormat	  "One multidimensional signal"
-		  outputEOF		  off
-		  dataOrg		  "Column-major"
-		  audioFrameSize	  "1024"
-		  computeAudioFrameSize	  off
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "Original"
-		  SID			  "1171"
-		  Ports			  [1]
-		  Position		  [335, 22, 450, 88]
-		  LibraryVersion	  "1.254"
-		  UserDataPersistent	  on
-		  UserData		  "DataTag1"
-		  SourceBlock		  "vipsnks/Video Viewer"
-		  SourceType		  "Video Viewer"
-		  inputType		  "Obsolete7b"
-		  imagePorts		  "One multidimensional signal"
-		  useColorMap		  off
-		  colormapValue		  "gray(256)"
-		  specRange		  off
-		  minInputVal		  "0"
-		  maxInputVal		  "255"
-		  FigPos		  "[59 997 538 596]"
-		  AxisZoom		  on
-		  trueSizedOnce		  on
-		  OpenAtMdlStart	  on
-		}
-		Block {
-		  BlockType		  Reshape
-		  Name			  "Reshape"
-		  SID			  "1172"
-		  Ports			  [1, 1]
-		  Position		  [470, 138, 500, 162]
-		  OutputDimensionality	  "Column vector (2-D)"
-		  OutputDimensions	  "[160,120]"
-		}
-		Block {
-		  BlockType		  SubSystem
-		  Name			  "Video source"
-		  SID			  "1175"
-		  Ports			  [0, 1]
-		  Position		  [55, 26, 135, 74]
-		  MinAlgLoopOccurrences	  off
-		  PropExecContextOutsideSubsystem off
-		  RTWSystemCode		  "Auto"
-		  FunctionWithSeparateData off
-		  Opaque		  off
-		  RequestExecContextInheritance	off
-		  MaskHideContents	  off
-		  System {
-		    Name		    "Video source"
-		    Location		    [301, 513, 787, 637]
-		    Open		    off
-		    ModelBrowserVisibility  off
-		    ModelBrowserWidth	    200
-		    ScreenColor		    "white"
-		    PaperOrientation	    "landscape"
-		    PaperPositionMode	    "auto"
-		    PaperType		    "A4"
-		    PaperUnits		    "centimeters"
-		    TiledPaperMargins	    [1.270000, 1.270000, 1.270000, 1.270000]
-		    TiledPageScale	    1
-		    ShowPageBoundaries	    off
-		    ZoomFactor		    "100"
-		    Block {
-		    BlockType		    Reference
-		    Name		    "Read Binary File"
-		    SID			    "1177"
-		    Ports		    [0, 3]
-		    Position		    [15, 29, 140, 91]
-		    LibraryVersion	    "1.309"
-		    SourceBlock		    "vipsrcs/Read Binary File"
-		    SourceType		    "Read Binary File"
-		    FileName		    "vipmen.bin"
-		    loopOrNot		    on
-		    numLoops		    "inf"
-		    VideoFormat		    "Custom"
-		    FOURCC		    "I420"
-		    BitStreamFormat	    "Planar"
-		    NumOutputs		    "3"
-		    ComponentOrder	    "[1 2 3]"
-		    Interlaced		    off
-		    LineOrdering	    "Top line first"
-		    Ts			    "(8*188/9.6e6) / (8 * 184)"
-		    Component1		    "Y'"
-		    Component2		    "Cb"
-		    Component3		    "Cr"
-		    Component4		    "Alpha"
-		    Bits1		    "8"
-		    Bits2		    "8"
-		    Bits3		    "8"
-		    Bits4		    "8"
-		    Rows1		    "120"
-		    Rows2		    "60"
-		    Rows3		    "60"
-		    Rows4		    "288"
-		    Cols1		    "160"
-		    Cols2		    "80"
-		    Cols3		    "80"
-		    Cols4		    "352"
-		    YRows		    "120"
-		    YCols		    "160"
-		    SignedOutput	    off
-		    FileEndian		    "Little endian"
-		    OutputEOF		    off
-		    }
-		    Block {
-		    BlockType		    Outport
-		    Name		    "I"
-		    SID			    "1180"
-		    Position		    [390, 33, 420, 47]
-		    IconDisplay		    "Port number"
-		    }
-		    Line {
-		    SrcBlock		    "Read Binary File"
-		    SrcPort		    1
-		    DstBlock		    "I"
-		    DstPort		    1
-		    }
-		  }
-		}
-		Block {
-		  BlockType		  Outport
-		  Name			  "Out"
-		  SID			  "1181"
-		  Position		  [1115, 143, 1145, 157]
-		  IconDisplay		  "Port number"
-		}
-		Line {
-		  SrcBlock		  "Reshape"
-		  SrcPort		  1
-		  DstBlock		  "Buffer"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "Buffer"
-		  SrcPort		  1
-		  DstBlock		  "Frame Conversion"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "Frame Conversion"
-		  SrcPort		  1
-		  DstBlock		  "Out"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "From Multimedia File"
-		  SrcPort		  1
-		  Points		  [75, 0; 0, -5]
-		  Branch {
-		    Points		    [0, -90]
-		    DstBlock		    "Original"
-		    DstPort		    1
-		  }
-		  Branch {
-		    Points		    [0, 5]
-		    DstBlock		    "Reshape"
-		    DstPort		    1
-		  }
-		}
-	      }
+	      BlockType		      Inport
+	      Name		      "MPEG-2"
+	      SID		      "1041"
+	      Position		      [40, 253, 70, 267]
+	      ShowName		      off
+	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Constant
@@ -2983,7 +2854,7 @@ Model {
 	      VectorParams1D	      off
 	      SamplingMode	      "Frame based"
 	      OutDataTypeStr	      "uint8"
-	      FramePeriod	      "(8*188)/30e6"
+	      FramePeriod	      "(8*188)/9.6e6"
 	    }
 	    Block {
 	      BlockType		      Concatenate
@@ -2999,7 +2870,7 @@ Model {
 	      Name		      "Pack 8 bit chunks\ninto bytes"
 	      SID		      "1044"
 	      Ports		      [1, 1]
-	      Position		      [290, 141, 380, 189]
+	      Position		      [255, 141, 345, 189]
 	      LibraryVersion	      "1.270"
 	      SourceBlock	      "commutil2/Bit to Integer\nConverter"
 	      SourceType	      "Bit to Integer Converter"
@@ -3029,7 +2900,7 @@ Model {
 	      GeneratePreprocessorConditionals off
 	      P			      "0.5"
 	      seed		      "61"
-	      Ts		      "(8*188/30e6) / (3*8)"
+	      Ts		      "(8*188/9.6e6) / (3*8)"
 	      frameBased	      on
 	      sampPerFrame	      "3*8"
 	      orient		      off
@@ -3068,10 +2939,100 @@ Model {
 	      DstPort		      2
 	    }
 	    Line {
-	      SrcBlock		      "Audio Source"
+	      SrcBlock		      "MPEG-2"
 	      SrcPort		      1
 	      DstBlock		      "Matrix\nConcatenation"
 	      DstPort		      3
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Raw Data "
+	  SID			  "1122"
+	  Ports			  [0, 1]
+	  Position		  [105, 59, 200, 121]
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  FunctionWithSeparateData off
+	  Opaque		  off
+	  RequestExecContextInheritance	off
+	  MaskHideContents	  off
+	  System {
+	    Name		    "Raw Data "
+	    Location		    [72, 146, 675, 356]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "A4"
+	    PaperUnits		    "centimeters"
+	    TiledPaperMargins	    [1.270000, 1.270000, 1.270000, 1.270000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Reference
+	      Name		      "184 bytes of MPEG-2\nor auxiliary data"
+	      SID		      "1123"
+	      Ports		      [0, 1]
+	      Position		      [25, 58, 105, 102]
+	      LibraryVersion	      "1.111"
+	      SourceBlock	      "commrandsrc2/Bernoulli Binary\nGenerator"
+	      SourceType	      "Bernoulli Binary Generator"
+	      ShowPortLabels	      "FromPortIcon"
+	      SystemSampleTime	      "-1"
+	      FunctionWithSeparateData off
+	      RTWMemSecFuncInitTerm   "Inherit from model"
+	      RTWMemSecFuncExecute    "Inherit from model"
+	      RTWMemSecDataConstants  "Inherit from model"
+	      RTWMemSecDataInternal   "Inherit from model"
+	      RTWMemSecDataParameters "Inherit from model"
+	      GeneratePreprocessorConditionals off
+	      P			      "0.5"
+	      seed		      "61"
+	      Ts		      "(8*188/9.6e6) / (8 * 184)"
+	      frameBased	      on
+	      sampPerFrame	      "8 * 184"
+	      orient		      off
+	      outDataType	      "uint8"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Pack 8 bit chunks\ninto bytes"
+	      SID		      "1124"
+	      Ports		      [1, 1]
+	      Position		      [240, 56, 395, 104]
+	      LibraryVersion	      "1.270"
+	      SourceBlock	      "commutil2/Bit to Integer\nConverter"
+	      SourceType	      "Bit to Integer Converter"
+	      nbits		      "8"
+	      bitOrder		      "MSB first"
+	      signedOutputValues      "Unsigned"
+	      outDtype		      "uint8"
+	      outDtypeSigned	      "Inherit via internal rule"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Bytes"
+	      SID		      "1125"
+	      Position		      [530, 73, 560, 87]
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      SrcBlock		      "184 bytes of MPEG-2\nor auxiliary data"
+	      SrcPort		      1
+	      DstBlock		      "Pack 8 bit chunks\ninto bytes"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Pack 8 bit chunks\ninto bytes"
+	      SrcPort		      1
+	      DstBlock		      "Bytes"
+	      DstPort		      1
 	    }
 	  }
 	}
@@ -3218,7 +3179,7 @@ Model {
 		    outVarSiz		    off
 		    maxOutSizeMode	    "Dialog parameter"
 		    maxOutSize		    "[10 1]"
-		    Ts			    "8 * (8*188/30e6) / (8*188 - 1)"
+		    Ts			    "8 * (8*188/9.6e6) / (8*188 - 1)"
 		    frameBased		    on
 		    sampPerFrame	    "(8*188 - 1)"
 		    reset		    on
@@ -3235,7 +3196,7 @@ Model {
 		    Position		    [30, 320, 60, 350]
 		    VectorParams1D	    off
 		    OutDataTypeStr	    "boolean"
-		    SampleTime		    "8 * (8*188/30e6)"
+		    SampleTime		    "8 * (8*188/9.6e6)"
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -4555,16 +4516,16 @@ Model {
 	      DstPort		      1
 	    }
 	    Line {
+	      SrcBlock		      "Scrambler-Descrambler"
+	      SrcPort		      1
+	      DstBlock		      "Rebuffer\nto Packets"
+	      DstPort		      1
+	    }
+	    Line {
 	      Labels		      [0, 0]
 	      SrcBlock		      "Buffer to\nSuperframes"
 	      SrcPort		      1
 	      DstBlock		      "Scrambler-Descrambler"
-	      DstPort		      1
-	    }
-	    Line {
-	      SrcBlock		      "Scrambler-Descrambler"
-	      SrcPort		      1
-	      DstBlock		      "Rebuffer\nto Packets"
 	      DstPort		      1
 	    }
 	  }
@@ -4579,7 +4540,7 @@ Model {
 	Line {
 	  SrcBlock		  "Prepend MPEG-2\nTransport Stream\nHeader Bytes"
 	  SrcPort		  1
-	  Points		  [250, 0]
+	  Points		  [45, 0]
 	  Branch {
 	    DstBlock		    "Sync1 Inversion and\nData Randomization\n(Sec 4.2, 7.1)"
 	    DstPort		    1
@@ -4594,6 +4555,12 @@ Model {
 	  SrcBlock		  "Sync1 Inversion and\nData Randomization\n(Sec 4.2, 7.1)"
 	  SrcPort		  1
 	  DstBlock		  "Out"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Raw Data "
+	  SrcPort		  1
+	  DstBlock		  "Prepend MPEG-2\nTransport Stream\nHeader Bytes"
 	  DstPort		  1
 	}
 	Line {
@@ -5103,7 +5070,7 @@ Model {
 	  Position		  [305, 65, 360, 105]
 	  LibraryVersion	  "1.716"
 	  UserDataPersistent	  on
-	  UserData		  "DataTag2"
+	  UserData		  "DataTag1"
 	  SourceBlock		  "dspsigops/Delay"
 	  SourceType		  "Delay"
 	  InputProcessing	  "Columns as channels (frame based)"
@@ -5832,60 +5799,11 @@ Model {
   }
 }
 MatData {
-  NumRecords		  3
-  DataRecord {
-    Tag			    DataTag2
-    Data		    "  %)30     .    B     8    (     @         %    \"     $    !     0         %  0 $P    $    3    :&%S26"
-    "YH97)I=&5D3W!T:6]N        #@   #     &    \"     D\"        !0    @    !     0    $          @ !  $    "
-  }
+  NumRecords		  2
   DataRecord {
     Tag			    DataTag1
-    Data		    "  %)30     .    4 $   8    (     @         %    \"     $    !     0         %  0 #0    $    :    4V-O<&"
-    "5#9F=.86UE %-C;W!E                   .    4     8    (    !          %    \"     $    =     0         0    '0   '9"
-    "I<'-C;W!E<RY6:61E;U9I97=E<E-C;W!E0V9G    #@   )@    &    \"    !$          0         !  0 34-/4P$    :    <V-O<&5E"
-    ">'1E;G-I;VYS+E-C;W!E0FQO8VL        .    2     8    (    #0         %    \"     8    !     0         &    &        "
-    "-T\"     0    $    !     P    X   \"P#0  !@    @    )          4    (     0   ( -   !          (   \" #0    %)30  "
-    "   .    X P   8    (     @         %    \"     $    !     0         %  0 !0    $    %    34-/4P     .    F P   8  "
-    "  (    $0         !          $ ! !-0T]3 0    T   !&:6QE5W)A<'!E<E]?    #@   %@,   &    \"     $         !0    @   "
-    " &     0    $         #@   %@\"   &    \"     D         !0    @    H @   0    $          @   \"@\"   \"    %    \""
-    "@!  !H 0  D $  / !   ( @  * (             86YY %!A<G-E9$%R9W, 4V-O<&5#3$D =6ES8V]P97, 3F%M90!!<F=S $%R9TYA;65S %9I"
-    "9&5O5FEE=V5R4V-O<&5#9F< =FEP<V-O<&5S $)L;V-K %-C;W!E $-U<G)E;G1#;VYF:6=U<F%T:6]N %!O<VET:6]N %=I;F1O=U-T>6QE %-C;W"
-    "!E0FQO8VL <V-O<&5E>'1E;G-I;VYS $%L;&]W4V-O<&5#:&%N9V5S $%L;&]W0FQO8VM#:&%N9V5S $ES4V-O<&5#9F=/;&0 <VEG=71I;',N07!P"
-    ";&EC871I;VY$871A+D%P<&QI8V%T:6]N1&%T85\\                        $     P              \"0    @              !     /"
-    "                          $    !     0    (    !     0    $    !                                     P            "
-    "   0         #     @               @         \"     0                    $    !               !     @    $        "
-    "                                            .          X    P    !@    @    $          4    (               !     "
-    "    !          #@   \" \"   &    \"     (         !0    @    !     0    $         !0 $ !4    !    :0   &-L87-S    "
-    "                 $-U<G)E;G1#;VYF:6=U<F%T:6]N %-C;W!E0TQ)                 %!O<VET:6]N                 %=I;F1O=U-T>6"
-    "QE                       .    4     8    (    !          %    \"     $    =     0         0    '0   '9I<'-C;W!E<RY"
-    "6:61E;U9I97=E<E-C;W!E0V9G    #@   #     &    \"     8         !0    @               $         \"0         .    2  "
-    "   8    (    #0         %    \"     8    !     0         &    &        -T\"     0    $    #     0    X   !0    !@ "
-    "   @    &          4    (     0    0    !          D    @          #8@T       '!W0       H'E       # <D .    .    "
-    " 8    (    !          %    \"     $    (     0         0    \"    '5N9&]C:V5D#@   + !   &    \"     (         !0  "
-    "  @    !     0    $         !0 $  H    !    *    %-C;W!E0V9G  !\";&]C:TYA;64 5FES:6)L90   %9E<G-I;VX    .    2    "
-    " 8    (    #0         %    \"     8    !     0         &    &        -T\"     0    $    \"     @    X   \"     !@ "
-    "   @    $          4    (     0   %     !         !    !0    +T%U9&EO(%-O=7)C92]0<F5P96YD($U014<M,@I4<F%N<W!O<G0@4"
-    "W1R96%M\"DAE861E<B!\">71E<R]!=61I;R!3;W5R8V4O3W)I9VEN86P.    ,     8    (    !          %    \"     $    #     0  "
-    "       0  , ;V9F  X    X    !@    @    &          4    (     0    $    !          D    (            \\#\\.    J 4 "
-    "  8    (     0         %    \"     0    !     0         .    .     8    (     @         %    \"     $          0  "
-    "       %  0  0    $         #@   # !   &    \"     (         !0    @    !     0    $         !0 $  L    !    +    "
-    "$YA;64         07)G<P        !087)S961!<F=S $%R9TYA;65S          X    P    !@    @    $          4    (           "
-    "    !         !          #@   \"@    &    \"     $         !0    @               $         #@   \"@    &    \"    "
-    " $         !0    @               $         #@   \"@    &    \"     $         !0    @               $         #@   "
-    "# \"   &    \"     (         !0    @    !     0    $         !0 $ !4    !    ?@   $)L;V-K                     %-C;"
-    "W!E                     $-U<G)E;G1#;VYF:6=U<F%T:6]N %-C;W!E0TQ)                 %!O<VET:6]N                 %=I;F1"
-    "O=U-T>6QE                #@   #     &    \"     8         !0    @               $         \"0         .    ,     8"
-    "    (    !@         %    \"                0         )          X    P    !@    @    &          4    (            "
-    "   !          D         #@   #     &    \"     8         !0    @               $         \"0         .    4     8 "
-    "   (    !@         %    \"     $    $     0         )    (           V(-       !P=T       *!Y0       P') #@   #@  "
-    "  &    \"     0         !0    @    !    \"     $         $     @   !U;F1O8VME9 X   #( 0  !@    @    \"          4 "
-    "   (     0    $    !          4 !  J     0   *@   !!;&QO=U-C;W!E0VAA;F=E<P                                !!;&QO=T"
-    ")L;V-K0VAA;F=E<P                                !)<U-C;W!E0V9G3VQD                                      !S:6=U=&EL"
-    "<RY!<'!L:6-A=&EO;D1A=&$N07!P;&EC871I;VY$871A7P .    ,     8    (    \"0(        %    \"     $    !     0         \""
-    "  $  0    X    P    !@    @    ) @        4    (     0    $    !          (  0 !    #@   #     &    \"     D\"    "
-    "    !0    @    !     0    $          @ !       .    .     8    (     @         %    \"     $    !     0         % "
-    " 0  0    $         #@   (@    &    \"     D         !0    @    !    6     $          @   %@      4E-      X   !(  "
-    "  !@    @    \"          4    (     0    $    !          4 !  %     0    4   !-0T]3      X         "
+    Data		    "  %)30     .    B     8    (     @         %    \"     $    !     0         %  0 $P    $    3    :&%S26"
+    "YH97)I=&5D3W!T:6]N        #@   #     &    \"     D\"        !0    @    !     0    $          @ !  $    "
   }
   DataRecord {
     Tag			    DataTag0
@@ -5947,7 +5865,7 @@ MatData {
 Stateflow {
   machine {
     id			    1
-    name		    "Temp"
+    name		    "DemoMPEG"
     created		    "23-Apr-2012 13:25:47"
     isLibrary		    0
     firstTarget		    2
