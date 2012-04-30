@@ -1,12 +1,12 @@
 Model {
-  Name			  "Temp"
+  Name			  "DemoAVI"
   Version		  7.7
   MdlSubVersion		  0
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.243"
+    ComputedModelVersion    "1.244"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -18,7 +18,7 @@ Model {
       Type		      "Cell"
       Dimension		      2
       Cell		      "HDLSubsystem"
-      Cell		      "Temp"
+      Cell		      "DemoAVI"
       PropName		      "mdlProps"
     }
   }
@@ -39,9 +39,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "katsikas"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sun Apr 29 13:04:04 2012"
-  RTWModifiedTimeStamp	  257605410
-  ModelVersionFormat	  "1.%<AutoIncrement:243>"
+  LastModifiedDate	  "Mon Apr 30 14:47:21 2012"
+  RTWModifiedTimeStamp	  257698028
+  ModelVersionFormat	  "1.%<AutoIncrement:244>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -78,6 +78,7 @@ Model {
     $ObjectID		    2
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "Temp"
+    signals_		    []
     overrideMode_	    [0.0]
     Array {
       Type		      "Cell"
@@ -798,7 +799,7 @@ Model {
     }
   }
   System {
-    Name		    "Temp"
+    Name		    "DemoAVI"
     Location		    [67, 83, 1337, 749]
     Open		    on
     ModelBrowserVisibility  off
@@ -825,7 +826,7 @@ Model {
       SourceBlock	      "commblkcod2/Integer-Output\nRS Decoder"
       SourceType	      "Integer-Output RS Decoder"
       n			      "204"
-      k			      "160"
+      k			      "188"
       specPrimPoly	      off
       prPoly		      "[1 0 1 1]"
       specGenPoly	      off
@@ -845,7 +846,7 @@ Model {
       SourceBlock	      "commblkcod2/Integer-Input\nRS Encoder"
       SourceType	      "Integer-Input RS Encoder"
       n			      "204"
-      k			      "160"
+      k			      "188"
       specPrimPoly	      off
       prPoly		      "[1 0 1 1]"
       specGenPoly	      off
@@ -870,7 +871,7 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"Audio Sink"
-	Location		[302, 455, 1514, 848]
+	Location		[67, 455, 1279, 848]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -917,7 +918,7 @@ Model {
 	  specRange		  off
 	  minInputVal		  "0"
 	  maxInputVal		  "255"
-	  FigPos		  "[519 936 458 411]"
+	  FigPos		  "[505 936 458 411]"
 	  AxisZoom		  on
 	  trueSizedOnce		  on
 	  OpenAtMdlStart	  on
@@ -1093,7 +1094,7 @@ Model {
 	  Name			  "Buffer"
 	  SID			  "816"
 	  Position		  [755, 135, 805, 185]
-	  N			  "160"
+	  N			  "188"
 	  TreatMby1Signals	  "One channel"
 	}
 	Block {
@@ -1121,7 +1122,7 @@ Model {
 	  specRange		  off
 	  minInputVal		  "0"
 	  maxInputVal		  "255"
-	  FigPos		  "[68 877 458 411]"
+	  FigPos		  "[54 877 458 411]"
 	  AxisZoom		  on
 	  trueSizedOnce		  on
 	  OpenAtMdlStart	  on
@@ -2626,7 +2627,7 @@ MatData {
     "-I=&EO;@                !7:6YD;W=3='EL90                X    P    !@    @    &          4    (               !    "
     "      D         #@   #     &    \"     8         !0    @               $         \"0         .    ,     8    (    "
     "!@         %    \"                0         )          X    P    !@    @    &          4    (               !     "
-    "     D         #@   %     &    \"     8         !0    @    !    !     $         \"0   \"           -B#0       <'= "
+    "     D         #@   %     &    \"     8         !0    @    !    !     $         \"0   \"           #![0       H'9 "
     "      \"@>4       ,!R0 X    X    !@    @    $          4    (     0    @    !         !     (    =6YD;V-K960.    R"
     " $   8    (     @         %    \"     $    !     0         %  0 *@    $   \"H    06QL;W=38V]P94-H86YG97,          "
     "                       06QL;W=\";&]C:T-H86YG97,                                 27-38V]P94-F9T]L9                 "
@@ -2675,7 +2676,7 @@ MatData {
     "-I=&EO;@                !7:6YD;W=3='EL90                X    P    !@    @    &          4    (               !    "
     "      D         #@   #     &    \"     8         !0    @               $         \"0         .    ,     8    (    "
     "!@         %    \"                0         )          X    P    !@    @    &          4    (               !     "
-    "     D         #@   %     &    \"     8         !0    @    !    !     $         \"0   \"           -B#0       <'= "
+    "     D         #@   %     &    \"     8         !0    @    !    !     $         \"0   \"           #![0       H'9 "
     "      \"@>4       ,!R0 X    X    !@    @    $          4    (     0    @    !         !     (    =6YD;V-K960.    R"
     " $   8    (     @         %    \"     $    !     0         %  0 *@    $   \"H    06QL;W=38V]P94-H86YG97,          "
     "                       06QL;W=\";&]C:T-H86YG97,                                 27-38V]P94-F9T]L9                 "
@@ -2697,7 +2698,7 @@ MatData {
 Stateflow {
   machine {
     id			    1
-    name		    "Temp"
+    name		    "DemoAVI"
     created		    "23-Apr-2012 13:25:47"
     isLibrary		    0
     firstTarget		    2
