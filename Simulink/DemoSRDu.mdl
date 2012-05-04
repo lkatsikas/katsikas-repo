@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.268"
+    ComputedModelVersion    "1.269"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -39,9 +39,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "katsikas"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Apr 30 20:13:40 2012"
-  RTWModifiedTimeStamp	  257715835
-  ModelVersionFormat	  "1.%<AutoIncrement:268>"
+  LastModifiedDate	  "Thu May  3 17:50:21 2012"
+  RTWModifiedTimeStamp	  257968204
+  ModelVersionFormat	  "1.%<AutoIncrement:269>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -78,7 +78,6 @@ Model {
     $ObjectID		    2
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "DemoSRDu"
-    signals_		    []
     overrideMode_	    [0.0]
     Array {
       Type		      "Cell"
@@ -824,7 +823,7 @@ Model {
   }
   System {
     Name		    "DemoSRDu"
-    Location		    [233, 357, 1503, 1023]
+    Location		    [46, 298, 1316, 964]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -5424,7 +5423,7 @@ Model {
       Name		      "SDRu Receiver"
       SID		      "1360"
       Ports		      [0, 2]
-      Position		      [1157, 315, 1248, 495]
+      Position		      [1047, 330, 1138, 510]
       ZOrder		      -1
       BlockRotation	      270
       BlockMirror	      on
@@ -5465,8 +5464,8 @@ Model {
       BlockType		      Reference
       Name		      "SDRu Transmitter1"
       SID		      "1359"
-      Ports		      [2]
-      Position		      [1162, 125, 1253, 305]
+      Ports		      [1]
+      Position		      [1044, 140, 1136, 320]
       ZOrder		      -2
       BlockRotation	      270
       BlockMirror	      on
@@ -5492,7 +5491,7 @@ Model {
       gain		      "20"
       gainSrc		      "Dialog"
       decimInterp	      "512"
-      decimInterpSrc	      "Input port"
+      decimInterpSrc	      "Dialog"
       USRP2_IP_NUM	      "[49 57 50 46 49 54 56 46 49 48 46 50]"
       frameLength	      "362"
       outputDatatype	      "int16"
@@ -5734,12 +5733,14 @@ Model {
     Line {
       SrcBlock		      "SDRu Receiver"
       SrcPort		      1
+      Points		      [110, 0]
       DstBlock		      "Buffer"
       DstPort		      1
     }
     Line {
       SrcBlock		      "Buffer1"
       SrcPort		      1
+      Points		      [0, 5]
       DstBlock		      "SDRu Transmitter1"
       DstPort		      1
     }

@@ -1,2 +1,2 @@
-dokimi gmsk gia dvb-t
+dokimi qam ofdm gia dvb-t
 

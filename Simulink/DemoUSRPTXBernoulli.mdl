@@ -1,12 +1,12 @@
 Model {
-  Name			  "DemoUSRPTX"
+  Name			  "DemoUSRPTXBernoulli"
   Version		  7.7
   MdlSubVersion		  0
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.275"
+    ComputedModelVersion    "1.274"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -39,9 +39,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "katsikas"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu May  3 18:57:50 2012"
-  RTWModifiedTimeStamp	  257971880
-  ModelVersionFormat	  "1.%<AutoIncrement:275>"
+  LastModifiedDate	  "Thu May  3 18:47:40 2012"
+  RTWModifiedTimeStamp	  257971600
+  ModelVersionFormat	  "1.%<AutoIncrement:274>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -77,13 +77,13 @@ Model {
     $PropName		    "DataLoggingOverride"
     $ObjectID		    2
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
-    model_		    "DemoUSRPTX"
+    model_		    "DemoUSRPTXBernoulli"
     signals_		    []
     overrideMode_	    [0.0]
     Array {
       Type		      "Cell"
       Dimension		      1
-      Cell		      "DemoUSRPTX"
+      Cell		      "DemoUSRPTXBernoulli"
       PropName		      "logAsSpecifiedByModels_"
     }
     Array {
@@ -648,8 +648,8 @@ Model {
 	PropName		"Components"
       }
       Name		      "Configuration"
-      CurrentDlgPage	      "HDL Code Generation"
-      ConfigPrmDlgPosition     [ 0, 0, 937, 931 ] 
+      CurrentDlgPage	      "Solver"
+      ConfigPrmDlgPosition     [ 171, 24, 1108, 955 ] 
     }
     PropName		    "ConfigurationSets"
   }
@@ -715,11 +715,6 @@ Model {
       PreserveConstantTs      off
     }
     Block {
-      BlockType		      FrameConversion
-      InheritSamplingMode     off
-      OutFrame		      "Frame-based"
-    }
-    Block {
       BlockType		      From
       IconDisplay	      "Tag"
       TagVisibility	      "local"
@@ -764,11 +759,6 @@ Model {
       InitialOutput	      "[]"
     }
     Block {
-      BlockType		      Reshape
-      OutputDimensionality    "1-D array"
-      OutputDimensions	      "[1,1]"
-    }
-    Block {
       BlockType		      Selector
       NumberOfDimensions      "1"
       IndexMode		      "One-based"
@@ -797,19 +787,10 @@ Model {
       Variant		      off
       GeneratePreprocessorConditionals off
     }
-    Block {
-      BlockType		      ToWorkspace
-      VariableName	      "simulink_output"
-      MaxDataPoints	      "1000"
-      Decimation	      "1"
-      SampleTime	      "0"
-      FixptAsFi		      off
-      NumInputs		      "1"
-    }
   }
   System {
-    Name		    "DemoUSRPTX"
-    Location		    [63, 620, 1248, 1286]
+    Name		    "DemoUSRPTXBernoulli"
+    Location		    [75, 265, 1260, 931]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -823,7 +804,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "1367"
+    SIDHighWatermark	    "1371"
     Block {
       BlockType		      Reference
       Name		      "(204,188) Shortened\nRS Encoder"
@@ -906,221 +887,6 @@ Model {
 	    ShowPageBoundaries	    off
 	    ZoomFactor		    "100"
 	    Block {
-	      BlockType		      SubSystem
-	      Name		      "Audio Source"
-	      SID		      "1168"
-	      Ports		      [0, 1]
-	      Position		      [65, 232, 145, 288]
-	      MinAlgLoopOccurrences   off
-	      PropExecContextOutsideSubsystem off
-	      RTWSystemCode	      "Auto"
-	      FunctionWithSeparateData off
-	      Opaque		      off
-	      RequestExecContextInheritance off
-	      MaskHideContents	      off
-	      System {
-		Name			"Audio Source"
-		Location		[118, 692, 1279, 954]
-		Open			off
-		ModelBrowserVisibility	off
-		ModelBrowserWidth	200
-		ScreenColor		"white"
-		PaperOrientation	"landscape"
-		PaperPositionMode	"auto"
-		PaperType		"A4"
-		PaperUnits		"centimeters"
-		TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
-		TiledPageScale		1
-		ShowPageBoundaries	off
-		ZoomFactor		"100"
-		Block {
-		  BlockType		  Buffer
-		  Name			  "Buffer"
-		  SID			  "1169"
-		  Position		  [675, 125, 725, 175]
-		  N			  "184"
-		  TreatMby1Signals	  "One channel"
-		}
-		Block {
-		  BlockType		  FrameConversion
-		  Name			  "Frame Conversion"
-		  SID			  "1170"
-		  Ports			  [1, 1]
-		  Position		  [875, 130, 930, 170]
-		}
-		Block {
-		  BlockType		  Reference
-		  Name			  "From Multimedia File"
-		  SID			  "1184"
-		  Ports			  [0, 1]
-		  Position		  [55, 119, 195, 181]
-		  LibraryVersion	  "1.712"
-		  SourceBlock		  "dspsrcs4/From Multimedia File"
-		  SourceType		  "From Multimedia File"
-		  inputFilename		  "vipmen.avi"
-		  loop			  on
-		  numPlays		  "inf"
-		  outputStreams		  "Video only"
-		  videoDataType		  "uint8"
-		  audioDataType		  "int16"
-		  inheritSampleTime	  off
-		  userDefinedSampleTime	  "(8*188/28e6) / (8 * 184)"
-		  noAudioOutput		  off
-		  isIntensityVideo	  off
-		  fourcc		  "RGB"
-		  colorVideoFormat	  "One multidimensional signal"
-		  outputEOF		  off
-		  dataOrg		  "Column-major"
-		  audioFrameSize	  "1024"
-		  computeAudioFrameSize	  off
-		}
-		Block {
-		  BlockType		  Reshape
-		  Name			  "Reshape"
-		  SID			  "1172"
-		  Ports			  [1, 1]
-		  Position		  [470, 138, 500, 162]
-		  OutputDimensionality	  "Column vector (2-D)"
-		  OutputDimensions	  "[160,120]"
-		}
-		Block {
-		  BlockType		  ToWorkspace
-		  Name			  "To Workspace"
-		  SID			  "1356"
-		  Ports			  [1]
-		  Position		  [615, 190, 675, 220]
-		  VariableName		  "a1"
-		  MaxDataPoints		  "inf"
-		  SampleTime		  "-1"
-		  SaveFormat		  "Array"
-		}
-		Block {
-		  BlockType		  SubSystem
-		  Name			  "Video source"
-		  SID			  "1175"
-		  Ports			  [0, 1]
-		  Position		  [85, 41, 165, 89]
-		  MinAlgLoopOccurrences	  off
-		  PropExecContextOutsideSubsystem off
-		  RTWSystemCode		  "Auto"
-		  FunctionWithSeparateData off
-		  Opaque		  off
-		  RequestExecContextInheritance	off
-		  MaskHideContents	  off
-		  System {
-		    Name		    "Video source"
-		    Location		    [301, 513, 787, 637]
-		    Open		    off
-		    ModelBrowserVisibility  off
-		    ModelBrowserWidth	    200
-		    ScreenColor		    "white"
-		    PaperOrientation	    "landscape"
-		    PaperPositionMode	    "auto"
-		    PaperType		    "A4"
-		    PaperUnits		    "centimeters"
-		    TiledPaperMargins	    [1.270000, 1.270000, 1.270000, 1.270000]
-		    TiledPageScale	    1
-		    ShowPageBoundaries	    off
-		    ZoomFactor		    "100"
-		    Block {
-		    BlockType		    Reference
-		    Name		    "Read Binary File"
-		    SID			    "1177"
-		    Ports		    [0, 3]
-		    Position		    [15, 29, 140, 91]
-		    LibraryVersion	    "1.309"
-		    SourceBlock		    "vipsrcs/Read Binary File"
-		    SourceType		    "Read Binary File"
-		    FileName		    "vipmen.bin"
-		    loopOrNot		    on
-		    numLoops		    "inf"
-		    VideoFormat		    "Custom"
-		    FOURCC		    "I420"
-		    BitStreamFormat	    "Planar"
-		    NumOutputs		    "3"
-		    ComponentOrder	    "[1 2 3]"
-		    Interlaced		    off
-		    LineOrdering	    "Top line first"
-		    Ts			    "(8*188/9.6e6) / (8 * 184)"
-		    Component1		    "Y'"
-		    Component2		    "Cb"
-		    Component3		    "Cr"
-		    Component4		    "Alpha"
-		    Bits1		    "8"
-		    Bits2		    "8"
-		    Bits3		    "8"
-		    Bits4		    "8"
-		    Rows1		    "120"
-		    Rows2		    "60"
-		    Rows3		    "60"
-		    Rows4		    "288"
-		    Cols1		    "160"
-		    Cols2		    "80"
-		    Cols3		    "80"
-		    Cols4		    "352"
-		    YRows		    "120"
-		    YCols		    "160"
-		    SignedOutput	    off
-		    FileEndian		    "Little endian"
-		    OutputEOF		    off
-		    }
-		    Block {
-		    BlockType		    Outport
-		    Name		    "I"
-		    SID			    "1180"
-		    Position		    [390, 33, 420, 47]
-		    IconDisplay		    "Port number"
-		    }
-		    Line {
-		    SrcBlock		    "Read Binary File"
-		    SrcPort		    1
-		    DstBlock		    "I"
-		    DstPort		    1
-		    }
-		  }
-		}
-		Block {
-		  BlockType		  Outport
-		  Name			  "Out"
-		  SID			  "1181"
-		  Position		  [1115, 143, 1145, 157]
-		  IconDisplay		  "Port number"
-		}
-		Line {
-		  SrcBlock		  "Reshape"
-		  SrcPort		  1
-		  Points		  [85, 0]
-		  Branch {
-		    DstBlock		    "Buffer"
-		    DstPort		    1
-		  }
-		  Branch {
-		    Points		    [0, 55]
-		    DstBlock		    "To Workspace"
-		    DstPort		    1
-		  }
-		}
-		Line {
-		  SrcBlock		  "Buffer"
-		  SrcPort		  1
-		  DstBlock		  "Frame Conversion"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "Frame Conversion"
-		  SrcPort		  1
-		  DstBlock		  "Out"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "From Multimedia File"
-		  SrcPort		  1
-		  DstBlock		  "Reshape"
-		  DstPort		  1
-		}
-	      }
-	    }
-	    Block {
 	      BlockType		      Constant
 	      Name		      "MPEG-2 Transport Stream\nHeader Sync Byte"
 	      SID		      "1042"
@@ -1129,7 +895,7 @@ Model {
 	      VectorParams1D	      off
 	      SamplingMode	      "Frame based"
 	      OutDataTypeStr	      "uint8"
-	      FramePeriod	      "(8*188)/28e6"
+	      FramePeriod	      "(8*188)/9.6e6"
 	    }
 	    Block {
 	      BlockType		      Concatenate
@@ -1145,7 +911,7 @@ Model {
 	      Name		      "Pack 8 bit chunks\ninto bytes"
 	      SID		      "1044"
 	      Ports		      [1, 1]
-	      Position		      [290, 141, 380, 189]
+	      Position		      [225, 141, 315, 189]
 	      LibraryVersion	      "1.270"
 	      SourceBlock	      "commutil2/Bit to Integer\nConverter"
 	      SourceType	      "Bit to Integer Converter"
@@ -1154,6 +920,96 @@ Model {
 	      signedOutputValues      "Unsigned"
 	      outDtype		      "uint8"
 	      outDtypeSigned	      "Inherit via internal rule"
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "Raw Data "
+	      SID		      "1368"
+	      Ports		      [0, 1]
+	      Position		      [50, 229, 145, 291]
+	      MinAlgLoopOccurrences   off
+	      PropExecContextOutsideSubsystem off
+	      RTWSystemCode	      "Auto"
+	      FunctionWithSeparateData off
+	      Opaque		      off
+	      RequestExecContextInheritance off
+	      MaskHideContents	      off
+	      System {
+		Name			"Raw Data "
+		Location		[568, 612, 1171, 822]
+		Open			off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"usletter"
+		PaperUnits		"inches"
+		TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"100"
+		Block {
+		  BlockType		  Reference
+		  Name			  "184 bytes of MPEG-2\nor auxiliary data"
+		  SID			  "1369"
+		  Ports			  [0, 1]
+		  Position		  [25, 58, 105, 102]
+		  LibraryVersion	  "1.111"
+		  SourceBlock		  "commrandsrc2/Bernoulli Binary\nGenerator"
+		  SourceType		  "Bernoulli Binary Generator"
+		  ShowPortLabels	  "FromPortIcon"
+		  SystemSampleTime	  "-1"
+		  FunctionWithSeparateData off
+		  RTWMemSecFuncInitTerm	  "Inherit from model"
+		  RTWMemSecFuncExecute	  "Inherit from model"
+		  RTWMemSecDataConstants  "Inherit from model"
+		  RTWMemSecDataInternal	  "Inherit from model"
+		  RTWMemSecDataParameters "Inherit from model"
+		  GeneratePreprocessorConditionals off
+		  P			  "0.5"
+		  seed			  "61"
+		  Ts			  "(8*188/9.6e6)/ (8 * 184)"
+		  frameBased		  on
+		  sampPerFrame		  "8 * 184"
+		  orient		  off
+		  outDataType		  "uint8"
+		}
+		Block {
+		  BlockType		  Reference
+		  Name			  "Pack 8 bit chunks\ninto bytes"
+		  SID			  "1370"
+		  Ports			  [1, 1]
+		  Position		  [240, 56, 395, 104]
+		  LibraryVersion	  "1.270"
+		  SourceBlock		  "commutil2/Bit to Integer\nConverter"
+		  SourceType		  "Bit to Integer Converter"
+		  nbits			  "8"
+		  bitOrder		  "MSB first"
+		  signedOutputValues	  "Unsigned"
+		  outDtype		  "uint8"
+		  outDtypeSigned	  "Inherit via internal rule"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "Bytes"
+		  SID			  "1371"
+		  Position		  [530, 73, 560, 87]
+		  IconDisplay		  "Port number"
+		}
+		Line {
+		  SrcBlock		  "184 bytes of MPEG-2\nor auxiliary data"
+		  SrcPort		  1
+		  DstBlock		  "Pack 8 bit chunks\ninto bytes"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Pack 8 bit chunks\ninto bytes"
+		  SrcPort		  1
+		  DstBlock		  "Bytes"
+		  DstPort		  1
+		}
+	      }
 	    }
 	    Block {
 	      BlockType		      Reference
@@ -1175,7 +1031,7 @@ Model {
 	      GeneratePreprocessorConditionals off
 	      P			      "0.5"
 	      seed		      "61"
-	      Ts		      "(8*188/28e6) / (3*8)"
+	      Ts		      "(8*188/9.6e6) / (3*8)"
 	      frameBased	      on
 	      sampPerFrame	      "3*8"
 	      orient		      off
@@ -1214,7 +1070,7 @@ Model {
 	      DstPort		      2
 	    }
 	    Line {
-	      SrcBlock		      "Audio Source"
+	      SrcBlock		      "Raw Data "
 	      SrcPort		      1
 	      DstBlock		      "Matrix\nConcatenation"
 	      DstPort		      3
@@ -1364,7 +1220,7 @@ Model {
 		    outVarSiz		    off
 		    maxOutSizeMode	    "Dialog parameter"
 		    maxOutSize		    "[10 1]"
-		    Ts			    "8 * (8*188/28e6) / (8*188 - 1)"
+		    Ts			    "8 * (8*188/9.6e6) / (8*188 - 1)"
 		    frameBased		    on
 		    sampPerFrame	    "(8*188 - 1)"
 		    reset		    on
@@ -1381,7 +1237,7 @@ Model {
 		    Position		    [30, 320, 60, 350]
 		    VectorParams1D	    off
 		    OutDataTypeStr	    "boolean"
-		    SampleTime		    "8 * (8*188/28e6)"
+		    SampleTime		    "8 * (8*188/9.6e6)"
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -3178,10 +3034,10 @@ Model {
     }
     Block {
       BlockType		      Reference
-      Name		      "SDRu Transmitter1"
-      SID		      "1367"
+      Name		      "SDRu Transmitter"
+      SID		      "1365"
       Ports		      [1]
-      Position		      [955, 180, 1135, 270]
+      Position		      [955, 293, 1135, 387]
       ZOrder		      -2
       LibraryVersion	      "1.589"
       SourceBlock	      "commsdrhw_v2/SDRu Transmitter"
@@ -3201,13 +3057,13 @@ Model {
       centerFrequencySrc      "Dialog"
       loOffset		      "0"
       loOffsetSrc	      "Dialog"
-      gain		      "30"
+      gain		      "20"
       gainSrc		      "Dialog"
       decimInterp	      "512"
       decimInterpSrc	      "Dialog"
       USRP2_IP_NUM	      "[49 57 50 46 49 54 56 46 49 48 46 50]"
       frameLength	      "362"
-      outputDatatype	      "double"
+      outputDatatype	      "int16"
       overrunUnderrunPort     off
       sampleTime	      "1"
       dboardInfo	      "            dbid: 0\n          dbName: 'no db found'\n         freqMin: 0\n         freqMax: 0"
@@ -3270,8 +3126,8 @@ Model {
     Line {
       SrcBlock		      "Buffer1"
       SrcPort		      1
-      Points		      [0, 45; -95, 0]
-      DstBlock		      "SDRu Transmitter1"
+      Points		      [0, 145; -95, 0]
+      DstBlock		      "SDRu Transmitter"
       DstPort		      1
     }
   }
@@ -3286,7 +3142,7 @@ Model {
 Stateflow {
   machine {
     id			    1
-    name		    "DemoUSRPTX"
+    name		    "DemoUSRPTXBernoulli"
     created		    "23-Apr-2012 13:25:47"
     isLibrary		    0
     firstTarget		    2
