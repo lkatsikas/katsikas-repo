@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.275"
+    ComputedModelVersion    "1.272"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -39,9 +39,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "katsikas"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu May  3 18:57:50 2012"
-  RTWModifiedTimeStamp	  257971880
-  ModelVersionFormat	  "1.%<AutoIncrement:275>"
+  LastModifiedDate	  "Mon Apr 30 19:43:22 2012"
+  RTWModifiedTimeStamp	  257712922
+  ModelVersionFormat	  "1.%<AutoIncrement:272>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -648,8 +648,8 @@ Model {
 	PropName		"Components"
       }
       Name		      "Configuration"
-      CurrentDlgPage	      "HDL Code Generation"
-      ConfigPrmDlgPosition     [ 0, 0, 937, 931 ] 
+      CurrentDlgPage	      "Solver"
+      ConfigPrmDlgPosition     [ 171, 24, 1108, 955 ] 
     }
     PropName		    "ConfigurationSets"
   }
@@ -809,7 +809,7 @@ Model {
   }
   System {
     Name		    "DemoUSRPTX"
-    Location		    [63, 620, 1248, 1286]
+    Location		    [75, 265, 1260, 931]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -823,7 +823,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "1367"
+    SIDHighWatermark	    "1366"
     Block {
       BlockType		      Reference
       Name		      "(204,188) Shortened\nRS Encoder"
@@ -964,7 +964,7 @@ Model {
 		  videoDataType		  "uint8"
 		  audioDataType		  "int16"
 		  inheritSampleTime	  off
-		  userDefinedSampleTime	  "(8*188/28e6) / (8 * 184)"
+		  userDefinedSampleTime	  "(8*188/24e6) / (8 * 184)"
 		  noAudioOutput		  off
 		  isIntensityVideo	  off
 		  fourcc		  "RGB"
@@ -1129,7 +1129,7 @@ Model {
 	      VectorParams1D	      off
 	      SamplingMode	      "Frame based"
 	      OutDataTypeStr	      "uint8"
-	      FramePeriod	      "(8*188)/28e6"
+	      FramePeriod	      "(8*188)/24e6"
 	    }
 	    Block {
 	      BlockType		      Concatenate
@@ -1175,7 +1175,7 @@ Model {
 	      GeneratePreprocessorConditionals off
 	      P			      "0.5"
 	      seed		      "61"
-	      Ts		      "(8*188/28e6) / (3*8)"
+	      Ts		      "(8*188/24e6) / (3*8)"
 	      frameBased	      on
 	      sampPerFrame	      "3*8"
 	      orient		      off
@@ -1364,7 +1364,7 @@ Model {
 		    outVarSiz		    off
 		    maxOutSizeMode	    "Dialog parameter"
 		    maxOutSize		    "[10 1]"
-		    Ts			    "8 * (8*188/28e6) / (8*188 - 1)"
+		    Ts			    "8 * (8*188/24e6) / (8*188 - 1)"
 		    frameBased		    on
 		    sampPerFrame	    "(8*188 - 1)"
 		    reset		    on
@@ -1381,7 +1381,7 @@ Model {
 		    Position		    [30, 320, 60, 350]
 		    VectorParams1D	    off
 		    OutDataTypeStr	    "boolean"
-		    SampleTime		    "8 * (8*188/28e6)"
+		    SampleTime		    "8 * (8*188/24e6)"
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -3178,10 +3178,10 @@ Model {
     }
     Block {
       BlockType		      Reference
-      Name		      "SDRu Transmitter1"
-      SID		      "1367"
+      Name		      "SDRu Transmitter"
+      SID		      "1365"
       Ports		      [1]
-      Position		      [955, 180, 1135, 270]
+      Position		      [955, 285, 1135, 375]
       ZOrder		      -2
       LibraryVersion	      "1.589"
       SourceBlock	      "commsdrhw_v2/SDRu Transmitter"
@@ -3197,17 +3197,17 @@ Model {
       GeneratePreprocessorConditionals off
       rxtx		      "tx"
       USRP2_IP		      "'192.168.10.2'"
-      centerFrequency	      "482e6"
+      centerFrequency	      "474e6"
       centerFrequencySrc      "Dialog"
       loOffset		      "0"
       loOffsetSrc	      "Dialog"
-      gain		      "30"
+      gain		      "20"
       gainSrc		      "Dialog"
       decimInterp	      "512"
       decimInterpSrc	      "Dialog"
       USRP2_IP_NUM	      "[49 57 50 46 49 54 56 46 49 48 46 50]"
       frameLength	      "362"
-      outputDatatype	      "double"
+      outputDatatype	      "int16"
       overrunUnderrunPort     off
       sampleTime	      "1"
       dboardInfo	      "            dbid: 0\n          dbName: 'no db found'\n         freqMin: 0\n         freqMax: 0"
@@ -3270,8 +3270,8 @@ Model {
     Line {
       SrcBlock		      "Buffer1"
       SrcPort		      1
-      Points		      [0, 45; -95, 0]
-      DstBlock		      "SDRu Transmitter1"
+      Points		      [0, 145; -95, 0]
+      DstBlock		      "SDRu Transmitter"
       DstPort		      1
     }
   }

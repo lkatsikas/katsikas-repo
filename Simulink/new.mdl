@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.275"
+    ComputedModelVersion    "1.273"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -18,7 +18,7 @@ Model {
       Type		      "Cell"
       Dimension		      2
       Cell		      "HDLSubsystem"
-      Cell		      "new"
+      Cell		      "DemoUSRPTX"
       PropName		      "mdlProps"
     }
   }
@@ -39,9 +39,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "katsikas"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri May  4 16:08:58 2012"
-  RTWModifiedTimeStamp	  258048447
-  ModelVersionFormat	  "1.%<AutoIncrement:275>"
+  LastModifiedDate	  "Fri May  4 12:15:03 2012"
+  RTWModifiedTimeStamp	  258034390
+  ModelVersionFormat	  "1.%<AutoIncrement:273>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -773,6 +773,14 @@ Model {
       SampleTime	      "-1"
     }
     Block {
+      BlockType		      SignalToWorkspace
+      VariableName	      "simulink_output"
+      MaxDataPoints	      "1000"
+      Decimation	      "1"
+      FixptAsFi		      off
+      NumInputs		      "1"
+    }
+    Block {
       BlockType		      SubSystem
       ShowPortLabels	      "FromPortIcon"
       Permissions	      "ReadWrite"
@@ -806,7 +814,7 @@ Model {
   }
   System {
     Name		    "new"
-    Location		    [67, 266, 1347, 932]
+    Location		    [158, 287, 1443, 953]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -820,7 +828,28 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "1494"
+    SIDHighWatermark	    "1490"
+    Block {
+      BlockType		      Reference
+      Name		      "(204,188) Shortened\nRS Decoder"
+      SID		      "1373"
+      Ports		      [1, 1]
+      Position		      [305, 525, 385, 565]
+      BlockMirror	      on
+      LibraryVersion	      "1.536"
+      SourceBlock	      "commblkcod2/Integer-Output\nRS Decoder"
+      SourceType	      "Integer-Output RS Decoder"
+      n			      "204"
+      k			      "188"
+      specPrimPoly	      off
+      prPoly		      "[1 0 1 1]"
+      specGenPoly	      off
+      genPoly		      "rsgenpoly(7,3)"
+      specPuncture	      off
+      punctVec		      "[ones(2,1); zeros(2,1)]"
+      specErasurePort	      off
+      showNumErr	      off
+    }
     Block {
       BlockType		      Reference
       Name		      "(204,188) Shortened\nRS Encoder"
@@ -838,6 +867,250 @@ Model {
       genPoly		      "rsgenpoly(7,3)"
       specPuncture	      off
       punctVec		      "[ones(2,1); zeros(2,1)]"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Audio Sink"
+      SID		      "1374"
+      Ports		      [1]
+      Position		      [15, 557, 95, 613]
+      BlockMirror	      on
+      NamePlacement	      "alternate"
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      FunctionWithSeparateData off
+      Opaque		      off
+      RequestExecContextInheritance off
+      MaskHideContents	      off
+      System {
+	Name			"Audio Sink"
+	Location		[67, 407, 1279, 612]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "In1"
+	  SID			  "1375"
+	  Position		  [15, 90, 30, 120]
+	  NamePlacement		  "alternate"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Buffer
+	  Name			  "Buffer"
+	  SID			  "1376"
+	  Position		  [595, 80, 645, 130]
+	  N			  "120*160*3"
+	  TreatMby1Signals	  "One channel"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Final1"
+	  SID			  "1377"
+	  Ports			  [1]
+	  Position		  [795, 72, 910, 138]
+	  LibraryVersion	  "1.254"
+	  UserDataPersistent	  on
+	  UserData		  "DataTag0"
+	  SourceBlock		  "vipsnks/Video Viewer"
+	  SourceType		  "Video Viewer"
+	  inputType		  "Obsolete7b"
+	  imagePorts		  "One multidimensional signal"
+	  useColorMap		  off
+	  colormapValue		  "gray(256)"
+	  specRange		  off
+	  minInputVal		  "0"
+	  maxInputVal		  "255"
+	  FigPos		  "[630 717 410 300]"
+	  AxisZoom		  on
+	  trueSizedOnce		  on
+	  OpenAtMdlStart	  on
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Frame\nAlignment"
+	  SID			  "1378"
+	  Ports			  [1, 1]
+	  Position		  [110, 84, 175, 126]
+	  LibraryVersion	  "1.716"
+	  UserDataPersistent	  on
+	  UserData		  "DataTag1"
+	  SourceBlock		  "dspsigops/Delay"
+	  SourceType		  "Delay"
+	  InputProcessing	  "Columns as channels (frame based)"
+	  dly_unit		  "Samples"
+	  delay			  "1316"
+	  ic_detail		  off
+	  dif_ic_for_ch		  off
+	  dif_ic_for_dly	  off
+	  ic			  "0"
+	  reset_popup		  "None"
+	}
+	Block {
+	  BlockType		  Reshape
+	  Name			  "Reshape"
+	  SID			  "1379"
+	  Ports			  [1, 1]
+	  Position		  [715, 93, 745, 117]
+	  OutputDimensionality	  "Customize"
+	  OutputDimensions	  "[120,160,3]"
+	}
+	Block {
+	  BlockType		  Selector
+	  Name			  "Selector"
+	  SID			  "1380"
+	  Ports			  [1, 1]
+	  Position		  [460, 86, 510, 124]
+	  NumberOfDimensions	  "2"
+	  InputPortWidth	  "1"
+	  IndexOptions		  "Index vector (dialog),Index vector (dialog)"
+	  Indices		  "[5:188],1"
+	  OutputSizes		  "1,1"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Sync1 Inversion\nand Energy\nDispersal Removal"
+	  SID			  "1381"
+	  Ports			  [1, 1]
+	  Position		  [270, 80, 380, 130]
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  FunctionWithSeparateData off
+	  Opaque		  off
+	  RequestExecContextInheritance	off
+	  MaskHideContents	  off
+	  System {
+	    Name		    "Sync1 Inversion\nand Energy\nDispersal Removal"
+	    Location		    [126, 302, 886, 495]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "A4"
+	    PaperUnits		    "centimeters"
+	    TiledPaperMargins	    [1.270000, 1.270000, 1.270000, 1.270000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "Data"
+	      SID		      "1382"
+	      Position		      [20, 63, 50, 77]
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Buffer
+	      Name		      "Buffer to\nSuperframes"
+	      SID		      "1383"
+	      Position		      [145, 45, 195, 95]
+	      N			      "1504"
+	      TreatMby1Signals	      "One channel"
+	    }
+	    Block {
+	      BlockType		      Buffer
+	      Name		      "Rebuffer\nto Packets"
+	      SID		      "1384"
+	      Position		      [520, 45, 570, 95]
+	      N			      "188"
+	      TreatMby1Signals	      "One channel"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "MPEG-2"
+	      SID		      "1455"
+	      Position		      [665, 63, 695, 77]
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      SrcBlock		      "Data"
+	      SrcPort		      1
+	      DstBlock		      "Buffer to\nSuperframes"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Rebuffer\nto Packets"
+	      SrcPort		      1
+	      DstBlock		      "MPEG-2"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Buffer to\nSuperframes"
+	      SrcPort		      1
+	      DstBlock		      "Rebuffer\nto Packets"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  ToWorkspace
+	  Name			  "To Workspace"
+	  SID			  "1456"
+	  Ports			  [1]
+	  Position		  [685, 165, 745, 195]
+	  VariableName		  "a"
+	  MaxDataPoints		  "inf"
+	  SampleTime		  "-1"
+	  SaveFormat		  "Array"
+	}
+	Line {
+	  SrcBlock		  "Buffer"
+	  SrcPort		  1
+	  Points		  [20, 0]
+	  Branch {
+	    DstBlock		    "Reshape"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "To Workspace"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "In1"
+	  SrcPort		  1
+	  DstBlock		  "Frame\nAlignment"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Sync1 Inversion\nand Energy\nDispersal Removal"
+	  SrcPort		  1
+	  DstBlock		  "Selector"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Reshape"
+	  SrcPort		  1
+	  DstBlock		  "Final1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Selector"
+	  SrcPort		  1
+	  DstBlock		  "Buffer"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Frame\nAlignment"
+	  SrcPort		  1
+	  DstBlock		  "Sync1 Inversion\nand Energy\nDispersal Removal"
+	  DstPort		  1
+	}
+      }
     }
     Block {
       BlockType		      SubSystem
@@ -1122,7 +1395,7 @@ Model {
 	      Name		      "Bit Set"
 	      SID		      "1370"
 	      Ports		      [1, 1]
-	      Position		      [280, 95, 320, 135]
+	      Position		      [280, 90, 320, 130]
 	      LibraryVersion	      "1.236"
 	      SourceBlock	      "simulink/Logic and Bit\nOperations/Bit Set"
 	      SourceType	      "Bit Set"
@@ -1156,15 +1429,6 @@ Model {
 	      RTWMemSecDataParameters "Inherit from model"
 	      GeneratePreprocessorConditionals off
 	      iBit		      "4"
-	    }
-	    Block {
-	      BlockType		      Display
-	      Name		      "Display"
-	      SID		      "1494"
-	      Ports		      [1]
-	      Position		      [370, 115, 460, 145]
-	      Decimation	      "1"
-	      Lockdown		      off
 	    }
 	    Block {
 	      BlockType		      Constant
@@ -1240,7 +1504,7 @@ Model {
 		  DstPort		  3
 		}
 		Branch {
-		  Points		  [0, -50]
+		  Points		  [0, -55]
 		  DstBlock		  "Bit Set"
 		  DstPort		  1
 		}
@@ -1256,17 +1520,8 @@ Model {
 	    Line {
 	      SrcBlock		      "Bit Set"
 	      SrcPort		      1
-	      Points		      [25, 0]
-	      Branch {
-		Points			[5, 0]
-		DstBlock		"Display"
-		DstPort			1
-	      }
-	      Branch {
-		Points			[0, -5]
-		DstBlock		"Matrix\nConcatenation"
-		DstPort			2
-	      }
+	      DstBlock		      "Matrix\nConcatenation"
+	      DstPort		      2
 	    }
 	  }
 	}
@@ -1371,14 +1626,44 @@ Model {
       }
     }
     Block {
-      BlockType		      Buffer
-      Name		      "Buffer1"
-      SID		      "1491"
-      Position		      [1070, 60, 1120, 110]
-      BlockRotation	      270
+      BlockType		      Reference
+      Name		      "Bit to Integer\nConverter1"
+      SID		      "1457"
+      Ports		      [1, 1]
+      Position		      [565, 523, 645, 567]
       BlockMirror	      on
-      N			      "2048"
-      TreatMby1Signals	      "One channel"
+      NamePlacement	      "alternate"
+      LibraryVersion	      "1.270"
+      SourceBlock	      "commutil2/Bit to Integer\nConverter"
+      SourceType	      "Bit to Integer Converter"
+      nbits		      "log2(M)"
+      bitOrder		      "MSB first"
+      signedOutputValues      "Unsigned"
+      outDtype		      "uint8"
+      outDtypeSigned	      "Inherit via internal rule"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Convolutional\nDeinterleaver"
+      SID		      "1459"
+      Ports		      [1, 1]
+      Position		      [435, 520, 530, 570]
+      BlockMirror	      on
+      LibraryVersion	      "1.61"
+      SourceBlock	      "commcnvintrlv2/Convolutional\nDeinterleaver"
+      SourceType	      "Convolutional Deinterleaver"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      GeneratePreprocessorConditionals off
+      N			      "12"
+      B			      "17"
+      ic		      "0"
     }
     Block {
       BlockType		      Reference
@@ -1401,6 +1686,130 @@ Model {
       N			      "12"
       B			      "17"
       ic		      "0"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "DVB-T Inner Deinterleaver"
+      SID		      "1460"
+      Ports		      [1, 1]
+      Position		      [830, 519, 905, 571]
+      BlockMirror	      on
+      ShowName		      off
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      FunctionWithSeparateData off
+      Opaque		      off
+      RequestExecContextInheritance off
+      MaskHideContents	      off
+      MaskType		      "DVB-T Inner Deinterleaver"
+      MaskInitialization      "fullILVec = [(1:126) ...\n (rem([0:125]+63,126) +1 + 126     ) ...\n (rem([0:125]+105,1"
+      "26)+1 + (2*126) ) ...\n (rem([0:125]+42,126) +1 + (3*126) ) ...\n (rem([0:125]+21,126) +1 + (4*126) ) ...\n (rem"
+      "([0:125]+84,126) +1 + (5*126) )];"
+      MaskDisplay	      "disp('DVB-T\\nInner\\nDeinterleaver')"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskPortRotate	      "default"
+      MaskIconUnits	      "autoscale"
+      System {
+	Name			"DVB-T Inner Deinterleaver"
+	Location		[88, 380, 1123, 585]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "In1"
+	  SID			  "1461"
+	  Position		  [20, 78, 50, 92]
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Bit\nDeinterleaver"
+	  SID			  "1462"
+	  Ports			  [1, 1]
+	  Position		  [545, 58, 625, 112]
+	  LibraryVersion	  "1.61"
+	  SourceBlock		  "commblkintrlv2/General Block\nDeinterleaver"
+	  SourceType		  "General Block Deinterleaver"
+	  elements		  "BitInterleaverTable"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Bit\nDeinterleaver1"
+	  SID			  "1463"
+	  Ports			  [1, 1]
+	  Position		  [180, 58, 260, 112]
+	  LibraryVersion	  "1.61"
+	  SourceBlock		  "commblkintrlv2/General Block\nDeinterleaver"
+	  SourceType		  "General Block Deinterleaver"
+	  elements		  "SymbolInterleaverTable"
+	}
+	Block {
+	  BlockType		  Buffer
+	  Name			  "Buffer"
+	  SID			  "1464"
+	  Position		  [365, 60, 415, 110]
+	  N			  "756"
+	  TreatMby1Signals	  "One channel"
+	}
+	Block {
+	  BlockType		  Buffer
+	  Name			  "Buffer3"
+	  SID			  "1465"
+	  Position		  [730, 60, 780, 110]
+	  N			  "2176"
+	  TreatMby1Signals	  "One channel"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Out1"
+	  SID			  "1466"
+	  Position		  [895, 78, 925, 92]
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  SrcBlock		  "In1"
+	  SrcPort		  1
+	  DstBlock		  "Bit\nDeinterleaver1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Buffer3"
+	  SrcPort		  1
+	  DstBlock		  "Out1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Buffer"
+	  SrcPort		  1
+	  DstBlock		  "Bit\nDeinterleaver"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Bit\nDeinterleaver"
+	  SrcPort		  1
+	  DstBlock		  "Buffer3"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Bit\nDeinterleaver1"
+	  SrcPort		  1
+	  DstBlock		  "Buffer"
+	  DstPort		  1
+	}
+      }
     }
     Block {
       BlockType		      SubSystem
@@ -1526,6 +1935,64 @@ Model {
       }
     }
     Block {
+      BlockType		      Display
+      Name		      "Display"
+      SID		      "1467"
+      Ports		      [1]
+      Position		      [310, 266, 410, 324]
+      Decimation	      "1"
+      Lockdown		      off
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display1"
+      SID		      "1468"
+      Ports		      [1]
+      Position		      [890, 216, 990, 274]
+      Decimation	      "1"
+      Lockdown		      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Error Rate\nCalculation"
+      SID		      "1469"
+      Ports		      [2, 1]
+      Position		      [185, 267, 260, 318]
+      LibraryVersion	      "1.316"
+      SourceBlock	      "commsink2/Error Rate\nCalculation"
+      SourceType	      "Error Rate Calculation"
+      N			      "188*17*8"
+      st_delay		      "0"
+      cp_mode		      "Entire frame"
+      subframe		      "[]"
+      PMode		      "Port"
+      WsName		      "ErrorVec"
+      RsMode2		      off
+      stop		      off
+      numErr		      "Errors"
+      maxBits		      "Bits"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Error Rate\nCalculation1"
+      SID		      "1470"
+      Ports		      [2, 1]
+      Position		      [760, 217, 835, 268]
+      LibraryVersion	      "1.316"
+      SourceBlock	      "commsink2/Error Rate\nCalculation"
+      SourceType	      "Error Rate Calculation"
+      N			      "1632*6"
+      st_delay		      "0"
+      cp_mode		      "Entire frame"
+      subframe		      "[]"
+      PMode		      "Port"
+      WsName		      "ErrorVec"
+      RsMode2		      off
+      stop		      off
+      numErr		      "100"
+      maxBits		      "1e8"
+    }
+    Block {
       BlockType		      SubSystem
       Name		      "Inner Coder"
       SID		      "534"
@@ -1607,6 +2074,154 @@ Model {
       }
     }
     Block {
+      BlockType		      SubSystem
+      Name		      "Inner Decoder"
+      SID		      "1471"
+      Ports		      [1, 1]
+      Position		      [715, 518, 790, 572]
+      BlockMirror	      on
+      ShowName		      off
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      FunctionWithSeparateData off
+      Opaque		      off
+      RequestExecContextInheritance off
+      MaskHideContents	      off
+      MaskDisplay	      "disp('Viterbi\\nDecoder')"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskPortRotate	      "default"
+      MaskIconUnits	      "autoscale"
+      System {
+	Name			"Inner Decoder"
+	Location		[67, 190, 648, 346]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "Received bits"
+	  SID			  "1472"
+	  Position		  [40, 78, 70, 92]
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Delay"
+	  SID			  "1473"
+	  Ports			  [1, 1]
+	  Position		  [305, 65, 360, 105]
+	  LibraryVersion	  "1.716"
+	  UserDataPersistent	  on
+	  UserData		  "DataTag2"
+	  SourceBlock		  "dspsigops/Delay"
+	  SourceType		  "Delay"
+	  InputProcessing	  "Columns as channels (frame based)"
+	  dly_unit		  "Samples"
+	  delay			  "584+69"
+	  ic_detail		  off
+	  dif_ic_for_ch		  off
+	  dif_ic_for_dly	  off
+	  ic			  "0"
+	  reset_popup		  "None"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Viterbi Decoder"
+	  SID			  "1474"
+	  Ports			  [1, 1]
+	  Position		  [140, 59, 230, 111]
+	  LibraryVersion	  "1.210"
+	  SourceBlock		  "commcnvcod2/Viterbi Decoder"
+	  SourceType		  "Viterbi Decoder"
+	  trellis		  "poly2trellis(7, [171 133])"
+	  isPunctured		  on
+	  punctureVector	  "[1 1 0 1 1 0]'"
+	  erasures		  off
+	  dectype		  "Hard decision"
+	  runSigValErrCheck	  off
+	  nsdecb		  "4"
+	  smWordLength		  "16"
+	  tbdepth		  "136"
+	  opmode		  "Continuous"
+	  reset			  off
+	  outDataType		  "boolean"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Decoded symbols"
+	  SID			  "1475"
+	  Position		  [430, 78, 460, 92]
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  SrcBlock		  "Viterbi Decoder"
+	  SrcPort		  1
+	  DstBlock		  "Delay"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Received bits"
+	  SrcPort		  1
+	  DstBlock		  "Viterbi Decoder"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Delay"
+	  SrcPort		  1
+	  DstBlock		  "Decoded symbols"
+	  DstPort		  1
+	}
+	Annotation {
+	  Name			  "Align on 1632-bit \nframe boundary"
+	  Position		  [335, 41]
+	  FontName		  "MS Sans Serif"
+	}
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Integer to Bit\nConverter1"
+      SID		      "1476"
+      Ports		      [1, 1]
+      Position		      [128, 100, 172, 180]
+      BlockRotation	      270
+      BlockMirror	      on
+      LibraryVersion	      "1.270"
+      SourceBlock	      "commutil2/Integer to Bit\nConverter"
+      SourceType	      "Integer to Bit Converter"
+      nbits		      "8"
+      signedInputValues	      "Unsigned"
+      bitOrder		      "MSB first"
+      outDtype		      "boolean"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Integer to Bit\nConverter2"
+      SID		      "1477"
+      Ports		      [1, 1]
+      Position		      [128, 425, 172, 505]
+      BlockRotation	      270
+      LibraryVersion	      "1.270"
+      SourceBlock	      "commutil2/Integer to Bit\nConverter"
+      SourceType	      "Integer to Bit Converter"
+      nbits		      "8"
+      signedInputValues	      "Unsigned"
+      bitOrder		      "MSB first"
+      outDtype		      "boolean"
+    }
+    Block {
       BlockType		      Reference
       Name		      "Integer to Bit\nConverter3"
       SID		      "545"
@@ -1619,6 +2234,139 @@ Model {
       signedInputValues	      "Unsigned"
       bitOrder		      "MSB first"
       outDtype		      "boolean"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "OFDM Receiver"
+      SID		      "1478"
+      Ports		      [1, 1]
+      Position		      [1045, 517, 1115, 573]
+      BlockMirror	      on
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      FunctionWithSeparateData off
+      Opaque		      off
+      RequestExecContextInheritance off
+      MaskHideContents	      off
+      System {
+	Name			"OFDM Receiver"
+	Location		[67, 172, 192, 212]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "In1"
+	  SID			  "1479"
+	  Position		  [25, 38, 55, 52]
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "FFT"
+	  SID			  "1480"
+	  Ports			  [1, 1]
+	  Position		  [130, 26, 170, 64]
+	  LibraryVersion	  "1.460"
+	  SourceBlock		  "dspxfrm3/FFT"
+	  SourceType		  "FFT"
+	  CompMethod		  "Table lookup"
+	  TableOpt		  "NEW"
+	  TableOptActive	  "Speed"
+	  BitRevOrder		  off
+	  InheritFFTLength	  on
+	  FFTLength		  "64"
+	  RowConvenienceOn	  on
+	  additionalParams	  off
+	  SkipNorm		  off
+	  allowOverrides	  on
+	  firstCoeffMode	  "Same word length as input"
+	  firstCoeffWordLength	  "16"
+	  firstCoeffFracLength	  "15"
+	  firstCoeffDataTypeStr	  "Inherit: Same word length as input"
+	  firstCoeffLastDataTypeStr "Inherit: Same word length as input"
+	  outputMode		  "Inherit via internal rule"
+	  outputWordLength	  "16"
+	  outputFracLength	  "15"
+	  outputDataTypeStr	  "Inherit: Inherit via internal rule"
+	  outputLastDataTypeStr	  "Inherit: Inherit via internal rule"
+	  outputMin		  "[]"
+	  outputMax		  "[]"
+	  accumMode		  "Inherit via internal rule"
+	  accumWordLength	  "32"
+	  accumFracLength	  "30"
+	  accumDataTypeStr	  "Inherit: Inherit via internal rule"
+	  accumLastDataTypeStr	  "Inherit: Inherit via internal rule"
+	  prodOutputMode	  "Inherit via internal rule"
+	  prodOutputWordLength	  "32"
+	  prodOutputFracLength	  "30"
+	  prodOutputDataTypeStr	  "Inherit: Inherit via internal rule"
+	  prodOutputLastDataTypeStr "Inherit: Inherit via internal rule"
+	  roundingMode		  "Floor"
+	  overflowMode		  off
+	  LockScale		  off
+	}
+	Block {
+	  BlockType		  FrameConversion
+	  Name			  "Frame Conversion"
+	  SID			  "1481"
+	  Ports			  [1, 1]
+	  Position		  [275, 25, 330, 65]
+	}
+	Block {
+	  BlockType		  Selector
+	  Name			  "Selector"
+	  SID			  "1482"
+	  Ports			  [1, 1]
+	  Position		  [415, 26, 465, 64]
+	  NumberOfDimensions	  "2"
+	  InputPortWidth	  "3"
+	  IndexOptions		  "Index vector (dialog),Select all"
+	  Indices		  "[1:756 1293:2048],1"
+	  OutputSizes		  "1,1"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Out1"
+	  SID			  "1483"
+	  Position		  [525, 38, 555, 52]
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  SrcBlock		  "FFT"
+	  SrcPort		  1
+	  DstBlock		  "Frame Conversion"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Frame Conversion"
+	  SrcPort		  1
+	  DstBlock		  "Selector"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "In1"
+	  SrcPort		  1
+	  DstBlock		  "FFT"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Selector"
+	  SrcPort		  1
+	  DstBlock		  "Out1"
+	  DstPort		  1
+	}
+      }
     }
     Block {
       BlockType		      SubSystem
@@ -1787,6 +2535,41 @@ Model {
     }
     Block {
       BlockType		      Reference
+      Name		      "Rectangular QAM\nDemodulator\nBaseband"
+      SID		      "1484"
+      Ports		      [1, 1]
+      Position		      [950, 519, 1025, 571]
+      BlockMirror	      on
+      LibraryVersion	      "1.428"
+      SourceBlock	      "commdigbbndam3/Rectangular QAM\nDemodulator\nBaseband"
+      SourceType	      "Rectangular QAM Demodulator Baseband"
+      M			      "N"
+      PowType		      "Average Power"
+      MinDist		      "2"
+      AvgPow		      "1"
+      PeakPow		      "1"
+      Ph		      "0"
+      Dec		      "User-defined"
+      Mapping		      "map_constellation"
+      OutType		      "Bit"
+      DecType		      "Hard decision"
+      VarSource		      "Dialog"
+      Variance		      "1"
+      outDtype1		      "boolean"
+      outDtype2		      "Inherit via internal rule"
+      derotateFactorDTMode    "Same word length as input"
+      derotateFactorWordLen   "16"
+      denormFactorDTMode      "Same word length as input"
+      denormFactorWordLen     "16"
+      prodOutDTMode	      "Inherit via internal rule"
+      prodOutWordLen	      "32"
+      prodOutRoundingMode     "Floor"
+      prodOutOverflowMode     "Wrap"
+      sumDTMode		      "Inherit via internal rule"
+      sumWordLen	      "32"
+    }
+    Block {
+      BlockType		      Reference
       Name		      "Rectangular QAM\nModulator\nBaseband"
       SID		      "547"
       Ports		      [1, 1]
@@ -1810,45 +2593,50 @@ Model {
       outFracLen	      "15"
     }
     Block {
-      BlockType		      Reference
-      Name		      "SDRu Transmitter1"
-      SID		      "1492"
+      BlockType		      SignalToWorkspace
+      Name		      "Signal To\nWorkspace"
+      SID		      "1487"
       Ports		      [1]
-      Position		      [1045, 185, 1225, 275]
-      ZOrder		      -2
-      LibraryVersion	      "1.589"
-      SourceBlock	      "commsdrhw_v2/SDRu Transmitter"
-      SourceType	      "SDRu Transmitter"
-      ShowPortLabels	      "FromPortIcon"
-      SystemSampleTime	      "-1"
-      FunctionWithSeparateData off
-      RTWMemSecFuncInitTerm   "Inherit from model"
-      RTWMemSecFuncExecute    "Inherit from model"
-      RTWMemSecDataConstants  "Inherit from model"
-      RTWMemSecDataInternal   "Inherit from model"
-      RTWMemSecDataParameters "Inherit from model"
-      GeneratePreprocessorConditionals off
-      rxtx		      "tx"
-      USRP2_IP		      "'192.168.10.2'"
-      centerFrequency	      "794000000"
-      centerFrequencySrc      "Dialog"
-      loOffset		      "0"
-      loOffsetSrc	      "Dialog"
-      gain		      "30"
-      gainSrc		      "Dialog"
-      decimInterp	      "512"
-      decimInterpSrc	      "Dialog"
-      USRP2_IP_NUM	      "[49 57 50 46 49 54 56 46 49 48 46 50]"
-      frameLength	      "362"
-      outputDatatype	      "double"
-      overrunUnderrunPort     off
-      sampleTime	      "1"
-      dboardInfo	      "            dbid: 0\n          dbName: 'no db found'\n         freqMin: 0\n         freqMax: 0"
-      "\n         gainMin: 0\n         gainMax: 0\n    gainStepSize: 0"
-      HOST_DATA_PORT	      "30000"
-      HOST_CONTROL_PORT	      "30001"
-      USRP2_DATA_PORT	      "32769"
-      USRP2_CONTROL_PORT      "32768"
+      Position		      [890, 299, 940, 341]
+      CopyFcn		      "dspblkcopystw(gcbh);"
+      VariableName	      "BER1"
+      MaxDataPoints	      "inf"
+      SaveFormat	      "Array"
+      Save2DMode	      "2-D array (concatenate along first dimension)"
+    }
+    Block {
+      BlockType		      SignalToWorkspace
+      Name		      "Signal To\nWorkspace1"
+      SID		      "1488"
+      Ports		      [1]
+      Position		      [285, 354, 335, 396]
+      CopyFcn		      "dspblkcopystw(gcbh);"
+      VariableName	      "BER"
+      MaxDataPoints	      "1"
+      SaveFormat	      "Array"
+      Save2DMode	      "2-D array (concatenate along first dimension)"
+    }
+    Block {
+      BlockType		      ToWorkspace
+      Name		      "To Workspace"
+      SID		      "1489"
+      Ports		      [1]
+      Position		      [195, 200, 255, 230]
+      VariableName	      "Initial"
+      MaxDataPoints	      "inf"
+      SampleTime	      "-1"
+      SaveFormat	      "Array"
+    }
+    Block {
+      BlockType		      ToWorkspace
+      Name		      "To Workspace1"
+      SID		      "1490"
+      Ports		      [1]
+      Position		      [200, 385, 260, 415]
+      VariableName	      "Final"
+      MaxDataPoints	      "inf"
+      SampleTime	      "-1"
+      SaveFormat	      "Array"
     }
     Line {
       SrcBlock		      "Rectangular QAM\nModulator\nBaseband"
@@ -1872,8 +2660,16 @@ Model {
     Line {
       SrcBlock		      "Integer to Bit\nConverter3"
       SrcPort		      1
-      DstBlock		      "Inner Coder"
-      DstPort		      1
+      Points		      [20, 0]
+      Branch {
+	DstBlock		"Inner Coder"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, 180]
+	DstBlock		"Error Rate\nCalculation1"
+	DstPort			1
+      }
     }
     Line {
       SrcBlock		      "Inner Coder"
@@ -1890,21 +2686,136 @@ Model {
     Line {
       SrcBlock		      "Audio Source"
       SrcPort		      1
-      DstBlock		      "(204,188) Shortened\nRS Encoder"
+      Points		      [40, 0]
+      Branch {
+	DstBlock		"(204,188) Shortened\nRS Encoder"
+	DstPort			1
+      }
+      Branch {
+	Points			[5, 0]
+	DstBlock		"Integer to Bit\nConverter1"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "Error Rate\nCalculation"
+      SrcPort		      1
+      Points		      [5, 0]
+      Branch {
+	DstBlock		"Display"
+	DstPort			1
+      }
+      Branch {
+	DstBlock		"Signal To\nWorkspace1"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "Integer to Bit\nConverter2"
+      SrcPort		      1
+      Points		      [0, -25]
+      Branch {
+	Points			[0, -90]
+	DstBlock		"Error Rate\nCalculation"
+	DstPort			2
+      }
+      Branch {
+	Points			[0, 5]
+	DstBlock		"To Workspace1"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "(204,188) Shortened\nRS Decoder"
+      SrcPort		      1
+      Points		      [-150, 0]
+      Branch {
+	DstBlock		"Integer to Bit\nConverter2"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, 40]
+	DstBlock		"Audio Sink"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "Convolutional\nDeinterleaver"
+      SrcPort		      1
+      DstBlock		      "(204,188) Shortened\nRS Decoder"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "Buffer1"
+      SrcBlock		      "Error Rate\nCalculation1"
       SrcPort		      1
-      Points		      [0, 45; -65, 0]
-      DstBlock		      "SDRu Transmitter1"
+      Points		      [15, 0]
+      Branch {
+	DstBlock		"Display1"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, 75]
+	DstBlock		"Signal To\nWorkspace"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "Rectangular QAM\nDemodulator\nBaseband"
+      SrcPort		      1
+      DstBlock		      "DVB-T Inner Deinterleaver"
       DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Bit to Integer\nConverter1"
+      SrcPort		      1
+      DstBlock		      "Convolutional\nDeinterleaver"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Inner Decoder"
+      SrcPort		      1
+      Points		      [0, 0]
+      Branch {
+	DstBlock		"Bit to Integer\nConverter1"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, -290]
+	DstBlock		"Error Rate\nCalculation1"
+	DstPort			2
+      }
+    }
+    Line {
+      SrcBlock		      "DVB-T Inner Deinterleaver"
+      SrcPort		      1
+      DstBlock		      "Inner Decoder"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "OFDM Receiver"
+      SrcPort		      1
+      DstBlock		      "Rectangular QAM\nDemodulator\nBaseband"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Integer to Bit\nConverter1"
+      SrcPort		      1
+      Points		      [0, 30]
+      Branch {
+	Points			[0, 65]
+	DstBlock		"Error Rate\nCalculation"
+	DstPort			1
+      }
+      Branch {
+	DstBlock		"To Workspace"
+	DstPort			1
+      }
     }
     Line {
       SrcBlock		      "OFDM-Transmitter"
       SrcPort		      1
-      Points		      [85, 0]
-      DstBlock		      "Buffer1"
+      Points		      [130, 0; 0, 495]
+      DstBlock		      "OFDM Receiver"
       DstPort		      1
     }
     Annotation {
@@ -1934,6 +2845,71 @@ Model {
       Name		      "Errors"
       Position		      [441, 296]
     }
+    Annotation {
+      Position		      [214, 543]
+    }
+  }
+}
+MatData {
+  NumRecords		  3
+  DataRecord {
+    Tag			    DataTag2
+    Data		    "  %)30     .    B     8    (     @         %    \"     $    !     0         %  0 $P    $    3    :&%S26"
+    "YH97)I=&5D3W!T:6]N        #@   #     &    \"     D\"        !0    @    !     0    $          @ !  $    "
+  }
+  DataRecord {
+    Tag			    DataTag1
+    Data		    "  %)30     .    B     8    (     @         %    \"     $    !     0         %  0 $P    $    3    :&%S26"
+    "YH97)I=&5D3W!T:6]N        #@   #     &    \"     D\"        !0    @    !     0    $          @ !  $    "
+  }
+  DataRecord {
+    Tag			    DataTag0
+    Data		    "  %)30     .    4 $   8    (     @         %    \"     $    !     0         %  0 #0    $    :    4V-O<&"
+    "5#9F=.86UE %-C;W!E                   .    4     8    (    !          %    \"     $    =     0         0    '0   '9"
+    "I<'-C;W!E<RY6:61E;U9I97=E<E-C;W!E0V9G    #@   )@    &    \"    !$          0         !  0 34-/4P$    :    <V-O<&5E"
+    ">'1E;G-I;VYS+E-C;W!E0FQO8VL        .    2     8    (    #0         %    \"     8    !     0         &    &        "
+    "-T\"     0    $    !     P    X   !X#0  !@    @    )          4    (     0   $@-   !          (   !(#0    %)30    "
+    " .    J P   8    (     @         %    \"     $    !     0         %  0 !0    $    %    34-/4P     .    8 P   8    "
+    "(    $0         !          $ ! !-0T]3 0    T   !&:6QE5W)A<'!E<E]?    #@   \" ,   &    \"     $         !0    @    "
+    "&     0    $         #@   %@\"   &    \"     D         !0    @    H @   0    $          @   \"@\"   \"    %    \"@"
+    "!  !H 0  D $  / !   ( @  * (             86YY %!A<G-E9$%R9W, 4V-O<&5#3$D =6ES8V]P97, 3F%M90!!<F=S $%R9TYA;65S %9I9"
+    "&5O5FEE=V5R4V-O<&5#9F< =FEP<V-O<&5S $)L;V-K %-C;W!E $-U<G)E;G1#;VYF:6=U<F%T:6]N %!O<VET:6]N %=I;F1O=U-T>6QE %-C;W!"
+    "E0FQO8VL <V-O<&5E>'1E;G-I;VYS $%L;&]W4V-O<&5#:&%N9V5S $%L;&]W0FQO8VM#:&%N9V5S $ES4V-O<&5#9F=/;&0 <VEG=71I;',N07!P;"
+    "&EC871I;VY$871A+D%P<&QI8V%T:6]N1&%T85\\                        $     P              \"0    @              !     / "
+    "                         $    !     0    (    !     0    $    !                                     P             "
+    "  0         #     @               @         \"     0                    $    !               !     @    $         "
+    "                                           .          X    P    !@    @    $          4    (               !      "
+    "   !          #@   \" \"   &    \"     (         !0    @    !     0    $         !0 $ !4    !    :0   &-L87-S     "
+    "                $-U<G)E;G1#;VYF:6=U<F%T:6]N %-C;W!E0TQ)                 %!O<VET:6]N                 %=I;F1O=U-T>6Q"
+    "E                       .    4     8    (    !          %    \"     $    =     0         0    '0   '9I<'-C;W!E<RY6"
+    ":61E;U9I97=E<E-C;W!E0V9G    #@   #     &    \"     8         !0    @               $         \"0         .    2   "
+    "  8    (    #0         %    \"     8    !     0         &    &        -T\"     0    $    #     0    X   !0    !@  "
+    "  @    &          4    (     0    0    !          D    @           P>T       *!V0       H'E       # <D .    .     "
+    "8    (    !          %    \"     $    (     0         0    \"    '5N9&]C:V5D#@   '@!   &    \"     (         !0   "
+    " @    !     0    $         !0 $  H    !    *    %-C;W!E0V9G  !\";&]C:TYA;64 5FES:6)L90   %9E<G-I;VX    .    2     "
+    "8    (    #0         %    \"     8    !     0         &    &        -T\"     0    $    \"     @    X   !(    !@   "
+    " @    $          4    (     0   !(    !         !     2    +T%U9&EO(%-I;FLO1FEN86PQ        #@   #     &    \"     "
+    "0         !0    @    !     @    $         $  \" &]N   .    .     8    (    !@         %    \"     $    !     0    "
+    "     )    \"            / _#@   *@%   &    \"     $         !0    @    $     0    $         #@   #@    &    \"    "
+    " (         !0    @    !          $         !0 $  $    !          X    P 0  !@    @    \"          4    (     0    "
+    "$    !          4 !  +     0   \"P   !.86UE         $%R9W,         4&%R<V5D07)G<P!!<F=.86UE<P         .    ,     8"
+    "    (    !          %    \"                0         0          X    H    !@    @    !          4    (            "
+    "   !          X    H    !@    @    !          4    (               !          X    H    !@    @    !          4   "
+    " (               !          X    P @  !@    @    \"          4    (     0    $    !          4 !  5     0   'X   !"
+    "\";&]C:P                    !38V]P90                    !#=7)R96YT0V]N9FEG=7)A=&EO;@!38V]P94-,20                !0"
+    ";W-I=&EO;@                !7:6YD;W=3='EL90                X    P    !@    @    &          4    (               !  "
+    "        D         #@   #     &    \"     8         !0    @               $         \"0         .    ,     8    (  "
+    "  !@         %    \"                0         )          X    P    !@    @    &          4    (               !   "
+    "       D         #@   %     &    \"     8         !0    @    !    !     $         \"0   \"           -B#0       <'"
+    "=       \"@>4       ,!R0 X    X    !@    @    $          4    (     0    @    !         !     (    =6YD;V-K960.   "
+    " R $   8    (     @         %    \"     $    !     0         %  0 *@    $   \"H    06QL;W=38V]P94-H86YG97,        "
+    "                         06QL;W=\";&]C:T-H86YG97,                                 27-38V]P94-F9T]L9               "
+    "                        <VEG=71I;',N07!P;&EC871I;VY$871A+D%P<&QI8V%T:6]N1&%T85\\ #@   #     &    \"     D\"       "
+    " !0    @    !     0    $          @ !  $    .    ,     8    (    \"0(        %    \"     $    !     0         \"  "
+    "$  0    X    P    !@    @    ) @        4    (     0    $    !          (  0      #@   #@    &    \"     (        "
+    " !0    @    !     0    $         !0 $  $    !          X   \"(    !@    @    )          4    (     0   %@    !    "
+    "      (   !8      %)30     .    2     8    (     @         %    \"     $    !     0         %  0 !0    $    %    3"
+    "4-/4P     .          "
   }
 }
 # Finite State Machines
