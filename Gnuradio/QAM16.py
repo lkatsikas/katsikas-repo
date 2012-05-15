@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 ##################################################
 # Gnuradio Python Flow Graph
-# Title: QAM64
+# Title: QAM16
 # Author: katsikas
-# Generated: Thu May  3 17:17:05 2012
+# Generated: Tue May 15 17:27:52 2012
 ##################################################
 
 from gnuradio import digital
@@ -16,10 +16,10 @@ from grc_gnuradio import wxgui as grc_wxgui
 from optparse import OptionParser
 import wx
 
-class QAM64(grc_wxgui.top_block_gui):
+class QAM16(grc_wxgui.top_block_gui):
 
 	def __init__(self):
-		grc_wxgui.top_block_gui.__init__(self, title="QAM64")
+		grc_wxgui.top_block_gui.__init__(self, title="QAM16")
 
 		##################################################
 		# Variables
@@ -29,12 +29,12 @@ class QAM64(grc_wxgui.top_block_gui):
 		##################################################
 		# Blocks
 		##################################################
-		self.gr_wavfile_source_0 = gr.wavfile_source("/home/katsikas/guitarup_full.wav", True)
+		self.gr_wavfile_source_0 = gr.wavfile_source("/home/katsikas/guitarup_full.wav", False)
 		self.gr_wavfile_sink_0 = gr.wavfile_sink("/home/katsikas/katsikas-repo/Gnuradio/Sent.wav", 1, samp_rate, 8)
 		self.gr_throttle_0_0 = gr.throttle(gr.sizeof_float*1, samp_rate)
 		self.digital_ofdm_mod_0 = grc_blks2.packet_mod_f(digital.ofdm_mod(
 				options=grc_blks2.options(
-					modulation="qam256",
+					modulation="qam16",
 					fft_length=2048,
 					occupied_tones=200,
 					cp_length=128,
@@ -47,7 +47,7 @@ class QAM64(grc_wxgui.top_block_gui):
 		)
 		self.digital_ofdm_demod_0 = grc_blks2.packet_demod_f(digital.ofdm_demod(
 				options=grc_blks2.options(
-					modulation="qam256",
+					modulation="qam16",
 					fft_length=2048,
 					occupied_tones=200,
 					cp_length=128,
@@ -76,6 +76,6 @@ class QAM64(grc_wxgui.top_block_gui):
 if __name__ == '__main__':
 	parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
 	(options, args) = parser.parse_args()
-	tb = QAM64()
+	tb = QAM16()
 	tb.Run(True)
 
