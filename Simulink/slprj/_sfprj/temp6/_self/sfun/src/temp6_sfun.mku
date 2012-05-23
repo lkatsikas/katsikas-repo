@@ -6,14 +6,14 @@
 CC = /usr/local/MATLAB/R2011a/bin/mex
 LD = $(CC)
  
-MACHINE     = temp5
+MACHINE     = temp6
 TARGET      = sfun
 CHART_SRCS 	= \
-     c1_temp5.c
-MACHINE_SRC	= temp5_sfun.c
-MACHINE_REG = temp5_sfun_registry.c
+     c1_temp6.c
+MACHINE_SRC	= temp6_sfun.c
+MACHINE_REG = temp6_sfun_registry.c
 MEX_WRAPPER =
-MAKEFILE    = temp5_sfun.mku
+MAKEFILE    = temp6_sfun.mku
 MATLAB_ROOT	= /usr/local/MATLAB/R2011a/toolbox/stateflow/stateflow/../../..
 BUILDARGS   = 
 #------------------------------ Include/Lib Path ------------------------------
@@ -60,7 +60,7 @@ AUX_ABS_OBJS =
 REQ_OBJS = $(REQ_SRCS:.cpp=.o)
 REQ_OBJS2 = $(REQ_OBJS:.c=.o)
 OBJS = $(REQ_OBJS2) $(USER_ABS_OBJS) $(AUX_ABS_OBJS)
-OBJLIST_FILE = temp5_sfun.mol
+OBJLIST_FILE = temp6_sfun.mol
 SFCLIB = /usr/local/MATLAB/R2011a/stateflow/c/mex/lib/glnxa64/sfc_mex.a /usr/local/MATLAB/R2011a/stateflow/c/debugger/lib/glnxa64/sfc_debug.a
 AUX_LNK_OBJS =
 USER_LIBS =

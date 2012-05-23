@@ -1,18 +1,18 @@
 Model {
-  Name			  "temp4"
+  Name			  "temp6"
   Version		  7.7
   MdlSubVersion		  0
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.492"
+    ComputedModelVersion    "1.507"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
   Description		  "Digital Video Broadcasting - Terrestrial"
   SavedCharacterEncoding  "windows-1252"
-  PreLoadFcn		  "l=0;"
+  PreLoadFcn		  "RefSignals"
   SaveDefaultBlockParams  on
   ScopeRefreshTime	  0.035000
   OverrideScopeRefreshTime on
@@ -30,9 +30,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "katsikas"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue May 22 18:09:02 2012"
-  RTWModifiedTimeStamp	  259610288
-  ModelVersionFormat	  "1.%<AutoIncrement:492>"
+  LastModifiedDate	  "Wed May 23 22:33:19 2012"
+  RTWModifiedTimeStamp	  259707000
+  ModelVersionFormat	  "1.%<AutoIncrement:507>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -572,8 +572,8 @@ Model {
 	PropName		"Components"
       }
       Name		      "Configuration"
-      CurrentDlgPage	      "Solver"
-      ConfigPrmDlgPosition     [ 204, 117, 1196, 971 ] 
+      CurrentDlgPage	      "Simulation Target"
+      ConfigPrmDlgPosition     [ 351, 151, 1328, 883 ] 
     }
     PropName		    "ConfigurationSets"
   }
@@ -828,8 +828,8 @@ Model {
     }
   }
   System {
-    Name		    "temp4"
-    Location		    [235, 294, 1503, 950]
+    Name		    "temp6"
+    Location		    [94, 381, 1568, 1037]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    212
@@ -843,7 +843,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "337"
+    SIDHighWatermark	    "354"
     Block {
       BlockType		      Reference
       Name		      "(204,188) Shortened\nRS Decoder"
@@ -887,8 +887,16 @@ Model {
       BlockType		      Buffer
       Name		      "Buffer"
       SID		      "280"
-      Position		      [820, 30, 870, 80]
+      Position		      [805, 30, 855, 80]
       N			      "1512*68"
+      TreatMby1Signals	      "One channel"
+    }
+    Block {
+      BlockType		      Buffer
+      Name		      "Buffer1"
+      SID		      "353"
+      Position		      [1160, 30, 1210, 80]
+      N			      "1705"
       TreatMby1Signals	      "One channel"
     }
     Block {
@@ -1692,10 +1700,10 @@ Model {
 	      fading		      off
 	      render		      off
 	      AxisGrid		      on
-	      xMin		      "-1.18813579470811"
-	      xMax		      "1.19353641195678"
-	      yMin		      "-1.18813579470811"
-	      yMax		      "1.19353641195678"
+	      xMin		      "-1.46666666666667"
+	      xMax		      "1.47333333333333"
+	      yMin		      "-1.46729969137566"
+	      yMax		      "1.47270030862434"
 	      inphaseLabel	      "In-phase Amplitude"
 	      quadratureLabel	      "Quadrature Amplitude"
 	      openScopeAtSimStart     on
@@ -2063,7 +2071,7 @@ Model {
       Name		      "Group data for\nOFDM symbols "
       SID		      "279"
       Ports		      [1, 1]
-      Position		      [930, 42, 985, 68]
+      Position		      [880, 42, 935, 68]
       OutputDimensionality    "Customize"
       OutputDimensions	      "[1512 68]"
     }
@@ -2074,6 +2082,16 @@ Model {
       Ports		      [1, 1]
       Position		      [945, 582, 1000, 608]
       BlockMirror	      on
+      OutputDimensionality    "Column vector (2-D)"
+      OutputDimensions	      "[1512 68]"
+    }
+    Block {
+      BlockType		      Reshape
+      Name		      "Group data for\nOFDM symbols 2"
+      SID		      "354"
+      Ports		      [1, 1]
+      Position		      [1245, 42, 1300, 68]
+      NamePlacement	      "alternate"
       OutputDimensionality    "Column vector (2-D)"
       OutputDimensions	      "[1512 68]"
     }
@@ -2315,7 +2333,7 @@ Model {
       Name		      "Mapper"
       SID		      "77"
       Ports		      [1, 1]
-      Position		      [710, 27, 780, 83]
+      Position		      [705, 27, 775, 83]
       ShowName		      off
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
@@ -2416,7 +2434,7 @@ Model {
       Name		      "OFDM Receiver"
       SID		      "82"
       Ports		      [1, 1]
-      Position		      [1025, 567, 1090, 623]
+      Position		      [1350, 567, 1415, 623]
       BlockMirror	      on
       ShowName		      off
       MinAlgLoopOccurrences   off
@@ -2619,7 +2637,7 @@ Model {
       Name		      "OFDM Transmitter"
       SID		      "91"
       Ports		      [1, 1]
-      Position		      [1050, 28, 1115, 82]
+      Position		      [1350, 28, 1415, 82]
       ShowName		      off
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
@@ -2742,7 +2760,7 @@ Model {
 	      BlockType		      Inport
 	      Name		      "In1"
 	      SID		      "95"
-	      Position		      [30, 43, 60, 57]
+	      Position		      [15, 43, 45, 57]
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
@@ -2750,7 +2768,7 @@ Model {
 	      Name		      "Selector"
 	      SID		      "96"
 	      Ports		      [1, 1]
-	      Position		      [175, 28, 225, 72]
+	      Position		      [195, 28, 245, 72]
 	      NumberOfDimensions      "2"
 	      InputPortWidth	      "2048"
 	      IndexOptions	      "Index vector (dialog),Select all"
@@ -2798,7 +2816,7 @@ Model {
 	      BlockType		      Outport
 	      Name		      "Out1"
 	      SID		      "98"
-	      Position		      [250, 43, 280, 57]
+	      Position		      [285, 43, 315, 57]
 	      IconDisplay	      "Port number"
 	    }
 	    Line {
@@ -3063,9 +3081,9 @@ Model {
     Block {
       BlockType		      SubSystem
       Name		      "Pilots"
-      SID		      "337"
+      SID		      "347"
       Ports		      [1, 1]
-      Position		      [685, 127, 845, 173]
+      Position		      [975, 27, 1135, 83]
       ErrorFcn		      "Stateflow.Translate.translate"
       PermitHierarchicalResolution "ExplicitOnly"
       TreatAsAtomicUnit	      on
@@ -3102,30 +3120,31 @@ Model {
 	TiledPageScale		1
 	ShowPageBoundaries	off
 	ZoomFactor		"100"
-	SIDHighWatermark	"13"
+	SIDHighWatermark	"26"
 	Block {
 	  BlockType		  Inport
 	  Name			  "data_in"
-	  SID			  "337::1"
+	  SID			  "347::24"
 	  Position		  [20, 101, 40, 119]
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  Demux
 	  Name			  " Demux "
-	  SID			  "337::11"
+	  SID			  "347::11"
 	  Ports			  [1, 1]
-	  Position		  [270, 160, 320, 200]
+	  Position		  [270, 180, 320, 220]
 	  Outputs		  "1"
 	}
 	Block {
 	  BlockType		  S-Function
 	  Name			  " SFunction "
-	  SID			  "337::10"
-	  Tag			  "Stateflow S-Function temp4 1"
+	  SID			  "347::10"
+	  Tag			  "Stateflow S-Function temp6 1"
 	  Ports			  [1, 2]
-	  Position		  [180, 100, 230, 160]
+	  Position		  [180, 100, 230, 180]
 	  FunctionName		  "sf_sfun"
+	  Parameters		  "VAR"
 	  PortCounts		  "[1 2]"
 	  EnableBusSupport	  on
 	  Port {
@@ -3138,13 +3157,13 @@ Model {
 	Block {
 	  BlockType		  Terminator
 	  Name			  " Terminator "
-	  SID			  "337::13"
-	  Position		  [460, 171, 480, 189]
+	  SID			  "347::13"
+	  Position		  [460, 191, 480, 209]
 	}
 	Block {
 	  BlockType		  Outport
 	  Name			  "data_out"
-	  SID			  "337::5"
+	  SID			  "347::5"
 	  Position		  [460, 101, 480, 119]
 	  IconDisplay		  "Port number"
 	}
@@ -3156,7 +3175,7 @@ Model {
 	}
 	Line {
 	  Name			  "data_out"
-	  Labels		  [0, 0]
+	  Labels		  [0, 0; 0, 0]
 	  SrcBlock		  " SFunction "
 	  SrcPort		  2
 	  DstBlock		  "data_out"
@@ -3654,66 +3673,6 @@ Model {
 	}
       }
     }
-    Block {
-      BlockType		      Reference
-      Name		      "Spectrum\nScope"
-      SID		      "286"
-      Ports		      [1]
-      Position		      [1025, 200, 1060, 250]
-      BlockMirror	      on
-      LibraryVersion	      "1.473"
-      SourceBlock	      "dspsnks4/Spectrum\nScope"
-      SourceType	      "Spectrum Scope"
-      ShowPortLabels	      "none"
-      SystemSampleTime	      "-1"
-      FunctionWithSeparateData off
-      RTWMemSecFuncInitTerm   "Inherit from model"
-      RTWMemSecFuncExecute    "Inherit from model"
-      RTWMemSecDataConstants  "Inherit from model"
-      RTWMemSecDataInternal   "Inherit from model"
-      RTWMemSecDataParameters "Inherit from model"
-      GeneratePreprocessorConditionals off
-      ScopeProperties	      off
-      Domain		      "Frequency"
-      HorizSpan		      "1"
-      UseBuffer		      off
-      BufferSize	      "128"
-      Overlap		      "64"
-      TreatMby1Signals	      "One channel"
-      inpFftLenInherit	      off
-      FFTlength		      "128"
-      numAvg		      "2"
-      DisplayProperties	      on
-      AxisGrid		      on
-      Memory		      off
-      FrameNumber	      off
-      AxisLegend	      off
-      AxisZoom		      off
-      OpenScopeAtSimStart     on
-      OpenScopeImmediately    off
-      FigPos		      "figposition([1 7 36 45])"
-      AxisProperties	      off
-      XUnits		      "Hertz"
-      XRange		      "Two-sided ((-Fs/2...Fs/2])"
-      XDisplay		      "0"
-      InheritXIncr	      on
-      XIncr		      "1.0"
-      XLabel		      "Samples"
-      XLimit		      "Auto"
-      YUnits		      "dBW/Hertz"
-      XMax		      "1"
-      XMin		      "0"
-      YMin		      "-140"
-      YMax		      "-90"
-      YLabel		      "Power spectral density, dBW/Hz"
-      LineProperties	      off
-      wintypeSpecScope	      "Hann"
-      RsSpecScope	      "50"
-      betaSpecScope	      "5"
-      winsampSpecScope	      "Periodic"
-      XAxisParamsVer	      "6.9"
-      isFrameUpgraded	      on
-    }
     Line {
       SrcBlock		      "Source"
       SrcPort		      1
@@ -3838,18 +3797,6 @@ Model {
       }
     }
     Line {
-      SrcBlock		      "Buffer"
-      SrcPort		      1
-      DstBlock		      "Group data for\nOFDM symbols "
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "Group data for\nOFDM symbols "
-      SrcPort		      1
-      DstBlock		      "OFDM Transmitter"
-      DstPort		      1
-    }
-    Line {
       SrcBlock		      "Buffer2"
       SrcPort		      1
       Points		      [-15, 0]
@@ -3872,29 +3819,44 @@ Model {
     Line {
       SrcBlock		      "OFDM Transmitter"
       SrcPort		      1
-      Points		      [10, 0; 0, 170]
-      Branch {
-	Points			[0, 370]
-	DstBlock		"OFDM Receiver"
-	DstPort			1
-      }
-      Branch {
-	DstBlock		"Spectrum\nScope"
-	DstPort			1
-      }
+      Points		      [5, 0; 0, 540]
+      DstBlock		      "OFDM Receiver"
+      DstPort		      1
     }
     Line {
       SrcBlock		      "Mapper"
       SrcPort		      1
-      Points		      [0, 60; -115, 0]
-      DstBlock		      "Pilots"
+      DstBlock		      "Buffer"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Buffer"
+      SrcPort		      1
+      DstBlock		      "Group data for\nOFDM symbols "
       DstPort		      1
     }
     Line {
       SrcBlock		      "Pilots"
       SrcPort		      1
-      Points		      [0, -50; -45, 0]
-      DstBlock		      "Buffer"
+      DstBlock		      "Buffer1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Group data for\nOFDM symbols "
+      SrcPort		      1
+      DstBlock		      "Pilots"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Buffer1"
+      SrcPort		      1
+      DstBlock		      "Group data for\nOFDM symbols 2"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Group data for\nOFDM symbols 2"
+      SrcPort		      1
+      DstBlock		      "OFDM Transmitter"
       DstPort		      1
     }
     Annotation {
@@ -4004,18 +3966,16 @@ MatData {
 Stateflow {
   machine {
     id			    1
-    name		    "temp4"
+    name		    "temp6"
     created		    "22-May-2012 01:23:46"
     isLibrary		    0
-    firstTarget		    9
-    debug {
-    }
+    firstTarget		    10
     sfVersion		    75014001
   }
   chart {
     id			    2
     name		    "Pilots"
-    windowPosition	    [326.813 284.45 200.25 189.75]
+    windowPosition	    [356.813 254.45 200.25 189.75]
     viewLimits		    [0 156.75 0 153.75]
     screen		    [1 1 1680 1050 0.9306951423785592]
     treeNode		    [0 3 0 0]
@@ -4023,7 +3983,7 @@ Stateflow {
     firstJunction	    4
     viewObj		    2
     machine		    1
-    ssIdHighWaterMark	    5
+    ssIdHighWaterMark	    16
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
     firstData		    6
@@ -4048,19 +4008,19 @@ Stateflow {
     decomposition	    CLUSTER_STATE
     eml {
       isEML		      1
-      script		      "function data_out = insert_reference_signals(data_in)\n  \n  total_carriers = 1705;\n  continual_"
-      "pilots = ...\n      [ 0 48 54 87 141 156 192 201 255 279 282 333 432 450 ...\n       483 525 531 618 636 714 759"
-      " 765 780 804 873 888 918 ...\n       939 942 969 984 1050 1101 1107 1110 1137 1140 1146 ...\n       1206 1269 13"
-      "23 1377 1491 1683 1704];\n   \n   tps_signals = ...\n      [34 50 209 346 413 569 595 688 790 901 ...\n       10"
-      "73 1219 1262 1286 1469 1594 1687];\n\n  l = 1;\n  Kmin=0;\n  Kmax=total_carriers;\n  \n  \n  % merge data and pi"
-      "lots\n  v=1; % current input payload carrier index\n  pilot=1; % current pilot index in pilot_set\n  tps=1; % cu"
-      "rrent tps index in tps_set\n  for u = 1:total_carriers % for all output carriers\n    p = 1+pilot_set(pilot); % "
-      "get next pilot\n    if tps <= length(tps_set) % get next tps\n      t = 1+tps_set(tps); \n    else\n      t = 0;"
-      "\n    end\n    \n    if u == p % it's a pilot signal\n      data_out(u) = 4/3 * 2 * (0.5 - DVBT_SETTINGS.refsig."
-      "w(p));\n      pilot = pilot + 1;\n    elseif u == t; % it's a TPS signal\n      data_out(u) = 2 * (0.5 - DVBT_SE"
-      "TTINGS.refsig.w(p));\n      tps = tps + 1;\n    else % it's a payload carrier\n      data_out(u) = DVBT_SETTINGS"
-      ".refsig.alpha * data_in(v);\n      v = v + 1;\n    end\n  end\n\n\n\ndata_out = data_in;\n"
-      editorLayout	      "100 M4x1[105 105 909 622]"
+      script		      "function data_out = insert_reference_signals(data_in, VAR)\n  \n  w = VAR.w;\n  symbols = 68;\n  "
+      "used_carriers = 1705;\n  tps_set = VAR.tps_signals;\n  pilot_set = VAR.pilot_set;\n  \n\n  % merge data and pilo"
+      "ts\n  temp = zeros(1705,68);\n  data_out = complex(temp,0);\n  for l=1:symbols\n    v = 1; % current input paylo"
+      "ad carrier index\n    pilot = 1; % current pilot index in pilot_set\n    tps=1; % current tps index in tps_set\n"
+      "        for u = 1:used_carriers % for all output carriers\n            p = 1+pilot_set(pilot); % get next pilot\n"
+      "            if tps <= length(tps_set) % get next tps\n                t = 1+tps_set(tps); \n            else\n  "
+      "              t = 0;\n            end\n\n            if u == p % it's a pilot signal\n                real = 4/3"
+      " * 2 * (0.5 - w(p));\n                data_out(u,l) = complex(real);\n                pilot = pilot + 1;\n      "
+      "      elseif u == t; % it's a TPS signal\n                real = 2 * (0.5 - w(p));\n                data_out(u,l"
+      ") = complex(real);\n                tps = tps + 1;\n            else % it's a payload carrier\n                d"
+      "ata_out(u,l) = data_in(v);\n                v = v + 1;\n            end\n        end\n  end\n  \n  data_out(:,1)"
+      "\n"
+      editorLayout	      "100 M4x1[64 45 945 656]"
       fimathString	      "fimath(...\n'RoundMode', 'floor',...\n'OverflowMode', 'wrap',...\n'ProductMode', 'KeepLSB', "
       "'ProductWordLength', 32,...\n'SumMode', 'KeepLSB', 'SumWordLength', 32,...\n'CastBeforeSum', true)"
       emlDefaultFimath	      FimathUserSpecified
@@ -4109,19 +4069,16 @@ Stateflow {
       }
       type {
 	primitive		SF_DOUBLE_TYPE
-	fixpt {
-	  dataTypeOverride	  SF_FXP_DTO_OFF
-	}
       }
       complexity	      SF_COMPLEX_INHERITED
     }
-    dataType		    "fixdt('double', 'DataTypeOverride', 'Off')"
+    dataType		    "double"
   }
   data {
     id			    7
     ssIdNumber		    5
     name		    "data_out"
-    linkNode		    [2 6 0]
+    linkNode		    [2 6 8]
     scope		    OUTPUT_DATA
     machine		    1
     props {
@@ -4137,14 +4094,36 @@ Stateflow {
     }
     dataType		    "Inherit: Same as Simulink"
   }
-  instance {
+  data {
     id			    8
+    ssIdNumber		    16
+    name		    "VAR"
+    linkNode		    [2 7 0]
+    scope		    PARAMETER_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  instance {
+    id			    9
     name		    "Pilots"
     machine		    1
     chart		    2
   }
   target {
-    id			    9
+    id			    10
     name		    "sfun"
     description		    "Default Simulink S-Function Target."
     machine		    1

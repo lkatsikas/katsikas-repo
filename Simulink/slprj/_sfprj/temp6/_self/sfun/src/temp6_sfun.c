@@ -1,7 +1,7 @@
 /* Include files */
 
-#include "temp5_sfun.h"
-#include "c1_temp5.h"
+#include "temp6_sfun.h"
+#include "c1_temp6.h"
 
 /* Type Definitions */
 
@@ -10,33 +10,33 @@
 /* Variable Declarations */
 
 /* Variable Definitions */
-uint32_T _temp5MachineNumber_;
+uint32_T _temp6MachineNumber_;
 real_T _sfTime_;
 
 /* Function Declarations */
 
 /* Function Definitions */
-void temp5_initializer(void)
+void temp6_initializer(void)
 {
 }
 
-void temp5_terminator(void)
+void temp6_terminator(void)
 {
 }
 
 /* SFunction Glue Code */
-unsigned int sf_temp5_method_dispatcher(SimStruct *simstructPtr, unsigned int
+unsigned int sf_temp6_method_dispatcher(SimStruct *simstructPtr, unsigned int
   chartFileNumber, const char* specsCksum, int_T method, void *data)
 {
   if (chartFileNumber==1) {
-    c1_temp5_method_dispatcher(simstructPtr, method, data);
+    c1_temp6_method_dispatcher(simstructPtr, method, data);
     return 1;
   }
 
   return 0;
 }
 
-unsigned int sf_temp5_process_check_sum_call( int nlhs, mxArray * plhs[], int
+unsigned int sf_temp6_process_check_sum_call( int nlhs, mxArray * plhs[], int
   nrhs, const mxArray * prhs[] )
 {
 
@@ -56,10 +56,10 @@ unsigned int sf_temp5_process_check_sum_call( int nlhs, mxArray * plhs[], int
     mxGetString(prhs[1], commandName,sizeof(commandName)/sizeof(char));
     commandName[(sizeof(commandName)/sizeof(char)-1)] = '\0';
     if (!strcmp(commandName,"machine")) {
-      ((real_T *)mxGetPr((plhs[0])))[0] = (real_T)(1713015902U);
-      ((real_T *)mxGetPr((plhs[0])))[1] = (real_T)(1235666872U);
-      ((real_T *)mxGetPr((plhs[0])))[2] = (real_T)(1969811860U);
-      ((real_T *)mxGetPr((plhs[0])))[3] = (real_T)(1731324628U);
+      ((real_T *)mxGetPr((plhs[0])))[0] = (real_T)(1969373664U);
+      ((real_T *)mxGetPr((plhs[0])))[1] = (real_T)(2640953767U);
+      ((real_T *)mxGetPr((plhs[0])))[2] = (real_T)(2686940646U);
+      ((real_T *)mxGetPr((plhs[0])))[3] = (real_T)(1779302768U);
     } else if (!strcmp(commandName,"exportedFcn")) {
       ((real_T *)mxGetPr((plhs[0])))[0] = (real_T)(0U);
       ((real_T *)mxGetPr((plhs[0])))[1] = (real_T)(0U);
@@ -76,8 +76,8 @@ unsigned int sf_temp5_process_check_sum_call( int nlhs, mxArray * plhs[], int
       switch (chartFileNumber) {
        case 1:
         {
-          extern void sf_c1_temp5_get_check_sum(mxArray *plhs[]);
-          sf_c1_temp5_get_check_sum(plhs);
+          extern void sf_c1_temp6_get_check_sum(mxArray *plhs[]);
+          sf_c1_temp6_get_check_sum(plhs);
           break;
         }
 
@@ -96,10 +96,10 @@ unsigned int sf_temp5_process_check_sum_call( int nlhs, mxArray * plhs[], int
       return 0;
     }
   } else {
-    ((real_T *)mxGetPr((plhs[0])))[0] = (real_T)(1187166047U);
-    ((real_T *)mxGetPr((plhs[0])))[1] = (real_T)(2340605884U);
-    ((real_T *)mxGetPr((plhs[0])))[2] = (real_T)(1318170360U);
-    ((real_T *)mxGetPr((plhs[0])))[3] = (real_T)(1009630803U);
+    ((real_T *)mxGetPr((plhs[0])))[0] = (real_T)(1782823630U);
+    ((real_T *)mxGetPr((plhs[0])))[1] = (real_T)(1752973250U);
+    ((real_T *)mxGetPr((plhs[0])))[2] = (real_T)(828489128U);
+    ((real_T *)mxGetPr((plhs[0])))[3] = (real_T)(2530326621U);
   }
 
   return 1;
@@ -112,7 +112,7 @@ unsigned int sf_temp5_process_check_sum_call( int nlhs, mxArray * plhs[], int
 
 }
 
-unsigned int sf_temp5_autoinheritance_info( int nlhs, mxArray * plhs[], int nrhs,
+unsigned int sf_temp6_autoinheritance_info( int nlhs, mxArray * plhs[], int nrhs,
   const mxArray * prhs[] )
 {
 
@@ -134,8 +134,8 @@ unsigned int sf_temp5_autoinheritance_info( int nlhs, mxArray * plhs[], int nrhs
     switch (chartFileNumber) {
      case 1:
       {
-        extern mxArray *sf_c1_temp5_get_autoinheritance_info(void);
-        plhs[0] = sf_c1_temp5_get_autoinheritance_info();
+        extern mxArray *sf_c1_temp6_get_autoinheritance_info(void);
+        plhs[0] = sf_c1_temp6_get_autoinheritance_info();
         break;
       }
 
@@ -154,7 +154,7 @@ unsigned int sf_temp5_autoinheritance_info( int nlhs, mxArray * plhs[], int nrhs
 
 }
 
-unsigned int sf_temp5_get_eml_resolved_functions_info( int nlhs, mxArray * plhs[],
+unsigned int sf_temp6_get_eml_resolved_functions_info( int nlhs, mxArray * plhs[],
   int nrhs, const mxArray * prhs[] )
 {
 
@@ -176,9 +176,9 @@ unsigned int sf_temp5_get_eml_resolved_functions_info( int nlhs, mxArray * plhs[
     switch (chartFileNumber) {
      case 1:
       {
-        extern const mxArray *sf_c1_temp5_get_eml_resolved_functions_info(void);
+        extern const mxArray *sf_c1_temp6_get_eml_resolved_functions_info(void);
         mxArray *persistentMxArray = (mxArray *)
-          sf_c1_temp5_get_eml_resolved_functions_info();
+          sf_c1_temp6_get_eml_resolved_functions_info();
         plhs[0] = mxDuplicateArray(persistentMxArray);
         mxDestroyArray(persistentMxArray);
         break;
@@ -199,13 +199,13 @@ unsigned int sf_temp5_get_eml_resolved_functions_info( int nlhs, mxArray * plhs[
 
 }
 
-void temp5_debug_initialize(void)
+void temp6_debug_initialize(void)
 {
-  _temp5MachineNumber_ = sf_debug_initialize_machine("temp5","sfun",0,1,0,0,0);
-  sf_debug_set_machine_event_thresholds(_temp5MachineNumber_,0,0);
-  sf_debug_set_machine_data_thresholds(_temp5MachineNumber_,0);
+  _temp6MachineNumber_ = sf_debug_initialize_machine("temp6","sfun",0,1,0,0,0);
+  sf_debug_set_machine_event_thresholds(_temp6MachineNumber_,0,0);
+  sf_debug_set_machine_data_thresholds(_temp6MachineNumber_,0);
 }
 
-void temp5_register_exported_symbols(SimStruct* S)
+void temp6_register_exported_symbols(SimStruct* S)
 {
 }
