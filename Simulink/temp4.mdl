@@ -1,17 +1,18 @@
 Model {
-  Name			  "temp3"
+  Name			  "temp4"
   Version		  7.7
   MdlSubVersion		  0
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.489"
+    ComputedModelVersion    "1.492"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
   Description		  "Digital Video Broadcasting - Terrestrial"
   SavedCharacterEncoding  "windows-1252"
+  PreLoadFcn		  "l=0;"
   SaveDefaultBlockParams  on
   ScopeRefreshTime	  0.035000
   OverrideScopeRefreshTime on
@@ -29,9 +30,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "katsikas"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed May 23 00:59:04 2012"
-  RTWModifiedTimeStamp	  259635538
-  ModelVersionFormat	  "1.%<AutoIncrement:489>"
+  LastModifiedDate	  "Tue May 22 18:09:02 2012"
+  RTWModifiedTimeStamp	  259610288
+  ModelVersionFormat	  "1.%<AutoIncrement:492>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -827,8 +828,8 @@ Model {
     }
   }
   System {
-    Name		    "temp3"
-    Location		    [215, 393, 1483, 1049]
+    Name		    "temp4"
+    Location		    [235, 294, 1503, 950]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    212
@@ -842,7 +843,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "340"
+    SIDHighWatermark	    "337"
     Block {
       BlockType		      Reference
       Name		      "(204,188) Shortened\nRS Decoder"
@@ -898,90 +899,6 @@ Model {
       BlockMirror	      on
       N			      "1512"
       TreatMby1Signals	      "One channel"
-    }
-    Block {
-      BlockType		      SubSystem
-      Name		      "Continual Pilots"
-      SID		      "309"
-      Ports		      [0, 1]
-      Position		      [750, 120, 790, 180]
-      MinAlgLoopOccurrences   off
-      PropExecContextOutsideSubsystem off
-      RTWSystemCode	      "Auto"
-      FunctionWithSeparateData off
-      Opaque		      off
-      RequestExecContextInheritance off
-      MaskHideContents	      off
-      System {
-	Name			"Continual Pilots"
-	Location		[277, 304, 657, 402]
-	Open			off
-	ModelBrowserVisibility	off
-	ModelBrowserWidth	200
-	ScreenColor		"white"
-	PaperOrientation	"landscape"
-	PaperPositionMode	"auto"
-	PaperType		"A4"
-	PaperUnits		"centimeters"
-	TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
-	TiledPageScale		1
-	ShowPageBoundaries	off
-	ZoomFactor		"100"
-	Block {
-	  BlockType		  Reference
-	  Name			  "PN Sequence\nGenerator"
-	  SID			  "310"
-	  Ports			  [0, 1]
-	  Position		  [25, 33, 100, 67]
-	  ShowName		  off
-	  LibraryVersion	  "1.319"
-	  SourceBlock		  "commseqgen2/PN Sequence\nGenerator"
-	  SourceType		  "PN Sequence Generator"
-	  poly			  "[1 0 1 0 0 0 0 0 0 0 0 1]"
-	  ini_sta		  "[1 1 1 1 1 1 1 1 1 1 1]"
-	  outBitMaskSource	  "Dialog parameter"
-	  shift			  "0"
-	  outVarSiz		  off
-	  maxOutSizeMode	  "Dialog parameter"
-	  maxOutSize		  "[10 1]"
-	  Ts			  "1/1e3"
-	  frameBased		  on
-	  sampPerFrame		  "68"
-	  reset			  off
-	  bitPackedOutputs	  off
-	  outDataType		  "double"
-	  numPackedBits		  "8"
-	  bitPackDataSigned	  off
-	  bitPackedOutDType	  "double"
-	}
-	Block {
-	  BlockType		  Reshape
-	  Name			  "Reshape"
-	  SID			  "311"
-	  Ports			  [1, 1]
-	  Position		  [265, 38, 295, 62]
-	  OutputDimensionality	  "Row vector (2-D)"
-	}
-	Block {
-	  BlockType		  Outport
-	  Name			  "out"
-	  SID			  "313"
-	  Position		  [325, 43, 355, 57]
-	  IconDisplay		  "Port number"
-	}
-	Line {
-	  SrcBlock		  "Reshape"
-	  SrcPort		  1
-	  DstBlock		  "out"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "PN Sequence\nGenerator"
-	  SrcPort		  1
-	  DstBlock		  "Reshape"
-	  DstPort		  1
-	}
-      }
     }
     Block {
       BlockType		      SubSystem
@@ -3146,9 +3063,9 @@ Model {
     Block {
       BlockType		      SubSystem
       Name		      "Pilots"
-      SID		      "340"
+      SID		      "337"
       Ports		      [1, 1]
-      Position		      [790, 301, 950, 349]
+      Position		      [685, 127, 845, 173]
       ErrorFcn		      "Stateflow.Translate.translate"
       PermitHierarchicalResolution "ExplicitOnly"
       TreatAsAtomicUnit	      on
@@ -3185,18 +3102,18 @@ Model {
 	TiledPageScale		1
 	ShowPageBoundaries	off
 	ZoomFactor		"100"
-	SIDHighWatermark	"14"
+	SIDHighWatermark	"13"
 	Block {
 	  BlockType		  Inport
 	  Name			  "data_in"
-	  SID			  "340::1"
+	  SID			  "337::1"
 	  Position		  [20, 101, 40, 119]
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  Demux
 	  Name			  " Demux "
-	  SID			  "340::11"
+	  SID			  "337::11"
 	  Ports			  [1, 1]
 	  Position		  [270, 160, 320, 200]
 	  Outputs		  "1"
@@ -3204,8 +3121,8 @@ Model {
 	Block {
 	  BlockType		  S-Function
 	  Name			  " SFunction "
-	  SID			  "340::10"
-	  Tag			  "Stateflow S-Function temp3 1"
+	  SID			  "337::10"
+	  Tag			  "Stateflow S-Function temp4 1"
 	  Ports			  [1, 2]
 	  Position		  [180, 100, 230, 160]
 	  FunctionName		  "sf_sfun"
@@ -3221,13 +3138,13 @@ Model {
 	Block {
 	  BlockType		  Terminator
 	  Name			  " Terminator "
-	  SID			  "340::13"
+	  SID			  "337::13"
 	  Position		  [460, 171, 480, 189]
 	}
 	Block {
 	  BlockType		  Outport
 	  Name			  "data_out"
-	  SID			  "340::5"
+	  SID			  "337::5"
 	  Position		  [460, 101, 480, 119]
 	  IconDisplay		  "Port number"
 	}
@@ -3239,7 +3156,7 @@ Model {
 	}
 	Line {
 	  Name			  "data_out"
-	  Labels		  [0, 0; 0, 0]
+	  Labels		  [0, 0]
 	  SrcBlock		  " SFunction "
 	  SrcPort		  2
 	  DstBlock		  "data_out"
@@ -3797,820 +3714,6 @@ Model {
       XAxisParamsVer	      "6.9"
       isFrameUpgraded	      on
     }
-    Block {
-      BlockType		      SubSystem
-      Name		      "Subsystem"
-      SID		      "332"
-      Ports		      [2, 1]
-      Position		      [910, 120, 950, 180]
-      MinAlgLoopOccurrences   off
-      PropExecContextOutsideSubsystem off
-      RTWSystemCode	      "Auto"
-      FunctionWithSeparateData off
-      Opaque		      off
-      RequestExecContextInheritance off
-      MaskHideContents	      off
-      System {
-	Name			"Subsystem"
-	Location		[65, 122, 1670, 989]
-	Open			on
-	ModelBrowserVisibility	off
-	ModelBrowserWidth	200
-	ScreenColor		"white"
-	PaperOrientation	"landscape"
-	PaperPositionMode	"auto"
-	PaperType		"A4"
-	PaperUnits		"centimeters"
-	TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
-	TiledPageScale		1
-	ShowPageBoundaries	off
-	ZoomFactor		"100"
-	Block {
-	  BlockType		  Inport
-	  Name			  "pilot"
-	  SID			  "338"
-	  Position		  [1472, 195, 1488, 225]
-	  BlockRotation		  270
-	  BlockMirror		  on
-	  NamePlacement		  "alternate"
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  Inport
-	  Name			  "pilot1"
-	  SID			  "339"
-	  Position		  [602, 15, 618, 45]
-	  BlockRotation		  270
-	  BlockMirror		  on
-	  NamePlacement		  "alternate"
-	  Port			  "2"
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  Concatenate
-	  Name			  "Assemble\nSubcarriers"
-	  SID			  "323"
-	  Ports			  [124, 1]
-	  Position		  [55, 450, 1595, 570]
-	  BlockRotation		  270
-	  BlockMirror		  on
-	  NamePlacement		  "alternate"
-	  NumInputs		  "124"
-	  Mode			  "Multidimensional array"
-	}
-	Block {
-	  BlockType		  Reference
-	  Name			  "Select data\nblocks"
-	  SID			  "330"
-	  Ports			  [1, 6]
-	  Position		  [469, 105, 1181, 170]
-	  BlockRotation		  270
-	  BlockMirror		  on
-	  NamePlacement		  "alternate"
-	  LibraryVersion	  "1.462"
-	  SourceBlock		  "dspindex/Multiport\nSelector"
-	  SourceType		  "Multiport Selector"
-	  rowsOrCols		  "Rows"
-	  idxCellArray		  "{1:5, 6:18, 19:24, 25:30, 31:43, 44:48}"
-	  idxErrMode		  "Clip Index"
-	}
-	Block {
-	  BlockType		  Outport
-	  Name			  "out"
-	  SID			  "335"
-	  Position		  [818, 645, 832, 675]
-	  BlockRotation		  270
-	  BlockMirror		  on
-	  NamePlacement		  "alternate"
-	  IconDisplay		  "Port number"
-	}
-	Line {
-	  SrcBlock		  "Assemble\nSubcarriers"
-	  SrcPort		  1
-	  DstBlock		  "out"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "pilot1"
-	  SrcPort		  1
-	  DstBlock		  "Select data\nblocks"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "pilot"
-	  SrcPort		  1
-	  Points		  [0, 35; -40, 0]
-	  Branch {
-	    Points		    [-20, 0]
-	    Branch {
-	      DstBlock		      "Assemble\nSubcarriers"
-	      DstPort		      122
-	    }
-	    Branch {
-	      Points		      [-25, 0]
-	      Branch {
-		Points			[5, 0]
-		DstBlock		"Assemble\nSubcarriers"
-		DstPort			120
-	      }
-	      Branch {
-		Points			[-20, 0]
-		Branch {
-		  Points		  [5, 0]
-		  DstBlock		  "Assemble\nSubcarriers"
-		  DstPort		  118
-		}
-		Branch {
-		  Points		  [-20, 0]
-		  Branch {
-		    Points		    [5, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    116
-		  }
-		  Branch {
-		    Points		    [-25, 0]
-		    Branch {
-		    Points		    [10, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    114
-		    }
-		    Branch {
-		    Points		    [-15, 0]
-		    Branch {
-		    Points		    [5, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    112
-		    }
-		    Branch {
-		    Points		    [-15, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    110
-		    }
-		    Branch {
-		    Points		    [-25, 0]
-		    Branch {
-		    Points		    [5, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    108
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    Points		    [5, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    106
-		    }
-		    Branch {
-		    Points		    [-15, 0]
-		    Branch {
-		    Labels		    [1, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    104
-		    }
-		    Branch {
-		    Points		    [-25, 0]
-		    Branch {
-		    Points		    [5, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    102
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    Points		    [5, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    100
-		    }
-		    Branch {
-		    Points		    [-15, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    98
-		    }
-		    Branch {
-		    Points		    [-25, 0]
-		    Branch {
-		    Points		    [5, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    96
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    Points		    [5, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    94
-		    }
-		    Branch {
-		    Points		    [-15, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    92
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    Labels		    [1, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    90
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    Labels		    [1, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    88
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    86
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    84
-		    }
-		    Branch {
-		    Points		    [-25, 0]
-		    Branch {
-		    Points		    [5, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    82
-		    }
-		    Branch {
-		    Points		    [-15, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    80
-		    }
-		    Branch {
-		    Points		    [-25, 0]
-		    Branch {
-		    Points		    [5, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    78
-		    }
-		    Branch {
-		    Points		    [-15, 0]
-		    Branch {
-		    Labels		    [1, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    76
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    74
-		    }
-		    Branch {
-		    Points		    [-25, 0]
-		    Branch {
-		    Points		    [5, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    72
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    Labels		    [2, 0]
-		    Points		    [5, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    70
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    Points		    [5, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    68
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    Labels		    [2, 0]
-		    Points		    [5, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    66
-		    }
-		    Branch {
-		    Points		    [-15, 0]
-		    Branch {
-		    Labels		    [1, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    64
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    62
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    60
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    58
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    56
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    54
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    52
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    50
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    48
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    46
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    44
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    42
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    40
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    38
-		    }
-		    Branch {
-		    Points		    [-25, 0]
-		    Branch {
-		    Labels		    [2, 0]
-		    Points		    [5, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    36
-		    }
-		    Branch {
-		    Points		    [-15, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    34
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    32
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    30
-		    }
-		    Branch {
-		    Points		    [-25, 0]
-		    Branch {
-		    Points		    [5, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    28
-		    }
-		    Branch {
-		    Points		    [-15, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    26
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    Labels		    [1, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    24
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    22
-		    }
-		    Branch {
-		    Points		    [-25, 0]
-		    Branch {
-		    Points		    [5, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    20
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    Points		    [5, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    18
-		    }
-		    Branch {
-		    Points		    [-15, 0]
-		    Branch {
-		    Labels		    [1, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    16
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    14
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    12
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    10
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    6
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    4
-		    }
-		    Branch {
-		    Points		    [-20, 0]
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    2
-		    }
-		    }
-		    }
-		    Branch {
-		    DstBlock		    "Assemble\nSubcarriers"
-		    DstPort		    8
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		    }
-		  }
-		}
-	      }
-	    }
-	  }
-	  Branch {
-	    DstBlock		    "Assemble\nSubcarriers"
-	    DstPort		    124
-	  }
-	}
-	Annotation {
-	  Name			  "0 "
-	  Position		  [1448, 389]
-	}
-	Annotation {
-	  Name			  "34"
-	  Position		  [1426, 391]
-	}
-	Annotation {
-	  Name			  "48"
-	  Position		  [1406, 389]
-	}
-	Annotation {
-	  Name			  "50"
-	  Position		  [1384, 388]
-	}
-	Annotation {
-	  Name			  "54"
-	  Position		  [1367, 389]
-	}
-	Annotation {
-	  Name			  "87"
-	  Position		  [1344, 389]
-	}
-	Annotation {
-	  Name			  "141"
-	  Position		  [1326, 387]
-	}
-	Annotation {
-	  Name			  "156"
-	  Position		  [1306, 384]
-	}
-	Annotation {
-	  Name			  "192"
-	  Position		  [1284, 388]
-	}
-	Annotation {
-	  Name			  "201"
-	  Position		  [1264, 389]
-	}
-	Annotation {
-	  Name			  "255"
-	  Position		  [1224, 375]
-	}
-	Annotation {
-	  Name			  "279"
-	  Position		  [1205, 354]
-	}
-	Annotation {
-	  Name			  "282"
-	  Position		  [1185, 378]
-	}
-	Annotation {
-	  Name			  "333"
-	  Position		  [1164, 357]
-	}
-	Annotation {
-	  Name			  "346"
-	  Position		  [1144, 383]
-	}
-	Annotation {
-	  Name			  "413"
-	  Position		  [1124, 361]
-	}
-	Annotation {
-	  Name			  "432"
-	  Position		  [1105, 336]
-	}
-	Annotation {
-	  Name			  "450"
-	  Position		  [1085, 381]
-	}
-	Annotation {
-	  Name			  "483"
-	  Position		  [1064, 358]
-	}
-	Annotation {
-	  Name			  "525"
-	  Position		  [1044, 394]
-	}
-	Annotation {
-	  Name			  "531"
-	  Position		  [1026, 341]
-	}
-	Annotation {
-	  Name			  "569"
-	  Position		  [1005, 372]
-	}
-	Annotation {
-	  Name			  "595"
-	  Position		  [984, 346]
-	}
-	Annotation {
-	  Name			  "618"
-	  Position		  [965, 379]
-	}
-	Annotation {
-	  Name			  "636"
-	  Position		  [944, 354]
-	}
-	Annotation {
-	  Name			  "209"
-	  Position		  [1244, 364]
-	}
-	Annotation {
-	  Name			  "688"
-	  Position		  [924, 336]
-	}
-	Annotation {
-	  Name			  "714"
-	  Position		  [906, 375]
-	}
-	Annotation {
-	  Name			  "759"
-	  Position		  [884, 348]
-	}
-	Annotation {
-	  Name			  "765"
-	  Position		  [865, 371]
-	}
-	Annotation {
-	  Name			  "780"
-	  Position		  [846, 341]
-	}
-	Annotation {
-	  Name			  "790"
-	  Position		  [825, 375]
-	}
-	Annotation {
-	  Name			  "804"
-	  Position		  [805, 335]
-	}
-	Annotation {
-	  Name			  "873"
-	  Position		  [784, 369]
-	}
-	Annotation {
-	  Name			  "888"
-	  Position		  [764, 398]
-	}
-	Annotation {
-	  Name			  "901"
-	  Position		  [745, 349]
-	}
-	Annotation {
-	  Name			  "918"
-	  Position		  [724, 378]
-	}
-	Annotation {
-	  Name			  "939"
-	  Position		  [704, 354]
-	}
-	Annotation {
-	  Name			  "942"
-	  Position		  [686, 336]
-	}
-	Annotation {
-	  Name			  "969"
-	  Position		  [664, 356]
-	}
-	Annotation {
-	  Name			  "984"
-	  Position		  [644, 385]
-	}
-	Annotation {
-	  Name			  "1050"
-	  Position		  [625, 363]
-	}
-	Annotation {
-	  Name			  "1073"
-	  Position		  [606, 332]
-	}
-	Annotation {
-	  Name			  "1101"
-	  Position		  [584, 366]
-	}
-	Annotation {
-	  Name			  "1107"
-	  Position		  [565, 394]
-	}
-	Annotation {
-	  Name			  "1110"
-	  Position		  [544, 346]
-	}
-	Annotation {
-	  Name			  "1137"
-	  Position		  [526, 386]
-	}
-	Annotation {
-	  Name			  "1140"
-	  Position		  [504, 354]
-	}
-	Annotation {
-	  Name			  "1146"
-	  Position		  [484, 395]
-	}
-	Annotation {
-	  Name			  "1206"
-	  Position		  [465, 361]
-	}
-	Annotation {
-	  Name			  "1219"
-	  Position		  [444, 391]
-	}
-	Annotation {
-	  Name			  "1262"
-	  Position		  [425, 410]
-	}
-	Annotation {
-	  Name			  "1269"
-	  Position		  [404, 363]
-	}
-	Annotation {
-	  Name			  "1286"
-	  Position		  [386, 403]
-	}
-	Annotation {
-	  Name			  "1323"
-	  Position		  [366, 376]
-	}
-	Annotation {
-	  Name			  "1377"
-	  Position		  [345, 340]
-	}
-	Annotation {
-	  Name			  "1469"
-	  Position		  [324, 379]
-	}
-	Annotation {
-	  Name			  "1491"
-	  Position		  [304, 353]
-	}
-	Annotation {
-	  Name			  "1594"
-	  Position		  [284, 372]
-	}
-	Annotation {
-	  Name			  "1683"
-	  Position		  [265, 313]
-	}
-	Annotation {
-	  Name			  "1687"
-	  Position		  [244, 372]
-	}
-	Annotation {
-	  Name			  "1704"
-	  Position		  [224, 409]
-	}
-      }
-    }
     Line {
       SrcBlock		      "Source"
       SrcPort		      1
@@ -4623,12 +3726,6 @@ Model {
 	DstBlock		"Integer to Bit\nConverter 1"
 	DstPort			1
       }
-    }
-    Line {
-      SrcBlock		      "Mapper"
-      SrcPort		      1
-      DstBlock		      "Buffer"
-      DstPort		      1
     }
     Line {
       SrcBlock		      "(204,188) Shortened\nRS Encoder"
@@ -4786,6 +3883,20 @@ Model {
 	DstPort			1
       }
     }
+    Line {
+      SrcBlock		      "Mapper"
+      SrcPort		      1
+      Points		      [0, 60; -115, 0]
+      DstBlock		      "Pilots"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Pilots"
+      SrcPort		      1
+      Points		      [0, -50; -45, 0]
+      DstBlock		      "Buffer"
+      DstPort		      1
+    }
     Annotation {
       Name		      "BER"
       Position		      [386, 257]
@@ -4893,16 +4004,18 @@ MatData {
 Stateflow {
   machine {
     id			    1
-    name		    "temp3"
-    created		    "23-May-2012 00:58:58"
+    name		    "temp4"
+    created		    "22-May-2012 01:23:46"
     isLibrary		    0
     firstTarget		    9
+    debug {
+    }
     sfVersion		    75014001
   }
   chart {
     id			    2
     name		    "Pilots"
-    windowPosition	    [341.813 269.45 200.25 189.75]
+    windowPosition	    [326.813 284.45 200.25 189.75]
     viewLimits		    [0 156.75 0 153.75]
     screen		    [1 1 1680 1050 0.9306951423785592]
     treeNode		    [0 3 0 0]
@@ -4910,9 +4023,7 @@ Stateflow {
     firstJunction	    4
     viewObj		    2
     machine		    1
-    subviewS {
-    }
-    ssIdHighWaterMark	    6
+    ssIdHighWaterMark	    5
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
     firstData		    6
@@ -4937,27 +4048,19 @@ Stateflow {
     decomposition	    CLUSTER_STATE
     eml {
       isEML		      1
-      script		      "function data_out = insert_reference_signals(data_in)\n  \nused_carriers = 1705;\n\n%% Part 8: Re"
-      "ference Signals\n  %% See ETSI EN 300 744, section 4.5, pp. 26\n  %% Normalization factor for data symbols (Tabl"
-      "e 6, p. 26)\n  alpha = 1/sqrt(42);\n  %% section 4.5.2: PRBS as reference sequence (pp.26)\n  w = zeros(1,used_c"
-      "arriers);\n  reg = ones(1,11);\n  for k = 1:used_carriers\n    w(k) = reg(11);\n    %disp(w(k));\n    new_bit = "
-      "xor (reg(9), reg(11));\n    reg = [ new_bit reg(1:10) ];\n  end\n  %% section 4.5.3: scattered pilot cells (p. 2"
-      "7)\n  scattered_pilots_period = 4;\n  %% section 4.5.4: continual pilot cells (Table 7, p. 28)\n  continual_pilo"
-      "ts = ...\n      [ 0 48 54 87 141 156 192 201 255 279 282 333 432 450 ...\n       483 525 531 618 636 714 759 765"
-      " 780 804 873 888 918 ...\n       939 942 969 984 1050 1101 1107 1110 1137 1140 1146 ...\n       1206 1269 1323 1"
-      "377 1491 1683 1704];\n  %% section 4.6: transmission parameter signaling (TPS)\n  %% (Table 8, p. 29)\n  tps_sig"
-      "nals = ...\n      [34 50 209 346 413 569 595 688 790 901 ...\n       1073 1219 1262 1286 1469 1594 1687];\n   \n"
-      "   \n   % Insert TPS symbols\n   \n  tps_set = tps_signals;\n  continual_set = continual_pilots;\n  \n  \n  \n  "
-      "for l= 0:67\n    Kmin = 0;\n    Kmax = used_carriers;\n    scattered_set = Kmin + 3*rem(l,4) + 12*(0:(used_carri"
-      "ers-12)/12);\n    %  na ftiaksw 2-diastato pinaka 142*68\n  end\n  \n  pilot_set = union(continual_pilots,scatte"
-      "red_set);\n  \n\n  % merge data and pilots\n  v = 1; % current input payload carrier index\n  pilot = 1; % curre"
-      "nt pilot index in pilot_set\n  tps=1; % current tps index in tps_set\n  data_ou = (1:1705);\n  for u = 1:used_ca"
-      "rriers % for all output carriers\n    p = 1+pilot_set(pilot); % get next pilot\n    if tps <= length(tps_set) % "
-      "get next tps\n      t = 1+tps_set(tps); \n    else\n      t = 0;\n    end\n    \n    if u == p % it's a pilot si"
-      "gnal\n      data_ou(u) = 4/3 * 2 * (0.5 - w(p));\n      pilot = pilot + 1;\n    elseif u == t; % it's a TPS sign"
-      "al\n      data_ou(u) = 2 * (0.5 - w(p));\n      tps = tps + 1;\n    else % it's a payload carrier\n      data_ou"
-      "(u) = alpha * data_in(v);\n      v = v + 1;\n    end\n  end\n   \n\n\ndata_out = data_ou;\n"
-      editorLayout	      "100 M4x1[900 303 909 620]"
+      script		      "function data_out = insert_reference_signals(data_in)\n  \n  total_carriers = 1705;\n  continual_"
+      "pilots = ...\n      [ 0 48 54 87 141 156 192 201 255 279 282 333 432 450 ...\n       483 525 531 618 636 714 759"
+      " 765 780 804 873 888 918 ...\n       939 942 969 984 1050 1101 1107 1110 1137 1140 1146 ...\n       1206 1269 13"
+      "23 1377 1491 1683 1704];\n   \n   tps_signals = ...\n      [34 50 209 346 413 569 595 688 790 901 ...\n       10"
+      "73 1219 1262 1286 1469 1594 1687];\n\n  l = 1;\n  Kmin=0;\n  Kmax=total_carriers;\n  \n  \n  % merge data and pi"
+      "lots\n  v=1; % current input payload carrier index\n  pilot=1; % current pilot index in pilot_set\n  tps=1; % cu"
+      "rrent tps index in tps_set\n  for u = 1:total_carriers % for all output carriers\n    p = 1+pilot_set(pilot); % "
+      "get next pilot\n    if tps <= length(tps_set) % get next tps\n      t = 1+tps_set(tps); \n    else\n      t = 0;"
+      "\n    end\n    \n    if u == p % it's a pilot signal\n      data_out(u) = 4/3 * 2 * (0.5 - DVBT_SETTINGS.refsig."
+      "w(p));\n      pilot = pilot + 1;\n    elseif u == t; % it's a TPS signal\n      data_out(u) = 2 * (0.5 - DVBT_SE"
+      "TTINGS.refsig.w(p));\n      tps = tps + 1;\n    else % it's a payload carrier\n      data_out(u) = DVBT_SETTINGS"
+      ".refsig.alpha * data_in(v);\n      v = v + 1;\n    end\n  end\n\n\n\ndata_out = data_in;\n"
+      editorLayout	      "100 M4x1[105 105 909 622]"
       fimathString	      "fimath(...\n'RoundMode', 'floor',...\n'OverflowMode', 'wrap',...\n'ProductMode', 'KeepLSB', "
       "'ProductWordLength', 32,...\n'SumMode', 'KeepLSB', 'SumWordLength', 32,...\n'CastBeforeSum', true)"
       emlDefaultFimath	      FimathUserSpecified
@@ -5006,10 +4109,13 @@ Stateflow {
       }
       type {
 	primitive		SF_DOUBLE_TYPE
+	fixpt {
+	  dataTypeOverride	  SF_FXP_DTO_OFF
+	}
       }
       complexity	      SF_COMPLEX_INHERITED
     }
-    dataType		    "double"
+    dataType		    "fixdt('double', 'DataTypeOverride', 'Off')"
   }
   data {
     id			    7
