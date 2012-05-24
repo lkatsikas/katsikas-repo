@@ -4,8 +4,6 @@
 
   %% Part 8: Reference Signals
   %% See ETSI EN 300 744, section 4.5, pp. 26
-  %% Normalization factor for data symbols (Table 6, p. 26)
-  VAR.alpha = 1/sqrt(42);
   
   %% section 4.5.2: PRBS as reference sequence (pp.26)
   VAR.w = zeros(1,used_carriers);
@@ -33,4 +31,11 @@
     Kmin = 0;
     VAR.scattered_set = Kmin + 3*rem(l,4) + 12*(0:(used_carriers-12)/12);
     VAR.pilot_set(:,l+1) = union(VAR.continual_pilots,VAR.scattered_set);
-   end 
+   end
+   
+   %% Adding 1/4 cyclic prefix for Transmitter
+   VAR.CyclicPrefixTX = [2048-[(2048/4)-1:-1:0] 1:2048];
+   
+   %% Adding 1/4 cyclic prefix for Receiver
+   VAR.CyclicPrefixRX = [(2048/4)+1:(2048+512)];
+   

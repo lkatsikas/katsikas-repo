@@ -18,27 +18,29 @@ typedef struct {
   uint32_T mFileTimeHi;
 } c1_ResolvedFunctionInfo;
 
-#ifndef struct_struct_xiTGusujfWbfyD0i7ym1G_tag
-#define struct_struct_xiTGusujfWbfyD0i7ym1G_tag
+#ifndef struct_struct_pff9OPVgTqbyCupd3ePNxF_tag
+#define struct_struct_pff9OPVgTqbyCupd3ePNxF_tag
 
-typedef struct struct_xiTGusujfWbfyD0i7ym1G_tag
+typedef struct struct_pff9OPVgTqbyCupd3ePNxF_tag
 {
-  real_T alpha;
   real_T w[1705];
   real_T continual_pilots[45];
   real_T tps_signals[17];
   real_T scattered_set[142];
   real_T pilot_set[11968];
-} c1_struct_xiTGusujfWbfyD0i7ym1G;
+  real_T CyclicPrefixTX[2560];
+  real_T CyclicPrefixRX[2048];
+} c1_struct_pff9OPVgTqbyCupd3ePNxF;
 
 #else
 
-typedef struct struct_xiTGusujfWbfyD0i7ym1G_tag c1_struct_xiTGusujfWbfyD0i7ym1G;
+typedef struct struct_pff9OPVgTqbyCupd3ePNxF_tag
+  c1_struct_pff9OPVgTqbyCupd3ePNxF;
 
 #endif
 
 typedef struct {
-  c1_struct_xiTGusujfWbfyD0i7ym1G c1_VAR;
+  c1_struct_pff9OPVgTqbyCupd3ePNxF c1_VAR;
   SimStruct *S;
   int32_T c1_sfEvent;
   uint32_T chartNumber;
