@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.515"
+    ComputedModelVersion    "1.518"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -30,9 +30,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "katsikas"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri May 25 02:44:43 2012"
-  RTWModifiedTimeStamp	  259814681
-  ModelVersionFormat	  "1.%<AutoIncrement:515>"
+  LastModifiedDate	  "Fri May 25 11:03:14 2012"
+  RTWModifiedTimeStamp	  259844497
+  ModelVersionFormat	  "1.%<AutoIncrement:518>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -728,6 +728,21 @@ Model {
       Interpolate	      on
     }
     Block {
+      BlockType		      Math
+      Operator		      "exp"
+      OutputSignalType	      "auto"
+      SampleTime	      "-1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Same as first input"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+      IntermediateResultsDataTypeStr "Inherit: Inherit via internal rule"
+      AlgorithmType	      "Newton-Raphson"
+      Iterations	      "3"
+    }
+    Block {
       BlockType		      Outport
       Port		      "1"
       OutMin		      "[]"
@@ -743,6 +758,19 @@ Model {
       SourceOfInitialOutputValue "Dialog"
       OutputWhenDisabled      "held"
       InitialOutput	      "[]"
+    }
+    Block {
+      BlockType		      Probe
+      ProbeWidth	      on
+      ProbeSampleTime	      on
+      ProbeComplexSignal      on
+      ProbeSignalDimensions   off
+      ProbeFramedSignal	      off
+      ProbeWidthDataType      "double"
+      ProbeSampleTimeDataType "double"
+      ProbeComplexityDataType "double"
+      ProbeDimensionsDataType "double"
+      ProbeFrameDataType      "double"
     }
     Block {
       BlockType		      Reshape
@@ -819,6 +847,20 @@ Model {
     Block {
       BlockType		      Terminator
     }
+    Block {
+      BlockType		      ToWorkspace
+      VariableName	      "simulink_output"
+      MaxDataPoints	      "1000"
+      Decimation	      "1"
+      SampleTime	      "0"
+      FixptAsFi		      off
+      NumInputs		      "1"
+    }
+    Block {
+      BlockType		      Unbuffer
+      ic		      "0"
+      SampleBasedProcessing   "Pass through (this choice will be removed - see release notes)"
+    }
   }
   System {
     Name		    "temp6"
@@ -836,13 +878,13 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "586"
+    SIDHighWatermark	    "623"
     Block {
       BlockType		      Reference
       Name		      "(204,188) Shortened\nRS Decoder"
       SID		      "1"
       Ports		      [1, 1]
-      Position		      [190, 575, 270, 615]
+      Position		      [350, 575, 430, 615]
       BlockMirror	      on
       LibraryVersion	      "1.536"
       SourceBlock	      "commblkcod2/Integer-Output\nRS Decoder"
@@ -863,7 +905,7 @@ Model {
       Name		      "(204,188) Shortened\nRS Encoder"
       SID		      "2"
       Ports		      [1, 1]
-      Position		      [215, 33, 295, 77]
+      Position		      [255, 33, 335, 77]
       LibraryVersion	      "1.536"
       SourceBlock	      "commblkcod2/Integer-Input\nRS Encoder"
       SourceType	      "Integer-Input RS Encoder"
@@ -936,10 +978,161 @@ Model {
     }
     Block {
       BlockType		      SubSystem
+      Name		      "Compute\ndata rate"
+      SID		      "606"
+      Ports		      [1, 1]
+      Position		      [78, 105, 112, 210]
+      BlockRotation	      270
+      BlockMirror	      on
+      ShowName		      off
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      FunctionWithSeparateData off
+      Opaque		      off
+      RequestExecContextInheritance off
+      MaskHideContents	      off
+      MaskDisplay	      "disp(sprintf('Compute Bit\\nRate (Mbit/s)'))"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskPortRotate	      "default"
+      MaskIconUnits	      "autoscale"
+      System {
+	Name			"Compute\ndata rate"
+	Location		[89, 178, 850, 614]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "In1"
+	  SID			  "607"
+	  Position		  [15, 48, 45, 62]
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "Gain"
+	  SID			  "608"
+	  Position		  [492, 280, 588, 325]
+	  BlockRotation		  270
+	  BlockMirror		  on
+	  NamePlacement		  "alternate"
+	  Gain			  "8e-6"
+	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  Math
+	  Name			  "Math\nFunction"
+	  SID			  "609"
+	  Ports			  [1, 1]
+	  Position		  [516, 180, 564, 230]
+	  BlockRotation		  270
+	  BlockMirror		  on
+	  NamePlacement		  "alternate"
+	  Operator		  "reciprocal"
+	}
+	Block {
+	  BlockType		  Probe
+	  Name			  "Probe"
+	  SID			  "610"
+	  Ports			  [1, 1]
+	  Position		  [250, 41, 475, 69]
+	  ShowName		  off
+	  ProbeWidth		  off
+	  ProbeComplexSignal	  off
+	}
+	Block {
+	  BlockType		  Selector
+	  Name			  "Selector"
+	  SID			  "611"
+	  Ports			  [1, 1]
+	  Position		  [521, 95, 559, 135]
+	  BlockRotation		  270
+	  BlockMirror		  on
+	  NamePlacement		  "alternate"
+	  ShowName		  off
+	  InputPortWidth	  "2"
+	  IndexOptions		  "Index vector (dialog)"
+	  Indices		  "1"
+	  OutputSizes		  "1"
+	}
+	Block {
+	  BlockType		  Unbuffer
+	  Name			  "Unbuffer"
+	  SID			  "612"
+	  Ports			  [1, 1]
+	  Position		  [145, 31, 195, 79]
+	  ShowName		  off
+	  SampleBasedProcessing	  "Same as frame based"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Out2"
+	  SID			  "613"
+	  Position		  [533, 375, 547, 405]
+	  BlockRotation		  270
+	  BlockMirror		  on
+	  NamePlacement		  "alternate"
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  SrcBlock		  "Probe"
+	  SrcPort		  1
+	  Points		  [60, 0]
+	  DstBlock		  "Selector"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "In1"
+	  SrcPort		  1
+	  DstBlock		  "Unbuffer"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Selector"
+	  SrcPort		  1
+	  DstBlock		  "Math\nFunction"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Math\nFunction"
+	  SrcPort		  1
+	  DstBlock		  "Gain"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Gain"
+	  SrcPort		  1
+	  DstBlock		  "Out2"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Unbuffer"
+	  SrcPort		  1
+	  DstBlock		  "Probe"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
       Name		      "DVB-T Inner Deinterleaver"
       SID		      "5"
       Ports		      [1, 1]
-      Position		      [755, 569, 830, 621]
+      Position		      [810, 569, 885, 621]
       BlockMirror	      on
       ShowName		      off
       MinAlgLoopOccurrences   off
@@ -1872,17 +2065,7 @@ Model {
       Name		      "Display1"
       SID		      "61"
       Ports		      [1]
-      Position		      [300, 244, 380, 306]
-      ShowName		      off
-      Decimation	      "1"
-      Lockdown		      off
-    }
-    Block {
-      BlockType		      Display
-      Name		      "Display2"
-      SID		      "62"
-      Ports		      [1]
-      Position		      [635, 244, 715, 306]
+      Position		      [420, 244, 500, 306]
       ShowName		      off
       Decimation	      "1"
       Lockdown		      off
@@ -1892,7 +2075,7 @@ Model {
       Name		      "Error Rate Calculation1"
       SID		      "63"
       Ports		      [2, 1]
-      Position		      [185, 255, 270, 295]
+      Position		      [305, 255, 390, 295]
       ShowName		      off
       LibraryVersion	      "1.316"
       SourceBlock	      "commsink2/Error Rate\nCalculation"
@@ -1907,27 +2090,6 @@ Model {
       stop		      off
       numErr		      "100"
       maxBits		      "68274180 *8"
-    }
-    Block {
-      BlockType		      Reference
-      Name		      "Error Rate Calculation2"
-      SID		      "64"
-      Ports		      [2, 1]
-      Position		      [525, 255, 610, 295]
-      ShowName		      off
-      LibraryVersion	      "1.316"
-      SourceBlock	      "commsink2/Error Rate\nCalculation"
-      SourceType	      "Error Rate Calculation"
-      N			      "1632*6"
-      st_delay		      "0"
-      cp_mode		      "Entire frame"
-      subframe		      "[]"
-      PMode		      "Port"
-      WsName		      "e1"
-      RsMode2		      off
-      stop		      off
-      numErr		      "100"
-      maxBits		      "1e6"
     }
     Block {
       BlockType		      Reshape
@@ -2044,7 +2206,7 @@ Model {
       Name		      "Inner Decoder"
       SID		      "70"
       Ports		      [1, 1]
-      Position		      [510, 568, 585, 622]
+      Position		      [655, 568, 730, 622]
       BlockMirror	      on
       ShowName		      off
       MinAlgLoopOccurrences   off
@@ -2161,7 +2323,7 @@ Model {
       Name		      "Integer to Bit\nConverter 1"
       SID		      "75"
       Ports		      [1, 1]
-      Position		      [110, 205, 190, 245]
+      Position		      [230, 205, 310, 245]
       BlockRotation	      270
       BlockMirror	      on
       NamePlacement	      "alternate"
@@ -2179,7 +2341,7 @@ Model {
       Name		      "Integer to Bit\nConverter 2"
       SID		      "76"
       Ports		      [1, 1]
-      Position		      [110, 325, 190, 365]
+      Position		      [230, 325, 310, 365]
       BlockRotation	      270
       NamePlacement	      "alternate"
       ShowName		      off
@@ -2190,6 +2352,18 @@ Model {
       signedInputValues	      "Unsigned"
       bitOrder		      "MSB first"
       outDtype		      "boolean"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "MPEG2 useful \nBit rate (Mbit/s)"
+      SID		      "605"
+      Ports		      [1]
+      Position		      [47, 245, 143, 285]
+      BlockRotation	      270
+      BlockMirror	      on
+      Format		      "bank"
+      Decimation	      "1"
+      Lockdown		      off
     }
     Block {
       BlockType		      SubSystem
@@ -2560,7 +2734,7 @@ Model {
 	  Name			  "Add Cyclic\nPrefix"
 	  SID			  "357"
 	  Ports			  [1, 1]
-	  Position		  [530, 56, 580, 84]
+	  Position		  [430, 56, 480, 84]
 	  NumberOfDimensions	  "2"
 	  InputPortWidth	  "64"
 	  IndexOptions		  "Index vector (dialog),Select all"
@@ -2568,18 +2742,11 @@ Model {
 	  OutputSizes		  "1"
 	}
 	Block {
-	  BlockType		  FrameConversion
-	  Name			  "Frame Conversion"
-	  SID			  "356"
-	  Ports			  [1, 1]
-	  Position		  [260, 54, 300, 86]
-	}
-	Block {
 	  BlockType		  Reference
 	  Name			  "IFFT"
 	  SID			  "93"
 	  Ports			  [1, 1]
-	  Position		  [380, 54, 420, 86]
+	  Position		  [265, 54, 305, 86]
 	  LibraryVersion	  "1.460"
 	  SourceBlock		  "dspxfrm3/IFFT"
 	  SourceType		  "IFFT"
@@ -2621,6 +2788,17 @@ Model {
 	  roundingMode		  "Floor"
 	  overflowMode		  off
 	  LockScale		  off
+	}
+	Block {
+	  BlockType		  ToWorkspace
+	  Name			  "To Workspace"
+	  SID			  "623"
+	  Ports			  [1]
+	  Position		  [210, 105, 270, 135]
+	  VariableName		  "ifft"
+	  MaxDataPoints		  "inf"
+	  SampleTime		  "-1"
+	  SaveFormat		  "Array"
 	}
 	Block {
 	  BlockType		  SubSystem
@@ -2761,14 +2939,16 @@ Model {
 	Line {
 	  SrcBlock		  "Zero pad for OFDM"
 	  SrcPort		  1
-	  DstBlock		  "Frame Conversion"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "Frame Conversion"
-	  SrcPort		  1
-	  DstBlock		  "IFFT"
-	  DstPort		  1
+	  Points		  [35, 0]
+	  Branch {
+	    DstBlock		    "IFFT"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [-5, 0]
+	    DstBlock		    "To Workspace"
+	    DstPort		    1
+	  }
 	}
 	Line {
 	  SrcBlock		  "Add Cyclic\nPrefix"
@@ -2783,7 +2963,7 @@ Model {
       Name		      "Outer Deinterleaver"
       SID		      "100"
       Ports		      [1, 1]
-      Position		      [355, 567, 435, 623]
+      Position		      [485, 567, 565, 623]
       BlockMirror	      on
       ShowName		      off
       MinAlgLoopOccurrences   off
@@ -2890,7 +3070,7 @@ Model {
       Name		      "Outer Interleaver"
       SID		      "105"
       Ports		      [1, 1]
-      Position		      [355, 27, 435, 83]
+      Position		      [375, 27, 455, 83]
       ShowName		      off
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
@@ -3170,7 +3350,7 @@ Model {
 	  specRange		  off
 	  minInputVal		  "0"
 	  maxInputVal		  "255"
-	  FigPos		  "[97 966 410 300]"
+	  FigPos		  "[850 877 410 300]"
 	  AxisZoom		  on
 	  trueSizedOnce		  on
 	  OpenAtMdlStart	  on
@@ -3274,7 +3454,7 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"Source"
-	Location		[450, 437, 1146, 574]
+	Location		[450, 437, 1310, 726]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -3342,7 +3522,7 @@ Model {
 	      ComponentOrder	      "[1]"
 	      Interlaced	      off
 	      LineOrdering	      "Top line first"
-	      Ts		      "1/10"
+	      Ts		      "1/Tsample"
 	      Component1	      "Y'"
 	      Component2	      "Cb"
 	      Component3	      "Cr"
@@ -3444,7 +3624,7 @@ Model {
 	      VectorParams1D	      off
 	      SamplingMode	      "Frame based"
 	      OutDataTypeStr	      "uint8"
-	      FramePeriod	      "8*188/10"
+	      FramePeriod	      "8*188/Tsample"
 	    }
 	    Block {
 	      BlockType		      Concatenate
@@ -3490,7 +3670,7 @@ Model {
 	      GeneratePreprocessorConditionals off
 	      P			      "1"
 	      seed		      "61"
-	      Ts		      "(8*188/10) / (3*8)"
+	      Ts		      "(8*188/Tsample) / (3*8)"
 	      frameBased	      on
 	      sampPerFrame	      "3*8"
 	      orient		      off
@@ -3679,7 +3859,7 @@ Model {
 		    outVarSiz		    off
 		    maxOutSizeMode	    "Dialog parameter"
 		    maxOutSize		    "[10 1]"
-		    Ts			    "8 * (8*188/10) / (8*188 - 1)"
+		    Ts			    "8 * (8*188/Tsample) / (8*188 - 1)"
 		    frameBased		    on
 		    sampPerFrame	    "(8*188 - 1)"
 		    reset		    on
@@ -3696,7 +3876,7 @@ Model {
 		    Position		    [30, 320, 60, 350]
 		    VectorParams1D	    off
 		    OutDataTypeStr	    "boolean"
-		    SampleTime		    "8 * (8*188/10)"
+		    SampleTime		    "8 * (8*188/Tsample)"
 		    }
 		    Block {
 		    BlockType		    Outport
@@ -5035,7 +5215,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "Out1"
 	  SID			  "126"
-	  Position		  [490, 48, 520, 62]
+	  Position		  [640, 48, 670, 62]
 	  IconDisplay		  "Port number"
 	}
 	Line {
@@ -5064,13 +5244,21 @@ Model {
     Line {
       SrcBlock		      "Source"
       SrcPort		      1
-      Points		      [80, 0]
+      Points		      [25, 0]
       Branch {
-	DstBlock		"(204,188) Shortened\nRS Encoder"
-	DstPort			1
+	Points			[90, 0]
+	Branch {
+	  DstBlock		  "(204,188) Shortened\nRS Encoder"
+	  DstPort		  1
+	}
+	Branch {
+	  Points		  [0, 135]
+	  DstBlock		  "Integer to Bit\nConverter 1"
+	  DstPort		  1
+	}
       }
       Branch {
-	DstBlock		"Integer to Bit\nConverter 1"
+	DstBlock		"Compute\ndata rate"
 	DstPort			1
       }
     }
@@ -5083,16 +5271,8 @@ Model {
     Line {
       SrcBlock		      "Outer Interleaver"
       SrcPort		      1
-      Points		      [30, 0]
-      Branch {
-	Points			[0, 210]
-	DstBlock		"Error Rate Calculation2"
-	DstPort			1
-      }
-      Branch {
-	DstBlock		"Inner Coder"
-	DstPort			1
-      }
+      DstBlock		      "Inner Coder"
+      DstPort		      1
     }
     Line {
       SrcBlock		      "OFDM Receiver"
@@ -5109,16 +5289,8 @@ Model {
     Line {
       SrcBlock		      "Inner Decoder"
       SrcPort		      1
-      Points		      [-35, 0]
-      Branch {
-	DstBlock		"Outer Deinterleaver"
-	DstPort			1
-      }
-      Branch {
-	Points			[0, -310]
-	DstBlock		"Error Rate Calculation2"
-	DstPort			2
-      }
+      DstBlock		      "Outer Deinterleaver"
+      DstPort		      1
     }
     Line {
       SrcBlock		      "Outer Deinterleaver"
@@ -5147,13 +5319,13 @@ Model {
     Line {
       SrcBlock		      "(204,188) Shortened\nRS Decoder"
       SrcPort		      1
-      Points		      [-40, 0]
+      Points		      [-200, 0]
       Branch {
 	DstBlock		"Sink"
 	DstPort			1
       }
       Branch {
-	Points			[5, 0]
+	Points			[40, 0; 0, -215]
 	DstBlock		"Integer to Bit\nConverter 2"
 	DstPort			1
       }
@@ -5213,12 +5385,6 @@ Model {
       DstPort		      1
     }
     Line {
-      SrcBlock		      "Error Rate Calculation2"
-      SrcPort		      1
-      DstBlock		      "Display2"
-      DstPort		      1
-    }
-    Line {
       SrcBlock		      "Integer to Bit\nConverter 2"
       SrcPort		      1
       Points		      [0, -35]
@@ -5246,6 +5412,12 @@ Model {
       DstBlock		      "OFDM Receiver"
       DstPort		      1
     }
+    Line {
+      SrcBlock		      "Compute\ndata rate"
+      SrcPort		      1
+      DstBlock		      "MPEG2 useful \nBit rate (Mbit/s)"
+      DstPort		      1
+    }
     Annotation {
       Name		      "1512*68*4 = 204RS packets * 2016(No stuffing)"
       Position		      [775, 146]
@@ -5254,33 +5426,18 @@ Model {
       Position		      [670, 156]
     }
     Annotation {
-      Name		      "BER"
-      Position		      [726, 252]
-      HorizontalAlignment     "left"
-    }
-    Annotation {
       Name		      "Total Bits"
-      Position		      [725, 295]
+      Position		      [505, 300]
       HorizontalAlignment     "left"
     }
     Annotation {
       Name		      "Total Errors"
-      Position		      [723, 274]
-      HorizontalAlignment     "left"
-    }
-    Annotation {
-      Name		      "Total Bits"
-      Position		      [385, 300]
-      HorizontalAlignment     "left"
-    }
-    Annotation {
-      Name		      "Total Errors"
-      Position		      [383, 279]
+      Position		      [503, 279]
       HorizontalAlignment     "left"
     }
     Annotation {
       Name		      "BER"
-      Position		      [386, 257]
+      Position		      [506, 257]
       HorizontalAlignment     "left"
     }
   }
