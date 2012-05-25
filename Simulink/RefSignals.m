@@ -1,5 +1,5 @@
 
-  Tsample = 9;
+  Tsample = 9e3;
   VAR = {};
   used_carriers = 1705;
 
