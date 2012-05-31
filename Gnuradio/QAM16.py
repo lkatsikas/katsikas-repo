@@ -3,12 +3,13 @@
 # Gnuradio Python Flow Graph
 # Title: QAM16
 # Author: katsikas
-# Generated: Tue May 15 17:27:52 2012
+# Generated: Fri May 25 18:32:03 2012
 ##################################################
 
 from gnuradio import digital
 from gnuradio import eng_notation
 from gnuradio import gr
+from gnuradio import uhd
 from gnuradio.eng_option import eng_option
 from gnuradio.gr import firdes
 from grc_gnuradio import blks2 as grc_blks2
@@ -29,14 +30,24 @@ class QAM16(grc_wxgui.top_block_gui):
 		##################################################
 		# Blocks
 		##################################################
-		self.gr_wavfile_source_0 = gr.wavfile_source("/home/katsikas/guitarup_full.wav", False)
+		self.uhd_usrp_sink_0 = uhd.usrp_sink(
+			device_addr="addr=192.168.10.2",
+			stream_args=uhd.stream_args(
+				cpu_format="fc32",
+				channels=range(1),
+			),
+		)
+		self.uhd_usrp_sink_0.set_samp_rate(samp_rate)
+		self.uhd_usrp_sink_0.set_center_freq(474e6, 0)
+		self.uhd_usrp_sink_0.set_gain(15, 0)
+		self.gr_wavfile_source_0 = gr.wavfile_source("/home/katsikas/guitarup_full.wav", True)
 		self.gr_wavfile_sink_0 = gr.wavfile_sink("/home/katsikas/katsikas-repo/Gnuradio/Sent.wav", 1, samp_rate, 8)
 		self.gr_throttle_0_0 = gr.throttle(gr.sizeof_float*1, samp_rate)
 		self.digital_ofdm_mod_0 = grc_blks2.packet_mod_f(digital.ofdm_mod(
 				options=grc_blks2.options(
-					modulation="qam16",
-					fft_length=2048,
-					occupied_tones=200,
+					modulation="qam64",
+					fft_length=512,
+					occupied_tones=256,
 					cp_length=128,
 					pad_for_usrp=True,
 					log=None,
@@ -48,8 +59,8 @@ class QAM16(grc_wxgui.top_block_gui):
 		self.digital_ofdm_demod_0 = grc_blks2.packet_demod_f(digital.ofdm_demod(
 				options=grc_blks2.options(
 					modulation="qam16",
-					fft_length=2048,
-					occupied_tones=200,
+					fft_length=512,
+					occupied_tones=256,
 					cp_length=128,
 					snr=10,
 					log=None,
@@ -63,8 +74,9 @@ class QAM16(grc_wxgui.top_block_gui):
 		# Connections
 		##################################################
 		self.connect((self.gr_wavfile_source_0, 0), (self.gr_throttle_0_0, 0))
-		self.connect((self.digital_ofdm_mod_0, 0), (self.digital_ofdm_demod_0, 0))
+		self.connect((self.digital_ofdm_mod_0, 0), (self.uhd_usrp_sink_0, 0))
 		self.connect((self.gr_throttle_0_0, 0), (self.digital_ofdm_mod_0, 0))
+		self.connect((self.digital_ofdm_mod_0, 0), (self.digital_ofdm_demod_0, 0))
 		self.connect((self.digital_ofdm_demod_0, 0), (self.gr_wavfile_sink_0, 0))
 
 	def get_samp_rate(self):
@@ -72,6 +84,7 @@ class QAM16(grc_wxgui.top_block_gui):
 
 	def set_samp_rate(self, samp_rate):
 		self.samp_rate = samp_rate
+		self.uhd_usrp_sink_0.set_samp_rate(self.samp_rate)
 
 if __name__ == '__main__':
 	parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
