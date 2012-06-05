@@ -7,13 +7,13 @@
 % === ----------------------------------------------------------------- ===
 % === Purpose : Sender reads two .wav files containing voice signals,   ===
 % ===           checks the frequencies of each one and if is needed     ===
-% ===           resamples the files to meet the Nyiquist therem.        ===
+% ===           resamples the files to meet the Nyiquist theorem.       ===
 % ===           Then modulates message signals with DSB-SC and          ===
 % ===           transmits them over an AWGN channel.                    ===
 % ===           Receiver gets the modulated signals, uses a             ===
-% ===           bandpass filter around 2nd carriers frequency           ===
-% ===           to get only the second signal.                          ===
-% ===           Then demodulates this signal and uses a low pass        ===
+% ===           bandpass filter around 1st carrier's frequency          ===
+% ===           to get only the first signal(File1.wav).                ===
+% ===           Then de-modulates this signal and uses a low pass       ===
 % ===           filter in order to get the initial signal back.         ===
 % ===           The spectrum of the signal is calculated at each        ===
 % ===           step of the procedure to make this process more         ===
@@ -21,13 +21,15 @@
 % =========================================================================
 
 
+% -------------------------------------------------------------------------
+% -------------------------------------------------------------------------
 clc;
 close all;
 clear all;
 
-fprintf('\n===============================================\n');
-fprintf('===== DSB-SC modulation of voice signals. =====\n');
-fprintf('===============================================\n\n');
+fprintf('\n===========================================================\n');
+fprintf('=====       DSB-SC modulation of voice signals.       =====\n');
+fprintf('===========================================================\n\n');
 
 i = 1;
 file1 = 'File1.wav';
@@ -37,17 +39,22 @@ file2 = 'File2.wav';
 % ---> Step 1 - Read the .WAV files and get the information required.  <---
 fprintf('-----------------------\n');
 fprintf('Reading .WAV files... |\n');
-fprintf('-----------------------\n');
+fprintf('-----------------------\n\n');
 
 % Read the first
 [m1 d1] = wavfinfo(file1);                      % A piece of information...         
 [x1,f1,n1] = wavread(file1);                    % Use this function to read
-%sound(x1,f1);                                  % Listen to this .wav file.
+
+fprintf('Playing File1.wav...\n');
+sound(x1,f1);                                   % Listen to this .wav file.
+
 
 % Read the second
 [m2 d2] = wavfinfo(file2);                      % A piece of information...
 [x2,f2,n2] = wavread(file2);                    % Use this function to read 
-%sound(x2,f2);                                  % Listen to this .wav file.
+
+fprintf('Playing File2.wav...\n\n');
+sound(x2,f2);                                   % Listen to this .wav file.
 
 % Print some info about the .wav files...
 fprintf('%s info: \n',file1);
@@ -67,13 +74,16 @@ fm2 = f2/2;                     % fs is the initial sampling frequency of
                                 % the file.
                                 
 fc1 = 8000;                     % Carrier frequency(fc) >> fm to avoid
-fc2 = 16000;                    % spectrum overlaping.
+fc2 = 18000;                    % spectrum overlaping.
 
 fmax1 = fc1 + fm1;              % fmax is the maximum frequency expected.
 fmax2 = fc2 + fm2;
 
 fs1 = 2 * fmax1;                % fs is the sampling frequency according to
 fs2 = 2 * fmax2;                % the Nyiquist theorem.
+
+fs = max(fs1,fs2);              % Get the maximum frequency of two signals.
+                                % Used to the multiplexed signal.
 
 % Print some constant values...
 fprintf('---------------------------------\n');
@@ -92,6 +102,9 @@ fprintf('Nyiquist Sampling Frequency for Signal-2(fs) = %d \n\n',fs2);
 
 
 % ---> Step 3 - Sample the input signals using sampling frequences.    <---
+
+% If the intial sampling frequency(f1) is less than fs we have to
+% oversample the file with the new frequency.
 % Signal 1
 if f1 < fs1
     wavwrite(x1,fs1,n1,'Oversampled_File1.wav');% Create the sampled file.
@@ -101,6 +114,7 @@ end
 
 t1 = [0:length(x1)-1] * (1/fs1);                % Time axis.
 
+% Plot signal 1 in Time Domain.
 figure(i);
 i = i + 1;
 subplot(2,2,1);
@@ -119,6 +133,7 @@ end
 
 t2 = [0:length(x2)-1] * (1/fs2);                % Time axis.
 
+% Plot signal 2 in Time Domain using the same figure as above.
 subplot(2,2,2);
 plot(t2,x2);
 title('Voice Signal 2 - Time Domain. ');
@@ -135,6 +150,7 @@ NFFT1 = 2^nextpow2(l1);                          % Next power of 2 in order
 X1 = fft(x1,NFFT1)/l1;                           % speed up calculations.
 ff1 = fs1/2*linspace(0,1,NFFT1/2+1);
 
+% Plot signal 1 in Frequency Domain using the same figure as above.
 subplot(2,2,3);
 plot(ff1,2*abs(X1(1:NFFT1/2+1))) 
 title('Voice Signal 1 - Frequency Domain.');
@@ -147,16 +163,17 @@ NFFT2 = 2^nextpow2(l2);                          % Next power of 2 in order
 X2 = fft(x2,NFFT2)/l2;                           % speed up calculations.
 ff2 = fs2/2*linspace(0,1,NFFT2/2+1);
 
+% Plot signal 2 in Frequency Domain using the same figure as above.
 subplot(2,2,4);
 plot(ff2,2*abs(X2(1:NFFT2/2+1))) 
-title('Voice Signal 1 - Frequency Domain.');
+title('Voice Signal 2 - Frequency Domain.');
 xlabel('Frequency (KHz)');
 ylabel('Amplitude');
 % -------------------------------------------------------------------------
 
 
 
-% ---> Step 5 - Create the carrier signal for the modulating one.      <---
+% ---> Step 5 - Create the carrier signals.                            <---
 % Carrier Signal 1.
 c1 = cos(2*pi*fc1*t1);
 
@@ -166,28 +183,29 @@ c2 = cos(2*pi*fc2*t2);
 
 
 
-% ---> Step 6 - Create the AM Modulated signal for the modulating one. <--- 
-% AM Modulated Signal 1.
+% ---> Step 6 - Create the Modulated signals.                          <--- 
+% Modulated Signal 1.
 s1 = x1 .* c1';
 
-% AM Modulated Signal 2.
+% Modulated Signal 2.
 s2 = x2 .* c2';
 % -------------------------------------------------------------------------
 
 
 
-% ---> Step 7 - Calculate FFTs for the AM Modulated signal.            <---
-% AM Modulated Signal 1.
+% ---> Step 7 - Calculate FFTs for the Modulated signals.              <---
+% Modulated Signal 1.
 l1 = length(s1); 
 NFFT1 = 2^nextpow2(l1);                          % Next power of 2 in order 
 X1 = fft(s1,NFFT1)/l1;                           % speed up calculations.
 ff1 = fs1/2*linspace(0,1,NFFT1/2+1);
 
+% Plot modulated signal 1 in Frequency Domain.
 figure(i);
 i = i + 1;
 subplot(2,2,1:2);
 plot(ff1,2*abs(X1(1:NFFT1/2+1))) 
-title('AM Modulated Signal 1');
+title('Modulated Signal 1');
 xlabel('Frequency (KHz)');
 ylabel('Amplitude');
 
@@ -198,9 +216,10 @@ NFFT2 = 2^nextpow2(l2);                          % Next power of 2 in order
 X2 = fft(s2,NFFT2)/l2;                           % speed up calculations.
 ff2 = fs2/2*linspace(0,1,NFFT2/2+1);
 
+% Plot modulated signal 2 in Frequency Domain.
 subplot(2,2,3:4);
 plot(ff2,2*abs(X2(1:NFFT2/2+1))) 
-title('AM Modulated Signal 2');
+title('Modulated Signal 2');
 xlabel('Frequency (KHz)');
 ylabel('Amplitude');
 % -------------------------------------------------------------------------
@@ -215,17 +234,20 @@ if ( l2 > l1 )
     s1(l2) = 0;
 end
 
+% Multiplex the two modulated signals.
 m = s1 + s2;                                    % Multiplexed signal.
+
 l2 = length(m); 
 NFFT2 = 2^nextpow2(l2);                         % Next power of 2 in order 
 X1 = fft(m,NFFT2)/l2;                           % speed up calculations.
-ff2 = fs2/2*linspace(0,1,NFFT2/2+1);
+ff2 = fs/2*linspace(0,1,NFFT2/2+1);
 
+% Plot the multiplexed signals in Frequency Domain.
 figure(i);
 i = i + 1;
 subplot(2,2,1:2);
 plot(ff2,2*abs(X1(1:NFFT2/2+1))) 
-title('Multiplexed signal');
+title('Multiplexed signals - Frequency Domain.');
 xlabel('Frequency (KHz)');
 ylabel('Amplitude');
 % -------------------------------------------------------------------------
@@ -236,19 +258,22 @@ ylabel('Amplitude');
 % Channel.
 SNR = 5;
 
-% Add white Gaussian noise 
+% Create white Gaussian noise.
 variance = 1/SNR;
 noise = sqrt(variance);
-m(length(noise)) = 0;
-r = m.* noise;                                  % Signal with noise.
+m(length(noise)) = 0; 
+
+r = m.*noise;                                   % Add noise to signal.
                                     
 l2 = length(r); 
 NFFT2 = 2^nextpow2(l2);                         % Next power of 2 in order 
 X2 = fft(r,NFFT2)/l2;                           % speed up calculations.
-ff2 = fs2/2*linspace(0,1,NFFT2/2+1);
+ff2 = fs/2*linspace(0,1,NFFT2/2+1);
 
+% Plot both multiplexed signal and multiplexed signal with noise.
 subplot(2,2,3:4);
-plot(ff2,2*abs(X1(1:NFFT2/2+1)),ff2,2*abs(X2(1:NFFT2/2+1))) 
+plot(ff2,2*abs(X1(1:NFFT2/2+1)),ff2,2*abs(X2(1:NFFT2/2+1)))
+title('Multiplexed signals with(out) noise - Frequency Domain.');
 xlabel('Frequency (KHz)');
 ylabel('Amplitude');
 legend('Multiplexed signal','Multiplexed Signal with AWGN');
@@ -259,7 +284,7 @@ legend('Multiplexed signal','Multiplexed Signal with AWGN');
 % ----> Step 10 - Bandpass Filter Design.                              <---
 wc1 = 0.45*pi;
 N1 = 100;
-hd1 = ideal_lp(wc1,N1);
+hd1 = ideal_lp(wc1,N1);                     % Call function 'ideal_lp()'.
 w_tet_1 = (hanning(N1))';                   % Hanning window.
 h1 = hd1 .* w_tet_1;                        % Find the new limited h(n).
 fr1 = 0 : 0.01 : pi;                                       
@@ -267,19 +292,20 @@ H1 = freqz(h1,1,fr1);
 
 wc2 = 0.25*pi;
 N2 = 100;
-hd2 = ideal_lp(wc2,N2);
+hd2 = ideal_lp(wc2,N2);                     % Call function 'ideal_lp()'.
 w_tet_2 = (hanning(N2))';                   % Hanning window.
 h2 = hd2 .* w_tet_2;                     	% Find the new limited h(n).
 fr2 = 0 : 0.01 : pi;                                       
 H2 = freqz(h2,1,fr2);
 
-hb = h1 - h2;
-Hb = H1 - H2;                               % Bandpass filter arises from 
-                                          	% the abstraction of two 
+hb = h1 - h2;                               % Bandpass filter arises from 
+Hb = H1 - H2;                               % the abstraction of two 
                                          	% lowpass filters.
+
+% Plot bandpass filter behaviour.                                                                                        
 figure(i);
 i = i + 1;
-title('Bandpass Filter');
+title('Bandpass Filter Behaviour.');
 subplot(2,2,1);
 semilogy(fr1,abs(Hb));         
 title('H in log scale');
@@ -299,8 +325,10 @@ y = filter(hb,1,r);                         % y is the filtered signal.
 l2 = length(y); 
 NFFT2 = 2^nextpow2(l2);                  	% Next power of 2 in order 
 X2 = fft(y,NFFT2)/l2;                       % speed up calculations.
-ff2 = fs2/2*linspace(0,1,NFFT2/2+1);
+ff2 = fs/2*linspace(0,1,NFFT2/2+1);
 
+
+% Plot the result of applying bandpass filter to the signal received.
 subplot(2,2,3:4);
 plot(ff2,2*abs(X2(1:NFFT2/2+1))) 
 title('Bandpass Filter - Seperation of signal 1.');
@@ -312,7 +340,21 @@ ylabel('Amplitude');
 
 % ----> Step 12 - Demodulation of the signal.                          <---
 demuxed = s1.*c1';                              % Multiplied with the
-                                                % initial carrier signal
+                                                % initial carrier signal.
+l2 = length(demuxed); 
+NFFT2 = 2^nextpow2(l2);                         % Next power of 2 in order 
+X2 = fft(demuxed,NFFT2)/l2;                     % speed up calculations.
+ff2 = fs1/2*linspace(0,1,NFFT2/2+1);
+
+% Plot the frequency spectrum after the demodulation.
+figure(i);
+i = i + 1;
+subplot(2,2,1:2);
+plot(ff2,2*abs(X2(1:NFFT2/2+1))) 
+title('Demodulated signal - Frequency Domain.');
+xlabel('Frequency (KHz)');
+ylabel('Amplitude');                                                
+                                                
 % -------------------------------------------------------------------------
 
 
@@ -320,16 +362,17 @@ demuxed = s1.*c1';                              % Multiplied with the
 % ----> Step 13 - Lowpass Filter Design.                               <---
 % Low Pass Filter.
 wc = 0.28*pi;
-N = 100;
-hd = ideal_lp(wc,N);
-w_tet = (hanning(N))';                         	% Hanning window.
-hl = hd .* w_tet;                               % Find the new limited h(n)
+N = 100;                                                  
+hd = ideal_lp(wc,N);                        % Call function 'ideal_lp()'.
+w_tet = (hanning(N))';                      % Hanning window.
+hl = hd .* w_tet;                           % Find the new limited h(n).
 fl = 0 : 0.01 : pi;                                       
 Hl = freqz(hl,1,fl);
 
+% Plot bandpass filter behaviour.
 figure(i);
 i = i + 1;
-title('Lowpass Filter');
+title('Lowpass Filter Behaviour');
 subplot(2,2,1);
 semilogy(fl,abs(Hl));         
 title('H in log scale');
@@ -349,26 +392,30 @@ z = filter(hl,1,demuxed);                       % Lowpass filtering the
 
 
 % ----> Step 15 - Plot and sound the initial signal 1.                 <---
-sound(z,f1);                                    % Send the signal to the 
-                                                % audio card for playback.
-
-% Plot the spectrum of the initial signal 1 - Frequency Domain.                                               
+% Plot the spectrum of the lowpass filtered signal - Frequency Domain.
+% Actualy matches with the initial signal.
 l2 = length(z); 
 NFFT2 = 2^nextpow2(l2);                         % Next power of 2 in order 
 X2 = fft(z,NFFT2)/l2;                           % speed up calculations.
-ff2 = fs2/2*linspace(0,1,NFFT2/2+1);
+ff2 = fs1/2*linspace(0,1,NFFT2/2+1);
 
+% Plot the baseband signal(after lowpass filtering) - Frequency Domain.
 subplot(2,2,3);
 plot(ff2,2*abs(X2(1:NFFT2/2+1))) 
 title('Lowpass Filter - Cutoff frequencies.');
 xlabel('Frequency (KHz)');
 ylabel('Amplitude');
 
-% Plot the time scope of the intial signal 1 - Time Domain.
+% Plot the baseband signal(after lowpass filtering) - Time Domain.
 subplot(2,2,4),plot(t1,x1);
-title('Signal 1 - Recovered.');
+title('Voice Signal 1 - Recovered.');
 xlabel('Time (sec)');
 ylabel('Amplitude');
+
+% Play the received signal.
+sound(z,f1);                                    % Send the signal to the 
+                                                % audio card for playback.
+% -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
 
 
@@ -386,4 +433,3 @@ fprintf('=== Author : Katsikas Lampros.                          | ===\n');
 fprintf('=== ----------------------------------------------------  ===\n');
 fprintf('\n');
 % =========================================================================
-
