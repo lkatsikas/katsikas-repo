@@ -119,7 +119,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 
 		self.gr_file_sink_0 = gr.file_sink(gr.sizeof_char*1, "/home/katsikas/katsikas-repo/Gnuradio/Common/Results.txt")
 		self.gr_file_sink_0.set_unbuffered(False)
-		self.digital_ofdm_mod_0 = grc_blks2.packet_mod_b(digital.ofdm_mod(
+		self.digital_ofdm_mod_0 = grc_blks2.packet_mod_b(digital.DVBT_ofdm_mod(
 				options=grc_blks2.options(
 					modulation="qam64",
 					fft_length=OFDM_Symbols,
