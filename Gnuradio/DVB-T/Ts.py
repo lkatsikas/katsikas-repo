@@ -10,12 +10,18 @@ from PyQt4 import Qt
 from gnuradio import digital
 from gnuradio import eng_notation
 from gnuradio import gr
+#-----------------------#
+from gnuradio import atsc
+#-----------------------#
 from gnuradio.eng_option import eng_option
 from gnuradio.gr import firdes
 from gnuradio.qtgui import qtgui
 from grc_gnuradio import blks2 as grc_blks2
 from optparse import OptionParser
 import PyQt4.Qwt5 as Qwt
+#-----------#
+import random
+#-----------#
 import sip
 import sys
 
@@ -49,6 +55,11 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self.OFDM_Symbols = OFDM_Symbols = 2048
 		self.Guard_Interval = Guard_Interval = 4
 		self.Gain = Gain = 20
+		#------------------------------------------------#
+		self.Packets_Number = 2
+		##################################################
+
+
 
 		##################################################
 		# Blocks
@@ -85,10 +96,15 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self.top_layout.addWidget(self._qtgui_sink_x_0_win)
 		self.gr_vector_sink_x_0 = gr.vector_sink_f(1)
 		self.gr_throttle_0 = gr.throttle(gr.sizeof_gr_complex*1, samp_rate)
-		self.gr_file_source_0 = gr.file_source(gr.sizeof_float*1, "/home/katsikas/katsikas-repo/Gnuradio/Common/Text.txt", True)
-		self.gr_file_sink_0 = gr.file_sink(gr.sizeof_float*1, "/home/katsikas/katsikas-repo/Gnuradio/Common/Results.txt")
+		self.gr_file_source_0 = gr.file_source(gr.sizeof_float*1, "/home/katsikas/katsikas-repo/Simulink/Korgialas_GeiaSou.ts", True)
+		self.gr_file_sink_0 = gr.file_sink(gr.sizeof_float*1, "/home/katsikas/katsikas-repo/Gnuradio/Common/Results.ts")
 		self.gr_file_sink_0.set_unbuffered(False)
-		self.digital_ofdm_mod_0 = grc_blks2.packet_mod_f(digital.ofdm_mod(
+		#--------------------------------------------------------------------------------------------------------------#
+		#self.ts = self.make_fake_transport_stream_packet(self.Packets_Number) # make 2048 packets of 188 each one.
+		#self.gr_vector_source_0 = gr.vector_source_b(self.ts, True, 1)
+		#self.connect((self.gr_vector_source_0, 0), (self.gr_vector_sink_x_0, 0))
+		#--------------------------------------------------------------------------------------------------------------#		
+		self.digital_ofdm_mod_0 = grc_blks2.packet_mod_f(digital.DVBT_ofdm_mod(
 				options=grc_blks2.options(
 					modulation="qam64",
 					fft_length=OFDM_Symbols,
@@ -123,7 +139,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self.connect((self.digital_ofdm_mod_0, 0), (self.digital_ofdm_demod_0, 0))
 		self.connect((self.gr_file_source_0, 0), (self.digital_ofdm_mod_0, 0))
 		self.connect((self.digital_ofdm_demod_0, 0), (self.gr_file_sink_0, 0))
-		self.connect((self.gr_file_source_0, 0), (self.gr_vector_sink_x_0, 0))
+		#self.connect((self.gr_file_source_0, 0), (self.gr_vector_sink_x_0, 0))
 
 	def get_variable_qtgui_range_0(self):
 		return self.variable_qtgui_range_0
@@ -170,6 +186,60 @@ class QAM16(gr.top_block, Qt.QWidget):
 	def set_Gain(self, Gain):
 		self.Gain = Gain
 
+	##################################################################
+	def make_transport_stream_packet(self):
+		"""
+		Create and return an MPEG transport stream according to the DVB-T standard.
+		A ts packet should of 188 bytes length.The first byte is called synchronization 
+		byte and its value is by default 47(HEX) or 71(dec) or 01 000 111(binary).
+		The processing order at the transmitting side shall always start from the MSB.
+		All bytes except the first sync byte are scrambled with a PRBS sequence. The 
+		PRBS sequence shall be initiated at the start of every eight transport packets.
+		To provide an initialization signal for the descrambler, the MPEG-2 sync byte of
+		the first transport packet in a group of eight packets is bit-wise inverted from 
+		47(HEX) to B8(HEX).
+
+		@Return an MPEG TS scrambled stream according to the DVB-T standard.
+		The whole process is known as 
+		Transport multiplex adaptation and randomization for energy dispersal.
+		"""
+			
+		PRBS_PERIOD = 8
+		MPEG_SYNC_BYTE = 0x47
+		MPEG_INVERTED_SYNC_BYTE = 0xB8
+		INIT_PRBS_REGISTERS = [1,0,0,1,0,1,0,1,0,0,0,0,0,0,0] 
+
+		
+		
+	########################################################################################
+
+
+	########################################################################################
+	# My Functions
+	def make_fake_transport_stream_packet(self,npkts):
+    		"""
+    		Return a sequence of 8-bit ints that represents an MPEG Transport Stream packet.
+
+    		@param npkts: how many 188-byte packets to return
+
+    		FYI, each ATSC Data Frame contains two Data Fields, each of which contains
+    		312 data segments.  Each transport stream packet maps to a data segment.
+    		"""
+    		r = [0] * (npkts * 188)
+    		i = 0
+    		for j in range(npkts):
+        		r[i+0] = atsc.MPEG_SYNC_BYTE
+        		r[i+1] = random.randint(0, 127) # top bit (transport error bit) clear
+        		i = i + 2
+        		for n in range(186):
+            			r[i + n] = random.randint(0, 255)
+        		i = i + 186
+			
+
+    		return r
+	########################################################################################
+
+
 if __name__ == '__main__':
 	parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
 	(options, args) = parser.parse_args()
@@ -179,4 +249,5 @@ if __name__ == '__main__':
 	tb.show()
 	qapp.exec_()
 	tb.stop()
+
 
