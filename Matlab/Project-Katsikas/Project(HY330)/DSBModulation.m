@@ -18,6 +18,9 @@
 % ===           The spectrum of the signal is calculated at each        ===
 % ===           step of the procedure to make this process more         ===
 % ===           familiar to the reader.                                 ===
+% ===           While script is running you can hear the File1.wav,     ===
+% ===           File2.wav, the received File1.wav and many plots and    ===
+% ===           and statistics about the process.                       ===
 % =========================================================================
 
 
