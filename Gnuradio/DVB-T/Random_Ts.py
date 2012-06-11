@@ -54,10 +54,10 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self.Useful_Carriers = Useful_Carriers = 1024
 		self.Transmission_Frequency = Transmission_Frequency = 474e6
 		self.OFDM_Symbols = OFDM_Symbols = 2048
-		self.Guard_Interval = Guard_Interval = 4
+		self.Guard_Interval = Guard_Interval = 16
 		self.Gain = Gain = 20
 		#------------------------------------------------#
-		self.Packets_Number = 8096*128
+		self.Packets_Number = 1024
 		##################################################
 
 		
@@ -66,8 +66,8 @@ class QAM16(gr.top_block, Qt.QWidget):
 		#with open('/home/katsikas/katsikas-repo/Gnuradio/Common/Text.txt', 'rb') as f:
 		with open('/home/katsikas/katsikas-repo/Simulink/Korgialas_GeiaSou.ts', 'rb') as f:
 			self.ts = self.make_fake_transport_stream_packet(self.Packets_Number,f) 
-		#--------------------------------------------------------------------------------------------------------------#		
-	
+			self.ts = self.pad_stream(self.ts, 256, 68)
+		#--------------------------------------------------------------------------------------------------------------#
 	
 
 		##################################################
@@ -107,7 +107,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self.gr_vector_source_0 = gr.vector_source_b(self.ts, True, 1)
 		self.gr_file_sink_0 = gr.file_sink(gr.sizeof_char*1, "/home/katsikas/katsikas-repo/Gnuradio/Common/Results.ts")
 		self.gr_file_sink_0.set_unbuffered(False)
-		self.digital_ofdm_mod_0 = grc_blks2.packet_mod_b(digital.DVBT_ofdm_mod(
+		self.digital_ofdm_mod_0 = grc_blks2.packet_mod_b(digital.ofdm_mod(
 				options=grc_blks2.options(
 					modulation="qam64",
 					fft_length=OFDM_Symbols,
@@ -236,6 +236,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 		MPEG_INVERTED_SYNC_BYTE = 0xB8
 
     		for j in range(npkts):
+			"""
 			if i == 0:
 				r[i+0] = MPEG_INVERTED_SYNC_BYTE
 			else:
@@ -244,17 +245,45 @@ class QAM16(gr.top_block, Qt.QWidget):
 			r[i+2] = random.randint(0, 0)
 			r[i+3] = random.randint(0, 0)
         		i = i + 4
-			
-       			for n in range(184):
+			"""
+       			for n in range(188):
     				byte = f.read(1)
 				if byte != "":
 					value = struct.unpack('B',byte)[0]
             				r[i + n] = value
 				else:
 					r[i + n] = 0
-        		i = i + 184
+        		i = i + 188
 			
     		return r
+
+
+
+	def pad_stream(self,src, sizeof_total, sizeof_pad):
+    		sizeof_valid = sizeof_total - sizeof_pad
+    		assert sizeof_valid > 0
+    		assert (len(src) % sizeof_valid) == 0
+    		npkts = len(src) // sizeof_valid
+    		dst = [0] * (npkts * sizeof_total)
+    		for i in range(npkts):
+        		src_s = i * sizeof_valid
+        		dst_s = i * sizeof_total
+        		dst[dst_s:dst_s + sizeof_valid] = src[src_s:src_s + sizeof_valid]
+    		return dst
+
+
+	def depad_stream(self,src, sizeof_total, sizeof_pad):
+    		sizeof_valid = sizeof_total - sizeof_pad
+    		assert sizeof_valid > 0
+    		assert (len(src) % sizeof_total) == 0
+    		npkts = len(src) // sizeof_total
+    		dst = [0] * (npkts * sizeof_valid)
+    		for i in range(npkts):
+        		src_s = i * sizeof_total
+        		dst_s = i * sizeof_valid
+        		dst[dst_s:dst_s + sizeof_valid] = src[src_s:src_s + sizeof_valid]
+    		return dst
+
 	########################################################################################
 
 

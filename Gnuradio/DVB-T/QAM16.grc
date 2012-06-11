@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ASCII'?>
 <flow_graph>
-  <timestamp>Sun Jun 10 19:30:31 2012</timestamp>
+  <timestamp>Mon Jun 11 15:26:09 2012</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -42,10 +42,6 @@
     <param>
       <key>run</key>
       <value>True</value>
-    </param>
-    <param>
-      <key>max_nouts</key>
-      <value>0</value>
     </param>
     <param>
       <key>realtime_scheduling</key>
@@ -224,29 +220,6 @@
     <param>
       <key>_coordinate</key>
       <value>(335, 11)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>variable</key>
-    <param>
-      <key>id</key>
-      <value>Guard_Interval</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>4</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(575, 11)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1077,6 +1050,64 @@
     </param>
   </block>
   <block>
+    <key>variable</key>
+    <param>
+      <key>id</key>
+      <value>Guard_Interval</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>16</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(575, 11)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
+    <key>gr_file_source</key>
+    <param>
+      <key>id</key>
+      <value>gr_file_source_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>file</key>
+      <value>/home/katsikas/katsikas-repo/Simulink/Korgialas_GeiaSou.ts</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>repeat</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(43, 240)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>digital_ofdm_mod</key>
     <param>
       <key>id</key>
@@ -1088,7 +1119,7 @@
     </param>
     <param>
       <key>type</key>
-      <value>float</value>
+      <value>byte</value>
     </param>
     <param>
       <key>modulation</key>
@@ -1135,7 +1166,7 @@
     </param>
     <param>
       <key>type</key>
-      <value>float</value>
+      <value>byte</value>
     </param>
     <param>
       <key>modulation</key>
@@ -1167,68 +1198,6 @@
     </param>
   </block>
   <block>
-    <key>gr_vector_sink_x</key>
-    <param>
-      <key>id</key>
-      <value>gr_vector_sink_x_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>float</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(116, 331)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>180</value>
-    </param>
-  </block>
-  <block>
-    <key>gr_file_source</key>
-    <param>
-      <key>id</key>
-      <value>gr_file_source_0</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>file</key>
-      <value>/home/katsikas/katsikas-repo/Gnuradio/Common/Text.txt</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>float</value>
-    </param>
-    <param>
-      <key>repeat</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(43, 240)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>gr_file_sink</key>
     <param>
       <key>id</key>
@@ -1240,11 +1209,11 @@
     </param>
     <param>
       <key>file</key>
-      <value>/home/katsikas/katsikas-repo/Gnuradio/Common/Results.txt</value>
+      <value>/home/katsikas/katsikas-repo/Gnuradio/Common/Results.ts</value>
     </param>
     <param>
       <key>type</key>
-      <value>float</value>
+      <value>byte</value>
     </param>
     <param>
       <key>vlen</key>
@@ -1257,6 +1226,33 @@
     <param>
       <key>_coordinate</key>
       <value>(28, 636)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>180</value>
+    </param>
+  </block>
+  <block>
+    <key>gr_vector_sink_x</key>
+    <param>
+      <key>id</key>
+      <value>gr_vector_sink_x_0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(117, 331)</value>
     </param>
     <param>
       <key>_rotation</key>

@@ -3,7 +3,7 @@
 # Gnuradio Python Flow Graph
 # Title: QAM16
 # Author: katsikas
-# Generated: Sun Jun 10 19:30:31 2012
+# Generated: Mon Jun 11 14:54:03 2012
 ##################################################
 
 from PyQt4 import Qt
@@ -47,7 +47,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self.Useful_Carriers = Useful_Carriers = 1024
 		self.Transmission_Frequency = Transmission_Frequency = 474e6
 		self.OFDM_Symbols = OFDM_Symbols = 2048
-		self.Guard_Interval = Guard_Interval = 4
+		self.Guard_Interval = Guard_Interval = 16
 		self.Gain = Gain = 20
 
 		##################################################
@@ -83,12 +83,11 @@ class QAM16(gr.top_block, Qt.QWidget):
 		)
 		self._qtgui_sink_x_0_win = sip.wrapinstance(self.qtgui_sink_x_0.pyqwidget(), Qt.QWidget)
 		self.top_layout.addWidget(self._qtgui_sink_x_0_win)
-		self.gr_vector_sink_x_0 = gr.vector_sink_f(1)
 		self.gr_throttle_0 = gr.throttle(gr.sizeof_gr_complex*1, samp_rate)
-		self.gr_file_source_0 = gr.file_source(gr.sizeof_float*1, "/home/katsikas/katsikas-repo/Gnuradio/Common/Text.txt", True)
-		self.gr_file_sink_0 = gr.file_sink(gr.sizeof_float*1, "/home/katsikas/katsikas-repo/Gnuradio/Common/Results.txt")
+		self.gr_file_source_0 = gr.file_source(gr.sizeof_char*1, "/home/katsikas/katsikas-repo/Simulink/Korgialas_GeiaSou.ts", True)
+		self.gr_file_sink_0 = gr.file_sink(gr.sizeof_char*1, "/home/katsikas/katsikas-repo/Gnuradio/Common/Results.ts")
 		self.gr_file_sink_0.set_unbuffered(False)
-		self.digital_ofdm_mod_0 = grc_blks2.packet_mod_f(digital.ofdm_mod(
+		self.digital_ofdm_mod_0 = grc_blks2.packet_mod_b(digital.ofdm_mod(
 				options=grc_blks2.options(
 					modulation="qam64",
 					fft_length=OFDM_Symbols,
@@ -101,7 +100,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 			),
 			payload_length=0,
 		)
-		self.digital_ofdm_demod_0 = grc_blks2.packet_demod_f(digital.ofdm_demod(
+		self.digital_ofdm_demod_0 = grc_blks2.packet_demod_b(digital.ofdm_demod(
 				options=grc_blks2.options(
 					modulation="qam64",
 					fft_length=OFDM_Symbols,
@@ -123,7 +122,6 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self.connect((self.digital_ofdm_mod_0, 0), (self.digital_ofdm_demod_0, 0))
 		self.connect((self.gr_file_source_0, 0), (self.digital_ofdm_mod_0, 0))
 		self.connect((self.digital_ofdm_demod_0, 0), (self.gr_file_sink_0, 0))
-		self.connect((self.gr_file_source_0, 0), (self.gr_vector_sink_x_0, 0))
 
 	def get_variable_qtgui_range_0(self):
 		return self.variable_qtgui_range_0
