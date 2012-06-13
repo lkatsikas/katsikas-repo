@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2009 Free Software Foundation, Inc.
+ * Copyright 2001,2006 Free Software Foundation, Inc.
  *
  * This file is part of GNU Radio
  *
@@ -20,29 +20,28 @@
  * Boston, MA 02110-1301, USA.
  */
 
-%include "gnuradio.i"				// the common stuff
+#ifndef _DVBT_TYPES_H_
+#define _DVBT_TYPES_H_
 
-//load generated python docstrings
-%include "dvbt_swig_doc.i"
-
-%{
-#include <dvbt_pad.h>
+#include <cstring>
+#include <cassert>
 #include <dvbt_consts.h>
-%}
 
 
-// ----------------------------------------------------------------
-GR_SWIG_BLOCK_MAGIC(dvbt,pad);
+class dvbt_mpeg_packet {
+ public:
+  static const int PAD  = 68;
+  unsigned char data[DVBT_MPEG_DATA_LENGTH + 1];        // first byte is sync
+  unsigned char _pad_[PAD];                            // pad to power of 2
 
-dvbt_pad_sptr dvbt_make_pad();
+  // overload equality operator
+  bool operator== (const dvbt_mpeg_packet &other) const {
+    return std::memcmp (data, other.data, sizeof (data)) == 0;
+  };
 
-class dvbt_pad : public gr_sync_decimator
-{
-  dvbt_pad();
-
-public:
-  void reset();
-
+  bool operator!= (const dvbt_mpeg_packet &other) const {
+    return !(std::memcmp (data, other.data, sizeof (data)) == 0);
+  };
 };
-// ----------------------------------------------------------------
 
+#endif /* _DVBT_TYPES_H_ */

@@ -56,6 +56,7 @@ include_directories(${CPPUNIT_INCLUDE_DIRS})
 link_directories(${CPPUNIT_LIBRARY_DIRS})
 
 list(APPEND test_dvbti_sources
+    qa_dvbti.cc
     # ---> qa_atsci_basic_trellis_encoder.cc
 )
 
@@ -72,6 +73,8 @@ endif(ENABLE_TESTING)
 ########################################################################
 install(FILES
     dvbt_api.h
+    dvbt_pad.h
+    dvbt_types.h
     dvbt_consts.h
 	# ----> put .h files.  e.g: atsc_derandomizer.h
     DESTINATION ${GR_INCLUDE_DIR}/gnuradio

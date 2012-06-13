@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2009 Free Software Foundation, Inc.
+ * Copyright 2002 Free Software Foundation, Inc.
  *
  * This file is part of GNU Radio
  *
@@ -20,29 +20,19 @@
  * Boston, MA 02110-1301, USA.
  */
 
-%include "gnuradio.i"				// the common stuff
+#ifndef _QA_DVBT_H_
+#define _QA_DVBT_H_
 
-//load generated python docstrings
-%include "dvbt_swig_doc.i"
+#include <cppunit/TestSuite.h>
 
-%{
-#include <dvbt_pad.h>
-#include <dvbt_consts.h>
-%}
+//! collect all the tests for the dtv directory
 
-
-// ----------------------------------------------------------------
-GR_SWIG_BLOCK_MAGIC(dvbt,pad);
-
-dvbt_pad_sptr dvbt_make_pad();
-
-class dvbt_pad : public gr_sync_decimator
-{
-  dvbt_pad();
-
-public:
-  void reset();
-
+class qa_dvbt {
+ public:
+  //! return suite of tests for all of dtv directory
+  static CppUnit::TestSuite *suite ();
 };
-// ----------------------------------------------------------------
+
+
+#endif /* _QA_DVBT_H_ */
 

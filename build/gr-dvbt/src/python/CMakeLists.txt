@@ -28,11 +28,6 @@ GR_PYTHON_INSTALL(
     COMPONENT "dvbt_examples"
 )
 
-install(
-    FILES README
-    DESTINATION ${GR_PKG_DATA_DIR}/examples/dvbt
-    COMPONENT "dvbt_examples"
-)
 
 ########################################################################
 # Handle the unit tests

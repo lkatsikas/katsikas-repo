@@ -1,6 +1,5 @@
-/* -*- c++ -*- */
 /*
- * Copyright 2009 Free Software Foundation, Inc.
+ * Copyright 2002 Free Software Foundation, Inc.
  *
  * This file is part of GNU Radio
  *
@@ -20,29 +19,21 @@
  * Boston, MA 02110-1301, USA.
  */
 
-%include "gnuradio.i"				// the common stuff
+/*
+ * This class gathers together all the test cases for the atsc
+ * directory into a single test suite.  As you create new test cases,
+ * add them here.
+ */
 
-//load generated python docstrings
-%include "dvbt_swig_doc.i"
-
-%{
-#include <dvbt_pad.h>
-#include <dvbt_consts.h>
-%}
+#include <qa_dvbti.h>
 
 
-// ----------------------------------------------------------------
-GR_SWIG_BLOCK_MAGIC(dvbt,pad);
-
-dvbt_pad_sptr dvbt_make_pad();
-
-class dvbt_pad : public gr_sync_decimator
+CppUnit::TestSuite *
+qa_dvbt::suite ()
 {
-  dvbt_pad();
+  CppUnit::TestSuite    *s = new CppUnit::TestSuite ("dvbt");
+  //s->addTest (qa_atsci_equalizer_nop::suite ());
 
-public:
-  void reset();
-
-};
-// ----------------------------------------------------------------
+  return s;
+}
 
