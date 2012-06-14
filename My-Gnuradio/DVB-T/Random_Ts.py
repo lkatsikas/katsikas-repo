@@ -14,7 +14,7 @@ from gnuradio import gr
 import struct
 from gnuradio import atsc
 from gnuradio import dvbt
-import dvbt_swig
+#from gnuradio import dvbt_swig
 #-----------------------#
 from gnuradio.eng_option import eng_option
 from gnuradio.gr import firdes
@@ -66,11 +66,11 @@ class QAM16(gr.top_block, Qt.QWidget):
 		#--------------------------------------------------------------------------------------------------------------#
 		#with open('/home/katsikas/katsikas-repo/Gnuradio/Common/Text.txt', 'rb') as f:
 		with open('/home/katsikas/katsikas-repo/Simulink/Korgialas_GeiaSou.ts', 'rb') as f:
-			#print(dvbt)
-			src = atsc.atsc_pad()
-                	#print(src)
-			self.ts = make_fake_transport_stream_packet(Packets_Number,f) 
-			self.ts = pad_stream(self.ts, 256, 68)
+			print("dvbt_source()")
+			self.ts = dvbt.dvbt_pad()
+		#	print(self.dvb)
+		#	self.ts = make_fake_transport_stream_packet(Packets_Number,f) 
+		#	self.ts = pad_stream(self.ts, 256, 68)
 		#--------------------------------------------------------------------------------------------------------------#
 	
 
