@@ -67,7 +67,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 		#with open('/home/katsikas/katsikas-repo/Gnuradio/Common/Text.txt', 'rb') as f:
 		with open('/home/katsikas/katsikas-repo/Simulink/Korgialas_GeiaSou.ts', 'rb') as f:
 			print("dvbt_source()")
-			self.ts = dvbt.dvbt_pad()
+			self.ts = dvbt.dvbt_source()
 		#	print(self.dvb)
 		#	self.ts = make_fake_transport_stream_packet(Packets_Number,f) 
 		#	self.ts = pad_stream(self.ts, 256, 68)
