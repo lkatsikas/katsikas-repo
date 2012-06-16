@@ -3,7 +3,7 @@
 # Gnuradio Python Flow Graph
 # Title: QAM16
 # Author: katsikas
-# Generated: Mon Jun 11 14:54:03 2012
+# Generated: Sat Jun 16 13:45:15 2012
 ##################################################
 
 from PyQt4 import Qt
@@ -47,7 +47,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self.Useful_Carriers = Useful_Carriers = 1024
 		self.Transmission_Frequency = Transmission_Frequency = 474e6
 		self.OFDM_Symbols = OFDM_Symbols = 2048
-		self.Guard_Interval = Guard_Interval = 16
+		self.Guard_Interval = Guard_Interval = 4
 		self.Gain = Gain = 20
 
 		##################################################
@@ -84,8 +84,8 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self._qtgui_sink_x_0_win = sip.wrapinstance(self.qtgui_sink_x_0.pyqwidget(), Qt.QWidget)
 		self.top_layout.addWidget(self._qtgui_sink_x_0_win)
 		self.gr_throttle_0 = gr.throttle(gr.sizeof_gr_complex*1, samp_rate)
-		self.gr_file_source_0 = gr.file_source(gr.sizeof_char*1, "/home/katsikas/katsikas-repo/Simulink/Korgialas_GeiaSou.ts", True)
-		self.gr_file_sink_0 = gr.file_sink(gr.sizeof_char*1, "/home/katsikas/katsikas-repo/Gnuradio/Common/Results.ts")
+		self.gr_file_source_0 = gr.file_source(gr.sizeof_char*1, "/home/katsikas/katsikas-repo/Simulink/Korgialas_GeiaSou.ts", False)
+		self.gr_file_sink_0 = gr.file_sink(gr.sizeof_char*1, "/home/katsikas/katsikas-repo/My-Gnuradio/Common/Results.ts")
 		self.gr_file_sink_0.set_unbuffered(False)
 		self.digital_ofdm_mod_0 = grc_blks2.packet_mod_b(digital.ofdm_mod(
 				options=grc_blks2.options(
