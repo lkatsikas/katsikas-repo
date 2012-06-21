@@ -54,7 +54,9 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self.input = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Text.txt'
                 self.output = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Results.txt'
 		##################################################
-
+	
+		self.randomizer = dvbt.randomizer()
+		self.derandomizer = dvbt.derandomizer()
 
 
 		##################################################
@@ -92,7 +94,10 @@ class QAM16(gr.top_block, Qt.QWidget):
 		##################################################
 		# Connections
 		##################################################
-		self.connect((self.gr_file_source_0, 0), (self.gr_file_sink_0, 0))
+		#self.connect((self.gr_file_source_0, 0), (self.gr_file_sink_0, 0))
+		self.connect((self.gr_file_source_0, 0), (self.randomizer, 0))
+		self.connect((self.randomizer, 0), (self.derandomizer, 0))
+		self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
 
 	def get_variable_qtgui_range_0(self):
 		return self.variable_qtgui_range_0
