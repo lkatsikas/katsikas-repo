@@ -53,6 +53,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 		#self.input = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Korgialas_GeiaSou.ts'
 		self.input = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Text.txt'
                 self.output = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Results.txt'
+		self.temp = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/dump.txt'
 		##################################################
 	
 		self.randomizer = dvbt.randomizer()
@@ -88,6 +89,12 @@ class QAM16(gr.top_block, Qt.QWidget):
 		#self.gr_file_sink_0.set_unbuffered(False)
                 with open(self.output, 'rb'):
                         self.gr_file_sink_0 = dvbt.dvbt_sink(self.output)
+
+		#self.gr_file_sink_1 = gr.file_sink(gr.sizeof_char*1, self.temp)
+                #self.gr_file_sink_1.set_unbuffered(False)
+		with open(self.temp, 'rb'):
+                        self.gr_file_sink_1 = gr.file_sink(gr.sizeof_char*1, self.temp)
+		self.stream = gr.vector_to_stream(gr.sizeof_char, 256)
                 #--------------------------------------------------------------------------------------------------------------#
 				
 
@@ -96,6 +103,9 @@ class QAM16(gr.top_block, Qt.QWidget):
 		##################################################
 		#self.connect((self.gr_file_source_0, 0), (self.gr_file_sink_0, 0))
 		self.connect((self.gr_file_source_0, 0), (self.randomizer, 0))
+		self.connect((self.randomizer, 0), (self.stream, 0))
+		self.connect((self.stream, 0), (self.gr_file_sink_1, 0))
+
 		self.connect((self.randomizer, 0), (self.derandomizer, 0))
 		self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
 
