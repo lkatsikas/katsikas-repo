@@ -8,12 +8,16 @@
 
 from PyQt4 import Qt
 from gnuradio import gr
-#-----------------------#
+from gnuradio import digital
+##################################################                    
+#------------------------------------------------#
 from gnuradio import dvbt
 #from gnuradio import dvbt_swig
-#-----------------------#
+#------------------------------------------------#
+##################################################
 from gnuradio import eng_notation
 from gnuradio.eng_option import eng_option
+from grc_gnuradio import blks2 as grc_blks2
 from gnuradio.gr import firdes
 from optparse import OptionParser
 import PyQt4.Qwt5 as Qwt
@@ -44,20 +48,25 @@ class QAM16(gr.top_block, Qt.QWidget):
 		##################################################
 		self.variable_qtgui_range_0 = variable_qtgui_range_0 = 474e6
 		self.samp_rate = samp_rate = 44100
-		self.Useful_Carriers = Useful_Carriers = 1024
+		self.Useful_Carriers = Useful_Carriers = 512
 		self.Transmission_Frequency = Transmission_Frequency = 474e6
 		self.OFDM_Symbols = OFDM_Symbols = 2048
 		self.Guard_Interval = Guard_Interval = 4
 		self.Gain = Gain = 20
-		#------------------------------------------------#
+
+		################################################################################################################
+		#--------------------------------------------------------------------------------------------------------------#
 		#self.input = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Korgialas_GeiaSou.ts'
 		self.input = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Text.txt'
                 self.output = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Results.txt'
 		self.temp = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/dump.txt'
-		##################################################
-	
+
+		#--------------------------------------------------------------------------------------------------------------#
 		self.randomizer = dvbt.randomizer()
-		self.derandomizer = dvbt.derandomizer()
+                self.derandomizer = dvbt.derandomizer()
+		#--------------------------------------------------------------------------------------------------------------#
+		################################################################################################################
+	
 
 
 		##################################################
@@ -80,6 +89,36 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self._variable_qtgui_range_0_slider.valueChanged.connect(self.set_variable_qtgui_range_0)
 		self._variable_qtgui_range_0_layout.addWidget(self._variable_qtgui_range_0_slider)
 		self.top_layout.addLayout(self._variable_qtgui_range_0_layout)
+
+		################################################################################################################
+		#--------------------------------------------------------------------------------------------------------------#
+		self.digital_ofdm_mod_0 = grc_blks2.packet_mod_b(digital.ofdm_mod(
+                                options=grc_blks2.options(
+                                        modulation="qam64",
+                                        fft_length=OFDM_Symbols,
+                                        occupied_tones=Useful_Carriers,
+                                        cp_length=OFDM_Symbols/Guard_Interval,
+                                        pad_for_usrp=True,
+                                        log=None,
+                                        verbose=None,
+                                ),
+                        ),
+                        payload_length=0,
+                )
+                self.digital_ofdm_demod_0 = grc_blks2.packet_demod_b(digital.ofdm_demod(
+                                options=grc_blks2.options(
+                                        modulation="qam64",
+                                        fft_length=OFDM_Symbols,
+                                        occupied_tones=Useful_Carriers,
+                                        cp_length=OFDM_Symbols/Guard_Interval,
+                                        snr=20,
+                                        log=None,
+                                        verbose=None,
+                                ),
+                                callback=lambda ok, payload: self.digital_ofdm_demod_0.recv_pkt(ok, payload),
+                        ),
+                )
+
 		#--------------------------------------------------------------------------------------------------------------#
 		#self.gr_file_source_0 = gr.file_source(gr.sizeof_char*1, self.input, False)
                 with open(self.input, 'rb'):
@@ -95,19 +134,45 @@ class QAM16(gr.top_block, Qt.QWidget):
 		with open(self.temp, 'rb'):
                         self.gr_file_sink_1 = gr.file_sink(gr.sizeof_char*1, self.temp)
 		self.stream = gr.vector_to_stream(gr.sizeof_char, 256)
+		self.vector = gr.stream_to_vector(gr.sizeof_char, 256)
                 #--------------------------------------------------------------------------------------------------------------#
-				
+		################################################################################################################
+		
 
 		##################################################
 		# Connections
 		##################################################
-		#self.connect((self.gr_file_source_0, 0), (self.gr_file_sink_0, 0))
+		################################################################################################################
+                #--------------------------------------------------------------------------------------------------------------#
+		"""
 		self.connect((self.gr_file_source_0, 0), (self.randomizer, 0))
 		self.connect((self.randomizer, 0), (self.stream, 0))
 		self.connect((self.stream, 0), (self.gr_file_sink_1, 0))
-
-		self.connect((self.randomizer, 0), (self.derandomizer, 0))
+		self.connect((self.stream, 0), (self.digital_ofdm_mod_0, 0))
+		self.connect((self.digital_ofdm_mod_0, 0), (self.digital_ofdm_demod_0, 0))
+		self.connect((self.digital_ofdm_demod_0, 0), (self.vector, 0))
+		self.connect((self.vector, 0), (self.derandomizer, 0))
 		self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
+		"""
+		
+		"""
+		self.connect((self.gr_file_source_0, 0), (self.randomizer, 0))
+                self.connect((self.randomizer, 0), (self.stream, 0))
+                self.connect((self.stream, 0), (self.gr_file_sink_1, 0))
+                self.connect((self.randomizer, 0), (self.derandomizer, 0))
+                self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
+		"""
+	
+                self.connect((self.gr_file_source_0, 0), (self.randomizer, 0))
+                self.connect((self.randomizer, 0), (self.stream, 0))
+                self.connect((self.stream, 0), (self.gr_file_sink_1, 0))
+		self.connect((self.stream, 0), (self.vector, 0))
+                self.connect((self.vector, 0), (self.derandomizer, 0))
+                self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
+         
+		#--------------------------------------------------------------------------------------------------------------#
+                ################################################################################################################
+
 
 	def get_variable_qtgui_range_0(self):
 		return self.variable_qtgui_range_0
