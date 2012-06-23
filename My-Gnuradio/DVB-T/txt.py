@@ -64,6 +64,9 @@ class QAM16(gr.top_block, Qt.QWidget):
 		#--------------------------------------------------------------------------------------------------------------#
 		self.randomizer = dvbt.randomizer()
                 self.derandomizer = dvbt.derandomizer()
+
+		self.rs_encoder = dvbt.rs_encoder()
+		self.rs_decoder = dvbt.rs_decoder()
 		#--------------------------------------------------------------------------------------------------------------#
 		################################################################################################################
 	
@@ -164,10 +167,13 @@ class QAM16(gr.top_block, Qt.QWidget):
 		"""
 	
                 self.connect((self.gr_file_source_0, 0), (self.randomizer, 0))
-                self.connect((self.randomizer, 0), (self.stream, 0))
+                self.connect((self.randomizer, 0), (self.rs_encoder, 0))
+		self.connect((self.rs_encoder, 0), (self.stream, 0))
                 self.connect((self.stream, 0), (self.gr_file_sink_1, 0))
+		
 		self.connect((self.stream, 0), (self.vector, 0))
-                self.connect((self.vector, 0), (self.derandomizer, 0))
+                self.connect((self.vector, 0), (self.rs_decoder, 0))
+		self.connect((self.rs_decoder, 0), (self.derandomizer, 0))
                 self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
          
 		#--------------------------------------------------------------------------------------------------------------#
