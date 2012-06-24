@@ -57,6 +57,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 		################################################################################################################
 		#--------------------------------------------------------------------------------------------------------------#
 		#self.input = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Korgialas_GeiaSou.ts'
+		#self.output = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Results.ts'
 		self.input = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Text.txt'
                 self.output = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Results.txt'
 		self.temp = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/dump.txt'
@@ -67,6 +68,9 @@ class QAM16(gr.top_block, Qt.QWidget):
 
 		self.rs_encoder = dvbt.rs_encoder()
 		self.rs_decoder = dvbt.rs_decoder()
+	
+		#self.interleaver = dvbt.interleaver()
+		#self.deinterleaver = dvbt.deinterleaver()
 		#--------------------------------------------------------------------------------------------------------------#
 		################################################################################################################
 	
