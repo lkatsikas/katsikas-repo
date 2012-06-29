@@ -180,8 +180,11 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self.connect((self.interleaver, 0), (self.stream, 0))
                 self.connect((self.stream, 0), (self.gr_file_sink_1, 0))
 		self.connect((self.stream, 0), (self.vector, 0))
+	
                 self.connect((self.vector, 0), (self.deinterleaver, 0))
 		self.connect((self.deinterleaver, 0), (self.rs_decoder, 0))
+		#self.connect((self.vector, 0), (self.rs_decoder, 0))
+
 		self.connect((self.rs_decoder, 0), (self.derandomizer, 0))
                 self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
          
