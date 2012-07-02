@@ -3,7 +3,7 @@
 # Gnuradio Python Flow Graph
 # Title: QAM16
 # Author: katsikas
-# Generated: Fri Jun 22 19:32:36 2012
+# Generated: Sun Jul  1 18:32:34 2012
 ##################################################
 
 from PyQt4 import Qt
@@ -83,12 +83,11 @@ class QAM16(gr.top_block, Qt.QWidget):
 		)
 		self._qtgui_sink_x_0_win = sip.wrapinstance(self.qtgui_sink_x_0.pyqwidget(), Qt.QWidget)
 		self.top_layout.addWidget(self._qtgui_sink_x_0_win)
-		self.gr_vector_to_stream_0 = gr.vector_to_stream(gr.sizeof_char*1, 256)
 		self.gr_throttle_0 = gr.throttle(gr.sizeof_gr_complex*1, samp_rate)
-		self.gr_stream_to_vector_0 = gr.stream_to_vector(gr.sizeof_char*1, 256)
-		self.gr_file_source_0 = gr.file_source(gr.sizeof_char*256, "/home/katsikas/Korgialas_GeiaSou.ts", False)
-		self.gr_file_sink_0 = gr.file_sink(gr.sizeof_char*256, "/home/katsikas/Results.ts")
+		self.gr_file_source_0 = gr.file_source(gr.sizeof_char*1, "/home/katsikas/katsikas-repo/My-Gnuradio/Common/Korgialas_GeiaSou.ts", False)
+		self.gr_file_sink_0 = gr.file_sink(gr.sizeof_char*1, "/home/katsikas/katsikas-repo/My-Gnuradio/Common/Results.ts")
 		self.gr_file_sink_0.set_unbuffered(False)
+		self.gr_delay_0 = gr.delay(gr.sizeof_char*1, 204)
 		self.digital_ofdm_mod_0 = grc_blks2.packet_mod_b(digital.ofdm_mod(
 				options=grc_blks2.options(
 					modulation="qam64",
@@ -122,10 +121,9 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self.connect((self.gr_throttle_0, 0), (self.qtgui_sink_x_0, 0))
 		self.connect((self.digital_ofdm_mod_0, 0), (self.gr_throttle_0, 0))
 		self.connect((self.digital_ofdm_mod_0, 0), (self.digital_ofdm_demod_0, 0))
-		self.connect((self.gr_vector_to_stream_0, 0), (self.digital_ofdm_mod_0, 0))
-		self.connect((self.digital_ofdm_demod_0, 0), (self.gr_stream_to_vector_0, 0))
-		self.connect((self.gr_stream_to_vector_0, 0), (self.gr_file_sink_0, 0))
-		self.connect((self.gr_file_source_0, 0), (self.gr_vector_to_stream_0, 0))
+		self.connect((self.gr_file_source_0, 0), (self.digital_ofdm_mod_0, 0))
+		self.connect((self.digital_ofdm_demod_0, 0), (self.gr_delay_0, 0))
+		self.connect((self.gr_delay_0, 0), (self.gr_file_sink_0, 0))
 
 	def get_variable_qtgui_range_0(self):
 		return self.variable_qtgui_range_0
