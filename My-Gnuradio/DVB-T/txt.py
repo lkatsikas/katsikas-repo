@@ -56,10 +56,10 @@ class QAM16(gr.top_block, Qt.QWidget):
 
 		################################################################################################################
 		#--------------------------------------------------------------------------------------------------------------#
-		#self.input = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Korgialas_GeiaSou.ts'
-		#self.output = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Results.ts'
-		self.input = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Text.txt'
-                self.output = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Results.txt'
+		self.input = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Korgialas_GeiaSou.ts'
+		self.output = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Results.ts'
+		#self.input = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Text.txt'
+                #self.output = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Results.txt'
 		self.temp = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/dump.txt'
 
 		#--------------------------------------------------------------------------------------------------------------#
@@ -71,7 +71,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 	
 		self.interleaver = dvbt.interleaver()
 		self.deinterleaver = dvbt.deinterleaver()
-		self.trellis_encoder = dvbt.trellis_encoder()
+		#self.trellis_encoder = dvbt.trellis_encoder()
 		#self.viterbi_decoder = dvbt.viterbi_decoder()
 		#self.delay = gr.delay(gr.sizeof_char*1*256, 1)
 		#--------------------------------------------------------------------------------------------------------------#
@@ -164,7 +164,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
 		"""
 		
-		"""
+		
                 self.connect((self.gr_file_source_0, 0), (self.randomizer, 0))
                 self.connect((self.randomizer, 0), (self.rs_encoder, 0))
 		self.connect((self.rs_encoder, 0), (self.interleaver, 0))
@@ -177,8 +177,24 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self.connect((self.deinterleaver, 0), (self.rs_decoder, 0))
 		self.connect((self.rs_decoder, 0), (self.derandomizer, 0))
                 self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
+
+
 		"""
-	
+		self.connect((self.gr_file_source_0, 0), (self.randomizer, 0))
+                self.connect((self.randomizer, 0), (self.rs_encoder, 0))
+                self.connect((self.rs_encoder, 0), (self.interleaver, 0))
+                self.connect((self.interleaver, 0),(self.stream, 0))
+		self.connect((self.stream, 0), (self.digital_ofdm_mod_0, 0))
+		self.connect((self.digital_ofdm_mod_0, 0),(self.digital_ofdm_demod_0, 0))
+		self.connect((self.digital_ofdm_demod_0, 0),(self.vector, 0))
+                self.connect((self.vector, 0), (self.deinterleaver, 0))
+                self.connect((self.deinterleaver, 0), (self.rs_decoder, 0))
+                self.connect((self.rs_decoder, 0), (self.derandomizer, 0))
+                self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
+		"""
+
+
+		"""	
 		self.connect((self.gr_file_source_0, 0), (self.randomizer, 0))
                 self.connect((self.randomizer, 0), (self.rs_encoder, 0))
                 self.connect((self.rs_encoder, 0), (self.interleaver, 0))
@@ -188,7 +204,7 @@ class QAM16(gr.top_block, Qt.QWidget):
                 self.connect((self.deinterleaver, 0), (self.rs_decoder, 0))
                 self.connect((self.rs_decoder, 0), (self.derandomizer, 0))
                 self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
-
+		"""
          
 		#--------------------------------------------------------------------------------------------------------------#
                 ################################################################################################################
