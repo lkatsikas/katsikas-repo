@@ -71,6 +71,8 @@ class QAM16(gr.top_block, Qt.QWidget):
 	
 		self.interleaver = dvbt.interleaver()
 		self.deinterleaver = dvbt.deinterleaver()
+		self.trellis_encoder = dvbt.trellis_encoder()
+		#self.viterbi_decoder = dvbt.viterbi_decoder()
 		#self.delay = gr.delay(gr.sizeof_char*1*256, 1)
 		#--------------------------------------------------------------------------------------------------------------#
 		################################################################################################################
@@ -162,32 +164,31 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
 		"""
 		
-		"""	
-		self.connect((self.gr_file_source_0, 0), (self.randomizer, 0))
-                self.connect((self.randomizer, 0), (self.rs_encoder, 0))
-		self.connect((self.rs_encoder, 0), (self.stream, 0))
-                self.connect((self.stream, 0), (self.gr_file_sink_1, 0))
-		self.connect((self.stream, 0), (self.vector, 0))
-                self.connect((self.vector, 0), (self.rs_decoder, 0))
-		self.connect((self.rs_decoder, 0), (self.derandomizer, 0))
-                self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
-		"""	
-	
-		
+		"""
                 self.connect((self.gr_file_source_0, 0), (self.randomizer, 0))
                 self.connect((self.randomizer, 0), (self.rs_encoder, 0))
 		self.connect((self.rs_encoder, 0), (self.interleaver, 0))
-		self.connect((self.interleaver, 0), (self.stream, 0))
+		self.connect((self.interleaver, 0),(self.stream, 0))
                 self.connect((self.stream, 0), (self.gr_file_sink_1, 0))
 		self.connect((self.stream, 0), (self.vector, 0))	
                 self.connect((self.vector, 0), (self.deinterleaver, 0))
-
 		#self.connect((self.deinterleaver, 0), (self.delay, 0))
-		#self.connect((self.delay, 0), (self.rs_decoder, 0))
+		#self.connect((self.delay, 0), (self.rs_decoder, 0))		
 		self.connect((self.deinterleaver, 0), (self.rs_decoder, 0))
-
 		self.connect((self.rs_decoder, 0), (self.derandomizer, 0))
                 self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
+		"""
+	
+		self.connect((self.gr_file_source_0, 0), (self.randomizer, 0))
+                self.connect((self.randomizer, 0), (self.rs_encoder, 0))
+                self.connect((self.rs_encoder, 0), (self.interleaver, 0))
+		self.connect((self.interleaver, 0),(self.trellis_encoder, 0))
+                self.connect((self.trellis_encoder, 0),(self.viterbi_decoder, 0))
+                self.connect((self.viterbi_decoder, 0), (self.deinterleaver, 0))
+                self.connect((self.deinterleaver, 0), (self.rs_decoder, 0))
+                self.connect((self.rs_decoder, 0), (self.derandomizer, 0))
+                self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
+
          
 		#--------------------------------------------------------------------------------------------------------------#
                 ################################################################################################################
