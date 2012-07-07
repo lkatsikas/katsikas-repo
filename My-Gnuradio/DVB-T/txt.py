@@ -26,9 +26,9 @@ import sys
 class QAM16(gr.top_block, Qt.QWidget):
 
 	def __init__(self):
-		gr.top_block.__init__(self, "QAM16")
+		gr.top_block.__init__(self, "QAM")
 		Qt.QWidget.__init__(self)
-		self.setWindowTitle("QAM16")
+		self.setWindowTitle("QAM")
 		self.setWindowIcon(Qt.QIcon.fromTheme('gnuradio-grc'))
 		self.top_scroll_layout = Qt.QVBoxLayout()
 		self.setLayout(self.top_scroll_layout)
@@ -48,7 +48,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 		##################################################
 		self.variable_qtgui_range_0 = variable_qtgui_range_0 = 474e6
 		self.samp_rate = samp_rate = 44100
-		self.Useful_Carriers = Useful_Carriers = 512
+		self.Useful_Carriers = Useful_Carriers = 1024
 		self.Transmission_Frequency = Transmission_Frequency = 474e6
 		self.OFDM_Symbols = OFDM_Symbols = 2048
 		self.Guard_Interval = Guard_Interval = 4
@@ -61,6 +61,25 @@ class QAM16(gr.top_block, Qt.QWidget):
 		#self.input = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Text.txt'
                 #self.output = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Results.txt'
 		self.temp = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/dump.txt'
+		#--------------------------------------------------------------------------------------------------------------#
+
+		#--------------------------------------------------------------------------------------------------------------#
+                #self.gr_file_source_0 = gr.file_source(gr.sizeof_char*1, self.input, False)
+                with open(self.input, 'rb'):
+                        self.gr_file_source_0 = dvbt.dvbt_source(self.input)
+
+                #self.gr_file_sink_0 = gr.file_sink(gr.sizeof_char*1, self.output)
+                #self.gr_file_sink_0.set_unbuffered(False)
+                with open(self.output, 'rb'):
+                        self.gr_file_sink_0 = dvbt.dvbt_sink(self.output)
+
+                #self.gr_file_sink_1 = gr.file_sink(gr.sizeof_char*1, self.temp)
+                #self.gr_file_sink_1.set_unbuffered(False)
+                with open(self.temp, 'rb'):
+                        self.gr_file_sink_1 = gr.file_sink(gr.sizeof_char*1, self.temp)
+                self.stream = gr.vector_to_stream(gr.sizeof_char, 256)
+                self.vector = gr.stream_to_vector(gr.sizeof_char, 256)
+                #--------------------------------------------------------------------------------------------------------------#
 
 		#--------------------------------------------------------------------------------------------------------------#
 		self.randomizer = dvbt.randomizer()
@@ -73,7 +92,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self.deinterleaver = dvbt.deinterleaver()
 		#self.trellis_encoder = dvbt.trellis_encoder()
 		#self.viterbi_decoder = dvbt.viterbi_decoder()
-		#self.delay = gr.delay(gr.sizeof_char*1*256, 1)
+		self.delay = gr.delay(gr.sizeof_char*1*256, 204)
 		#--------------------------------------------------------------------------------------------------------------#
 		################################################################################################################
 
@@ -103,7 +122,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 		#--------------------------------------------------------------------------------------------------------------#
 		self.digital_ofdm_mod_0 = grc_blks2.packet_mod_b(digital.ofdm_mod(
                                 options=grc_blks2.options(
-                                        modulation="qam64",
+                                        modulation="qpsk",
                                         fft_length=OFDM_Symbols,
                                         occupied_tones=Useful_Carriers,
                                         cp_length=OFDM_Symbols/Guard_Interval,
@@ -116,7 +135,7 @@ class QAM16(gr.top_block, Qt.QWidget):
                 )
                 self.digital_ofdm_demod_0 = grc_blks2.packet_demod_b(digital.ofdm_demod(
                                 options=grc_blks2.options(
-                                        modulation="qam64",
+                                        modulation="qpsk",
                                         fft_length=OFDM_Symbols,
                                         occupied_tones=Useful_Carriers,
                                         cp_length=OFDM_Symbols/Guard_Interval,
@@ -129,42 +148,31 @@ class QAM16(gr.top_block, Qt.QWidget):
                 )
 
 		#--------------------------------------------------------------------------------------------------------------#
-		#self.gr_file_source_0 = gr.file_source(gr.sizeof_char*1, self.input, False)
-                with open(self.input, 'rb'):
-                        self.gr_file_source_0 = dvbt.dvbt_source(self.input)
-
-		#self.gr_file_sink_0 = gr.file_sink(gr.sizeof_char*1, self.output)
-		#self.gr_file_sink_0.set_unbuffered(False)
-                with open(self.output, 'rb'):
-                        self.gr_file_sink_0 = dvbt.dvbt_sink(self.output)
-
-		#self.gr_file_sink_1 = gr.file_sink(gr.sizeof_char*1, self.temp)
-                #self.gr_file_sink_1.set_unbuffered(False)
-		with open(self.temp, 'rb'):
-                        self.gr_file_sink_1 = gr.file_sink(gr.sizeof_char*1, self.temp)
-		self.stream = gr.vector_to_stream(gr.sizeof_char, 256)
-		self.vector = gr.stream_to_vector(gr.sizeof_char, 256)
-                #--------------------------------------------------------------------------------------------------------------#
 		################################################################################################################
 		
+
 
 		##################################################
 		# Connections
 		##################################################
 		################################################################################################################
-                #--------------------------------------------------------------------------------------------------------------#
-		"""
+                #--------------------------------------------------------------------------------------------------------------#		
 		self.connect((self.gr_file_source_0, 0), (self.randomizer, 0))
-		self.connect((self.randomizer, 0), (self.stream, 0))
+		self.connect((self.randomizer, 0), (self.rs_encoder, 0))
+                self.connect((self.rs_encoder, 0), (self.interleaver, 0))
+                self.connect((self.interleaver, 0),(self.stream, 0))
 		self.connect((self.stream, 0), (self.gr_file_sink_1, 0))
 		self.connect((self.stream, 0), (self.digital_ofdm_mod_0, 0))
 		self.connect((self.digital_ofdm_mod_0, 0), (self.digital_ofdm_demod_0, 0))
 		self.connect((self.digital_ofdm_demod_0, 0), (self.vector, 0))
-		self.connect((self.vector, 0), (self.derandomizer, 0))
+		self.connect((self.vector, 0), (self.deinterleaver, 0))
+                self.connect((self.deinterleaver, 0), (self.rs_decoder, 0))
+                self.connect((self.rs_decoder, 0), (self.derandomizer, 0))
 		self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
+	
+		
+		
 		"""
-		
-		
                 self.connect((self.gr_file_source_0, 0), (self.randomizer, 0))
                 self.connect((self.randomizer, 0), (self.rs_encoder, 0))
 		self.connect((self.rs_encoder, 0), (self.interleaver, 0))
@@ -176,20 +184,6 @@ class QAM16(gr.top_block, Qt.QWidget):
 		#self.connect((self.delay, 0), (self.rs_decoder, 0))		
 		self.connect((self.deinterleaver, 0), (self.rs_decoder, 0))
 		self.connect((self.rs_decoder, 0), (self.derandomizer, 0))
-                self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
-
-
-		"""
-		self.connect((self.gr_file_source_0, 0), (self.randomizer, 0))
-                self.connect((self.randomizer, 0), (self.rs_encoder, 0))
-                self.connect((self.rs_encoder, 0), (self.interleaver, 0))
-                self.connect((self.interleaver, 0),(self.stream, 0))
-		self.connect((self.stream, 0), (self.digital_ofdm_mod_0, 0))
-		self.connect((self.digital_ofdm_mod_0, 0),(self.digital_ofdm_demod_0, 0))
-		self.connect((self.digital_ofdm_demod_0, 0),(self.vector, 0))
-                self.connect((self.vector, 0), (self.deinterleaver, 0))
-                self.connect((self.deinterleaver, 0), (self.rs_decoder, 0))
-                self.connect((self.rs_decoder, 0), (self.derandomizer, 0))
                 self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
 		"""
 
@@ -204,8 +198,7 @@ class QAM16(gr.top_block, Qt.QWidget):
                 self.connect((self.deinterleaver, 0), (self.rs_decoder, 0))
                 self.connect((self.rs_decoder, 0), (self.derandomizer, 0))
                 self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
-		"""
-         
+		"""         
 		#--------------------------------------------------------------------------------------------------------------#
                 ################################################################################################################
 
