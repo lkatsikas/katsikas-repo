@@ -78,7 +78,7 @@ class QAM16(gr.top_block, Qt.QWidget):
                 #self.gr_file_sink_1 = gr.file_sink(gr.sizeof_char*1, self.temp)
                 #self.gr_file_sink_1.set_unbuffered(False)
                 with open(self.temp, 'rb'):
-                        self.gr_file_sink_1 = gr.file_sink(gr.sizeof_char*1, self.temp)
+                        self.gr_file_sink_1 = gr.file_sink(gr.sizeof_char*1*8, self.temp)
                 self.stream = gr.vector_to_stream(gr.sizeof_char, 256)
                 self.vector = gr.stream_to_vector(gr.sizeof_char, 256)
                 #--------------------------------------------------------------------------------------------------------------#
@@ -164,13 +164,14 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self.connect((self.randomizer, 0), (self.rs_encoder, 0))
                 self.connect((self.rs_encoder, 0), (self.interleaver, 0))
                 self.connect((self.interleaver, 0),(self.stream, 0))
-		self.connect((self.stream, 0), (self.gr_file_sink_1, 0))
 		self.connect((self.stream, 0), (self.digital_ofdm_mod_0, 0))
+		self.connect((self.digital_ofdm_mod_0, 0), (self.gr_file_sink_1, 0))
 		self.connect((self.digital_ofdm_mod_0, 0), (self.digital_ofdm_demod_0, 0))
 		self.connect((self.digital_ofdm_demod_0, 0), (self.vector, 0))
 		self.connect((self.vector, 0), (self.deinterleaver, 0))
-		self.connect((self.deinterleaver, 0), (self.delay, 0))
-                self.connect((self.delay, 0), (self.rs_decoder, 0))
+		#self.connect((self.deinterleaver, 0), (self.delay, 0))
+                #self.connect((self.delay, 0), (self.rs_decoder, 0))
+		self.connect((self.deinterleaver, 0), (self.rs_decoder, 0))
                 self.connect((self.rs_decoder, 0), (self.derandomizer, 0))
 		self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
 		
