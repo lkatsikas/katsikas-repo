@@ -20,8 +20,10 @@ from gnuradio.eng_option import eng_option
 from grc_gnuradio import blks2 as grc_blks2
 from gnuradio.gr import firdes
 from optparse import OptionParser
+from gnuradio.qtgui import qtgui
 import PyQt4.Qwt5 as Qwt
 import sys
+import sip
 
 class QAM16(gr.top_block, Qt.QWidget):
 
@@ -53,7 +55,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self.OFDM_Symbols = OFDM_Symbols = 2048
 		self.Guard_Interval = Guard_Interval = 4
 		self.Gain = Gain = 20
-		self.Modulation_Type = "qpsk"
+		self.Modulation_Type = "qam16"
 		self.SNR = 20
 
 		################################################################################################################
@@ -119,6 +121,19 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self._variable_qtgui_range_0_slider.valueChanged.connect(self.set_variable_qtgui_range_0)
 		self._variable_qtgui_range_0_layout.addWidget(self._variable_qtgui_range_0_slider)
 		self.top_layout.addLayout(self._variable_qtgui_range_0_layout)
+		self.qtgui_sink_x_0 = qtgui.sink_c(
+			OFDM_Symbols, #fftsize
+			firdes.WIN_BLACKMAN_hARRIS, #wintype
+			Transmission_Frequency, #fc
+			8e6, #bw
+			"QT GUI Plot", #name
+			False, #plotfreq
+			False, #plotwaterfall
+			False, #plottime
+			True, #plotconst
+		)
+		self._qtgui_sink_x_0_win = sip.wrapinstance(self.qtgui_sink_x_0.pyqwidget(), Qt.QWidget)
+		self.top_layout.addWidget(self._qtgui_sink_x_0_win)
 
 		################################################################################################################
 		#--------------------------------------------------------------------------------------------------------------#
@@ -159,6 +174,8 @@ class QAM16(gr.top_block, Qt.QWidget):
 		##################################################
 		################################################################################################################
                 #--------------------------------------------------------------------------------------------------------------#		
+
+		self.connect((self.digital_ofdm_mod_0, 0), (self.qtgui_sink_x_0, 0))
 		
 		self.connect((self.gr_file_source_0, 0), (self.randomizer, 0))
 		self.connect((self.randomizer, 0), (self.rs_encoder, 0))

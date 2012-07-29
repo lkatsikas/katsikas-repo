@@ -3,7 +3,7 @@
 # Gnuradio Python Flow Graph
 # Title: QAM16
 # Author: katsikas
-# Generated: Tue Jul 10 21:57:38 2012
+# Generated: Sun Jul 29 20:22:46 2012
 ##################################################
 
 from PyQt4 import Qt
@@ -76,10 +76,10 @@ class QAM16(gr.top_block, Qt.QWidget):
 			Transmission_Frequency, #fc
 			8e6, #bw
 			"QT GUI Plot", #name
-			True, #plotfreq
+			False, #plotfreq
 			False, #plotwaterfall
-			True, #plottime
-			False, #plotconst
+			False, #plottime
+			True, #plotconst
 		)
 		self._qtgui_sink_x_0_win = sip.wrapinstance(self.qtgui_sink_x_0.pyqwidget(), Qt.QWidget)
 		self.top_layout.addWidget(self._qtgui_sink_x_0_win)
@@ -91,7 +91,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self.gr_file_sink_0.set_unbuffered(False)
 		self.digital_ofdm_mod_0 = grc_blks2.packet_mod_b(digital.ofdm_mod(
 				options=grc_blks2.options(
-					modulation="bpsk",
+					modulation="qam16",
 					fft_length=OFDM_Symbols,
 					occupied_tones=Useful_Carriers,
 					cp_length=OFDM_Symbols/Guard_Interval,
@@ -104,7 +104,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 		)
 		self.digital_ofdm_demod_0 = grc_blks2.packet_demod_b(digital.ofdm_demod(
 				options=grc_blks2.options(
-					modulation="bpsk",
+					modulation="qam16",
 					fft_length=OFDM_Symbols,
 					occupied_tones=Useful_Carriers,
 					cp_length=OFDM_Symbols/Guard_Interval,
