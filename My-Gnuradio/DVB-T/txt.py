@@ -157,6 +157,7 @@ class QAM16(gr.top_block, Qt.QWidget):
                                         occupied_tones=Useful_Carriers,
                                         cp_length=OFDM_Symbols/Guard_Interval,
 					snr=self.SNR,
+					show_vector_analyzer="yes",
 					log=None,
 					verbose=None,
 				),
