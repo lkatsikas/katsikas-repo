@@ -107,6 +107,14 @@ class top_block(gr.top_block, Qt.QWidget):
 		self.connect((self.digital_ofdm_demod_0, 0), (self.gr_file_sink_0, 0))
 		"""
 
+	def get_variable_qtgui_range_0(self):
+                return self.variable_qtgui_range_0
+
+        def set_variable_qtgui_range_0(self, variable_qtgui_range_0):
+                self.variable_qtgui_range_0 = variable_qtgui_range_0
+                self._variable_qtgui_range_0_counter.setValue(self.variable_qtgui_range_0)
+                self._variable_qtgui_range_0_slider.setValue(self.variable_qtgui_range_0)
+
 	def get_samp_rate(self):
 		return self.samp_rate
 

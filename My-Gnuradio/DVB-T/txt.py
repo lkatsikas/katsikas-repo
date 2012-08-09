@@ -55,7 +55,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 		self.OFDM_Symbols = OFDM_Symbols = 2048
 		self.Guard_Interval = Guard_Interval = 4
 		self.Gain = Gain = 20
-		self.Modulation_Type = "qam16"
+		self.Modulation_Type = "qpsk"
 		self.SNR = 20
 
 		################################################################################################################
