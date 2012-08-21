@@ -50,7 +50,7 @@ class QAM16(gr.top_block, Qt.QWidget):
 		##################################################
 		self.variable_qtgui_range_0 = variable_qtgui_range_0 = 474e6
 		self.samp_rate = samp_rate = 44100
-		self.Useful_Carriers = Useful_Carriers = 1704
+		self.Useful_Carriers = Useful_Carriers = 1705
 		self.Transmission_Frequency = Transmission_Frequency = 474e6
 		self.OFDM_Symbols = OFDM_Symbols = 2048
 		self.Guard_Interval = Guard_Interval = 4

@@ -51,10 +51,9 @@ class top_block(gr.top_block, Qt.QWidget):
 		##################################################
 		# Variables
 		##################################################
-		self.MODULATION_TYPE = "qpsk"
+		self.Modulation_Type = "qpsk"
 		self.samp_rate = samp_rate = 32000
 		self.FFT_LENGTH = FFT_LENGTH = 2048
-		self.CYCLIC_PREFIX = self.FFT_LENGTH/4
 		self.OCCUPIED_CARRIERS = OCCUPIED_CARRIERS = 1705
 
 		################################################################################################################
@@ -87,7 +86,7 @@ class top_block(gr.top_block, Qt.QWidget):
 		##################################################
 		self.qtgui_ofdm_vector_analyzer_x_0 = qtgui.ofdm_vector_analyzer_c(
 			  self.OCCUPIED_CARRIERS, #occupied_tones
-			  self.MODULATION_TYPE #modulation
+			  self.Modulation_Type #modulation
 			  )
 		self._qtgui_ofdm_vector_analyzer_x_0_win = sip.wrapinstance(self.qtgui_ofdm_vector_analyzer_x_0.pyqwidget(), Qt.QWidget)
 		self.top_grid_layout.addWidget(self._qtgui_ofdm_vector_analyzer_x_0_win, 
@@ -95,10 +94,10 @@ class top_block(gr.top_block, Qt.QWidget):
 		self.gr_vector_to_stream_0 = gr.vector_to_stream(gr.sizeof_gr_complex*1, self.OCCUPIED_CARRIERS)
 		self.digital_ofdm_mod_0 = grc_blks2.packet_mod_b(digital.dvbt_ofdm_mod(
 				options=grc_blks2.options(
-					modulation=self.MODULATION_TYPE,
+					modulation=self.Modulation_Type,
 					fft_length=self.FFT_LENGTH,
 					occupied_tones=self.OCCUPIED_CARRIERS,
-					cp_length=self.CYCLIC_PREFIX,
+					cp_length=128,
 					pad_for_usrp=True,
 					log=None,
 					verbose=None,
@@ -108,10 +107,10 @@ class top_block(gr.top_block, Qt.QWidget):
 		)
 		self.digital_ofdm_demod_0 = grc_blks2.packet_demod_b(digital.dvbt_ofdm_demod(
 				options=grc_blks2.options(
-					modulation=self.MODULATION_TYPE,
+					modulation=self.Modulation_Type,
 					fft_length=self.FFT_LENGTH,
 					occupied_tones=self.OCCUPIED_CARRIERS,
-					cp_length=self.CYCLIC_PREFIX,
+					cp_length=128,
 					snr=10,
 					show_vector_analyzer="yes",
 					log=None,
