@@ -52,11 +52,13 @@ class top_block(gr.top_block, Qt.QWidget):
 		##################################################
 		# Variables
 		##################################################
-		self.MODULATION_TYPE = "qpsk"
-		self.samp_rate = samp_rate = 9000000
-		self.FFT_LENGTH = FFT_LENGTH = 2048
-		self.CYCLIC_PREFIX = self.FFT_LENGTH/4
-		self.OCCUPIED_CARRIERS = OCCUPIED_CARRIERS = 1705
+		self.FREQ = FREQ = 474000000
+		self.MODULATION_TYPE = "qpsk"					# QPSK modulation
+		self.samp_rate = samp_rate = (64/7.0)*1000000			# 64/7 MHz
+		self.FFT_LENGTH = FFT_LENGTH = 2048				# 2k mode
+		self.CYCLIC_PREFIX = self.FFT_LENGTH/4				# Guard interval = 1/4
+		self.OCCUPIED_CARRIERS = OCCUPIED_CARRIERS = 1705		# 1705 total active (non zero) carriers
+
 
 		################################################################################################################
                 #--------------------------------------------------------------------------------------------------------------#
@@ -65,21 +67,26 @@ class top_block(gr.top_block, Qt.QWidget):
                 #self.input = '/home/katsikas/katsikas-repo/My-Gnuradio/Common/Text.txt'
                 #self.output = '/home/katsikas/Desktop/sink.txt'
                 #--------------------------------------------------------------------------------------------------------------#
-
+                
                 #--------------------------------------------------------------------------------------------------------------#
                 #self.gr_file_source_0 = gr.file_source(gr.sizeof_char*1, self.input, False)
                 with open(self.input, 'rb'):
                         self.gr_file_source_0 = dvbt.dvbt_source(self.input)
-
+                
                 #self.gr_file_sink_0 = gr.file_sink(gr.sizeof_char*1, self.output)
                 #self.gr_file_sink_0.set_unbuffered(False)
                 with open(self.output, 'rb'):
                         self.gr_file_sink_0 = dvbt.dvbt_sink(self.output)
-
+                
                 self.stream = gr.vector_to_stream(gr.sizeof_char, 256)
                 self.vector = gr.stream_to_vector(gr.sizeof_char, 256)
- 		self.delay = gr.delay(gr.sizeof_char*1*13640,13640)
-		self.gr_multiply_const_vxx_0 = gr.multiply_const_vcc((0.3, ))
+                #--------------------------------------------------------------------------------------------------------------#
+                
+                #--------------------------------------------------------------------------------------------------------------#
+                self.randomizer = dvbt.randomizer()
+                self.derandomizer = dvbt.derandomizer()
+
+		self.gr_multiply_const_vxx_0 = gr.multiply_const_vcc((0.45, ))
                 #--------------------------------------------------------------------------------------------------------------#
                 ################################################################################################################
 
@@ -96,8 +103,8 @@ class top_block(gr.top_block, Qt.QWidget):
                         ),
                 )
                 self.uhd_usrp_sink_0.set_samp_rate(samp_rate)
-                self.uhd_usrp_sink_0.set_center_freq(474000000, 0)
-                self.uhd_usrp_sink_0.set_gain(20, 0)
+                self.uhd_usrp_sink_0.set_center_freq(FREQ, 0)
+                self.uhd_usrp_sink_0.set_gain(10, 0)
                 self.uhd_usrp_sink_0.set_antenna("TX/RX", 0)
                 self.uhd_usrp_sink_0.set_bandwidth(8000000, 0)
                 self.qtgui_sink_x_0 = qtgui.sink_c(
@@ -121,7 +128,7 @@ class top_block(gr.top_block, Qt.QWidget):
                         ),
                 )
                 self.uhd_usrp_source_0.set_samp_rate(samp_rate)
-                self.uhd_usrp_source_0.set_center_freq(474000000, 0)
+                self.uhd_usrp_source_0.set_center_freq(FREQ, 0)
                 self.uhd_usrp_source_0.set_gain(20, 0)  
                 self.uhd_usrp_source_0.set_antenna("RX2", 0)
                 self.uhd_usrp_source_0.set_bandwidth(8000000, 0)
@@ -168,20 +175,22 @@ class top_block(gr.top_block, Qt.QWidget):
 		##################################################
 		# Connections
 		##################################################
-                
-		self.connect((self.gr_file_source_0, 0), (self.stream, 0))
+		self.connect((self.gr_file_source_0, 0), (self.randomizer, 0))
+                self.connect((self.randomizer, 0), (self.stream, 0))
                 self.connect((self.stream, 0), (self.digital_ofdm_mod_0, 0))
 		self.connect((self.digital_ofdm_mod_0, 0), (self.gr_multiply_const_vxx_0, 0))
                 self.connect((self.gr_multiply_const_vxx_0, 0), (self.qtgui_sink_x_0, 0))
                 self.connect((self.gr_multiply_const_vxx_0, 0), (self.uhd_usrp_sink_0, 0))
+	
 		self.connect((self.uhd_usrp_source_0, 0), (self.digital_ofdm_demod_0, 0))
 		self.connect((self.digital_ofdm_demod_0, 1), (self.gr_vector_to_stream_0, 0))
                 self.connect((self.gr_vector_to_stream_0, 0), (self.qtgui_ofdm_vector_analyzer_x_0, 0))
 		self.connect((self.digital_ofdm_demod_0, 0), (self.vector, 0))
-                self.connect((self.vector, 0), (self.gr_file_sink_0, 0))
+                self.connect((self.vector, 0), (self.derandomizer, 0))
+		self.connect((self.derandomizer, 0), (self.gr_file_sink_0, 0))
 
 
-		"""
+		"""	
 		self.connect((self.gr_file_source_0, 0), (self.stream, 0))
                 self.connect((self.stream, 0), (self.digital_ofdm_mod_0, 0))
 		self.connect((self.digital_ofdm_mod_0, 0), (self.digital_ofdm_demod_0, 0))

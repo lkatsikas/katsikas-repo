@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Top Block
-# Generated: Wed Aug 22 11:14:21 2012
+# Generated: Wed Aug 22 19:46:59 2012
 ##################################################
 
 from PyQt4 import Qt
@@ -41,7 +41,8 @@ class top_block(gr.top_block, Qt.QWidget):
 		##################################################
 		# Variables
 		##################################################
-		self.samp_rate = samp_rate = 9000000
+		self.samp_rate = samp_rate = (68/7.0)*1000000
+		self.occupied = occupied = 1704
 
 		##################################################
 		# Blocks
@@ -65,7 +66,6 @@ class top_block(gr.top_block, Qt.QWidget):
 				channels=range(1),
 			),
 		)
-		self.uhd_usrp_sink_0.set_time_unknown_pps(uhd.time_spec())
 		self.uhd_usrp_sink_0.set_samp_rate(samp_rate)
 		self.uhd_usrp_sink_0.set_center_freq(474000000, 0)
 		self.uhd_usrp_sink_0.set_gain(10, 0)
@@ -80,10 +80,10 @@ class top_block(gr.top_block, Qt.QWidget):
 		self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
 		self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
 		self.qtgui_sink_x_0 = qtgui.sink_c(
-			512, #fftsize
+			2048, #fftsize
 			firdes.WIN_BLACKMAN_hARRIS, #wintype
 			0, #fc
-			256, #bw
+			8000000, #bw
 			"QT GUI Plot", #name
 			True, #plotfreq
 			False, #plotwaterfall
@@ -99,17 +99,17 @@ class top_block(gr.top_block, Qt.QWidget):
 		self._qtgui_ofdm_vector_analyzer_x_0_win = sip.wrapinstance(self.qtgui_ofdm_vector_analyzer_x_0.pyqwidget(), Qt.QWidget)
 		self.top_grid_layout.addWidget(self._qtgui_ofdm_vector_analyzer_x_0_win, 
 		   )
-		self.gr_vector_to_stream_0 = gr.vector_to_stream(gr.sizeof_gr_complex*1, 1704)
-		self.gr_multiply_const_vxx_0 = gr.multiply_const_vcc((0.3, ))
-		self.gr_file_source_0 = gr.file_source(gr.sizeof_char*1, "/home/katsikas/katsikas-repo/My-Gnuradio/Common/Korgialas_GeiaSou.ts", True)
-		self.gr_file_sink_0 = gr.file_sink(gr.sizeof_char*1, "/home/katsikas/Desktop/Results.ts")
+		self.gr_vector_to_stream_0 = gr.vector_to_stream(gr.sizeof_gr_complex*1, occupied)
+		self.gr_multiply_const_vxx_0 = gr.multiply_const_vcc((0.4882, ))
+		self.gr_file_source_0 = gr.file_source(gr.sizeof_char*1, "/home/katsikas/katsikas-repo/My-Gnuradio/Common/Text.txt", True)
+		self.gr_file_sink_0 = gr.file_sink(gr.sizeof_char*1, "/home/katsikas/Desktop/sink.txt")
 		self.gr_file_sink_0.set_unbuffered(False)
 		self.digital_ofdm_mod_0 = grc_blks2.packet_mod_b(digital.ofdm_mod(
 				options=grc_blks2.options(
 					modulation="qpsk",
 					fft_length=2048,
-					occupied_tones=1704,
-					cp_length=512,
+					occupied_tones=occupied,
+					cp_length=128,
 					pad_for_usrp=True,
 					log=None,
 					verbose=None,
@@ -121,9 +121,9 @@ class top_block(gr.top_block, Qt.QWidget):
 				options=grc_blks2.options(
 					modulation="qpsk",
 					fft_length=2048,
-					occupied_tones=1704,
-					cp_length=512,
-					snr=100,
+					occupied_tones=occupied,
+					cp_length=128,
+					snr=10,
 					show_vector_analyzer="yes",
 					log=None,
 					verbose=None,
@@ -153,6 +153,12 @@ class top_block(gr.top_block, Qt.QWidget):
 		self.samp_rate = samp_rate
 		self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
 		self.uhd_usrp_sink_0.set_samp_rate(self.samp_rate)
+
+	def get_occupied(self):
+		return self.occupied
+
+	def set_occupied(self, occupied):
+		self.occupied = occupied
 
 if __name__ == '__main__':
 	parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
